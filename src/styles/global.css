@@ -1,18 +1,23 @@
 body {
-    font-size: 16px;
-    font-family: 'Outfit', sans-serif;
-  }
-  
-  /* Set the font size and font family for heading elements */
-  h1 {
-    font-size: 64px;
-    font-family: 'Outfit Bold', sans-serif;
-    font-weight: 700;
-  }
-  
-  h2 {
-    font-size: 40px;
-    font-family: 'Outfit Bold', sans-serif;
-    font-weight: 700;
-  }
-  
+  font-size: 16px;
+  font-family: "Outfit", sans-serif;
+  color: #161713;
+}
+
+/* Set the font size and font family for heading elements */
+h1 {
+  font-size: 64px;
+  font-family: "Outfit Bold", sans-serif;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 40px;
+  font-family: "Outfit Bold", sans-serif;
+  font-weight: 700;
+}
+
+p {
+  font-family: "Outfit ExtraLight", sans-serif;;
+  font-weight: 300;
+}

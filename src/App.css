@@ -3,3 +3,9 @@
 .App {
   text-align: center;
 }
+
+.about-us-section {
+  background-color: #FFFAF0;
+  margin-top: -121px; 
+  height: 500px;
+}
