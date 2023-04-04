@@ -1,11 +1,26 @@
-/* src/App.css */
-
 .App {
   text-align: center;
 }
 
+.bg-color {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 86%;
+  background-color: #fff1d9;
+}
+
+.hero-section {
+  position: relative;
+  z-index: 2;
+}
+
 .about-us-section {
+  position: absolute;
+  z-index: 1;
+  margin-top: -140px;
   background-color: #FFFAF0;
-  margin-top: -121px; 
-  height: 500px;
+  width: 100%;
 }
