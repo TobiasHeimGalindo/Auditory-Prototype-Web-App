@@ -1,0 +1,28 @@
+.container {
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr;
+  grid-template-rows: 1.8fr;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: row;
+  grid-template-areas: "rectangle journey";
+  padding-top: 4px;
+}
+
+.journey {
+  grid-area: journey;
+  text-align: start;
+  font-size: 1.25rem;
+  padding-top: 150px;
+  max-width: 475px;
+
+  padding-left: 110px;
+}
+.rectangle {
+  grid-area: rectangle;
+  background-color: #ffd97a;
+  min-height: 620px;
+  border-radius: 0 45px 0 45px;
+  background-image: url("../assets/footage/restaurant.jpg");
+  background-size: cover;
+  box-shadow: 12px 0px 0px 0px #FFD97A;
+}
