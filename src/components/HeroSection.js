@@ -1,5 +1,5 @@
 import React from "react";
-import "./HeroSection.scss";
+import styles from './HeroSection.module.scss';
 
 import bowl from "../assets/footage/cropped.png";
 
@@ -8,10 +8,10 @@ import Stack from "@mui/material/Stack";
 
 const HeroSection = () => {
   return (
-    <div className="wrapper">
-      <div className="container">
-        <div className="heroContent">
-          <div className="heroText">
+    <div className={styles.wrapper}>
+      <div className={styles.container}>
+        <div className={styles.heroContent}>
+          <div className={styles.heroText}>
             <h1>EXPERIENCE THE FLAVORS OF JAPAN</h1>
             <p>
               Embark on a journey of authentic <br /> ramen mastery
@@ -21,10 +21,10 @@ const HeroSection = () => {
               <Button variant="contained">Menu</Button>
             </Stack>
           </div>
-          <div className="collection">
+          <div className={styles.collection}>
             <img src={bowl} alt="Ramen Bowl" />
-            <div className="ellipse"></div>
-            <div className="ellipseTwin"></div>
+            <div className={styles.ellipse}></div>
+            <div className={styles.ellipseTwin}></div>
           </div>
         </div>
       </div>

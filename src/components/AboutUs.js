@@ -1,10 +1,10 @@
 import React from "react";
-import "./AboutUs.scss";
+import styles from './AboutUs.module.scss';
 
 const AboutUs = () => {
   return (
-    <div className="container">
-      <div className="journey">
+    <div className={styles.container}>
+      <div className={styles.journey}>
         <h2>Our Journey</h2>
         <p>
           Founded by a passionate chef, our restaurant is a dream to share the
@@ -12,7 +12,7 @@ const AboutUs = () => {
           of Japanese cuisine
         </p>
       </div>
-      <div className="rectangle"></div>
+      <div className={styles.rectangle}></div>
     </div>
   );
 };

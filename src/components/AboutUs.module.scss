@@ -6,6 +6,7 @@
   grid-auto-flow: row;
   grid-template-areas: "rectangle journey";
   padding-top: 4px;
+  background-color: red($color: #000000);
 }
 
 .journey {

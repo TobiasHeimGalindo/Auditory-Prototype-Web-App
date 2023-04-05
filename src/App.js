@@ -4,6 +4,7 @@ import HeroSection from "./components/HeroSection";
 import AboutUs from "./components/AboutUs";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { themeOptions } from "../src/styles/theme.ts";
+import FeaturedFavorites from "./components/FeaturedFavorites";
 
 const theme = createTheme(themeOptions);
 
@@ -20,7 +21,7 @@ function App() {
           <AboutUs />
         </section>
         <section className="featured-favorites-section">
-          Featured Favorites Section
+          <FeaturedFavorites />
         </section>
         <section className="menu-section">Menu Section</section>
         <section className="location-section">Location Section</section>
