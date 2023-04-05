@@ -15,6 +15,35 @@ export const themeOptions: ThemeOptions = {
   },
   typography: {
     fontSize: 16,
+    fontFamily: "Outfit Regular, sans-serif",
+    h1: {
+      fontFamily: "Outfit Bold, sans-serif",
+      fontWeight: 700,
+    },
+    h2: {
+      fontFamily: "Outfit Bold, sans-serif",
+      fontWeight: 700,
+    },
+    h3: {
+      fontFamily: "Outfit Bold, sans-serif",
+      fontWeight: 700,
+    },
+    h4: {
+      fontFamily: "Outfit Bold, sans-serif",
+      fontWeight: 700,
+    },
+    h5: {
+      fontFamily: "Outfit Bold, sans-serif",
+      fontWeight: 700,
+    },
+    h6: {
+      fontFamily: "Outfit Bold, sans-serif",
+      fontWeight: 700,
+    },
+    body2: {
+      fontFamily: "Outfit ExtraLight, sans-serif",
+      fontWeight: 300,
+    },
   },
   components: {
     MuiButton: {
@@ -36,6 +65,14 @@ export const themeOptions: ThemeOptions = {
         },
         containedPrimary: {
           boxShadow: "0px 8px 15px 0px rgba(255, 183, 3, 0.5)",
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: "25px",
+          boxShadow: "0 4px 25px rgba(0, 0, 0, 0.15)",
         },
       },
     },

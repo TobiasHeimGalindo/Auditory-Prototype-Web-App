@@ -3,22 +3,49 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 0.6fr 1.4fr;
   grid-auto-columns: 1fr;
-  gap: 0px 0px;
+  gap: 0px 25px;
   grid-auto-flow: row;
   grid-template-areas:
     "header header"
     "left right";
+  background-color: #fff1d9;
+  background-image: url("../assets/footage/featuredLeafs.png");
+  background-position: right 100% bottom 5%;
+  background-repeat: space;
+ 
 }
 
 .header {
-  grid-area: Header;
-  font-size: 4rem;
+  grid-area: header;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  h2 {
+    padding-top: 70px;
+    font-size: 4rem;
+    margin: 0;
+  }
+  p {
+    font-size: 1.25rem;
+    max-width: 550px;
+    text-align: center;
+  }
+}
+
+.left,
+.right {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
 }
 
 .left {
-  grid-area: left;
+  padding-top: 50px;
+  padding-bottom: 60px;
 }
 
 .right {
-  grid-area: right;
+  padding-top: 200px;
+  padding-bottom: 60px;
 }
