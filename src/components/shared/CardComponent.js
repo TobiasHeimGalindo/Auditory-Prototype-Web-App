@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardContent, Typography, Box } from "@mui/material";
 import styles from "./CardComponent.module.scss";
-import cart from "../../assets/footage/cart-icon.png";
+import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
 
 const CardComponent = ({ videoSrc, title, ingredients, price }) => {
   return (
@@ -32,7 +32,7 @@ const CardComponent = ({ videoSrc, title, ingredients, price }) => {
           <Typography variant="h6" component="div" align="left">
             {price}
           </Typography>
-          <img src={cart} alt="cart-icon" />
+          <ShoppingBasketRoundedIcon />
         </Box>
       </CardContent>
     </Card>

@@ -6,7 +6,7 @@
   grid-auto-flow: row;
   grid-template-areas: "rectangle journey";
   padding-top: 4px;
-  background-color: red($color: #000000);
+  background-color: #fffaf0;
 }
 
 .journey {
@@ -14,15 +14,33 @@
   text-align: start;
   padding-top: 150px;
   max-width: 475px;
-
   padding-left: 110px;
 }
+
 .rectangle {
   grid-area: rectangle;
   background-color: #ffd97a;
   min-height: 620px;
   border-radius: 0 45px 0 45px;
-  background-image: url("../assets/footage/restaurant.jpg");
-  background-size: cover;
-  box-shadow: 12px 0px 0px 0px #FFD97A;
+  box-shadow: 12px 0px 0px 0px #ffd97a;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.5s;
+
+  &:hover {
+    box-shadow: 50px 0px 0px 0px #ffd97a;
+
+    .video {
+      width: calc(100% + 50px);
+    }
+  }
+}
+
+.video {
+  left: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: width 0.5s;
 }

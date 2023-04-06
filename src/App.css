@@ -2,6 +2,14 @@
   text-align: center;
 }
 
+.Navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+}
+
 .bg-color {
   position: absolute;
   z-index: 0;
@@ -12,15 +20,15 @@
   background-color: #fff1d9;
 }
 
-.hero-section {
+.home-section {
   position: relative;
   z-index: 2;
 }
 
-.about-us-section {
+.about-section {
   position: relative;
   z-index: 1;
   margin-top: -140px;
-  background-color: #FFFAF0;
+  background-color: #fffaf0;
   width: 100%;
 }

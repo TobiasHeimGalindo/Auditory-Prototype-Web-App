@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
 import styles from "./Location.module.scss";
 
-
 const addressContent = [
   { text: "Restaurant Name", variant: "h5" },
   { text: "70806 Mühlheim Straße 8,", mt: 2 },
@@ -27,7 +26,13 @@ const Location = () => {
           </div>
           <Card
             className={styles.addressCard}
-            sx={{ boxShadow: "10px 0px 0px 0px #494bea" }}
+            sx={{
+              boxShadow: "10px 0px 0px 0px #494bea",
+              transition: "box-shadow 0.5s",
+              ":hover": {
+                boxShadow: "20px 0px 0px 0px #494bea",
+              },
+            }}
           >
             <CardContent>
               {addressContent.map(({ text, variant, mt }, index) => (

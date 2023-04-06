@@ -39,7 +39,12 @@
   background-size: cover;
   overflow: hidden;
   border-radius: 16px;
-  box-shadow: 25px 0px 0px 0px #494bea;
+  box-shadow: 10px 0px 0px 0px #494bea;
   height: 370px;
   width: 100%;
+  transition: box-shadow 0.5s;
+
+  &:hover {
+    box-shadow: 20px 0px 0px 0px #494bea;
+  }
 }

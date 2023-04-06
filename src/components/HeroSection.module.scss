@@ -19,7 +19,11 @@ $ellipse-color: #ffb703;
   position: relative;
   background-image: url("../assets/footage/leafs-figma.png");
   background-repeat: no-repeat;
-  background-size: auto 100%; 
+  background-size: auto 100%;
+
+  @media (max-width: 1043px) {
+    background-image: none;
+  }
 }
 
 .heroText {
@@ -29,8 +33,15 @@ $ellipse-color: #ffb703;
   z-index: 4;
   max-width: 449px;
 
+  @media (max-width: 1043px) {
+    padding-left: 2%;
+  }
+
   h1 {
     margin: 0;
+    @media (max-width: 715px) {
+      font-size: 3.3rem;
+    }
   }
 
   p {
@@ -43,6 +54,23 @@ $ellipse-color: #ffb703;
   position: relative;
   width: 100%;
   z-index: 2;
+
+  &:hover {
+    .ellipse,
+    .ellipseTwin {
+      transform: rotate(-135deg) scale(7) translateY(-10px);
+      transition-delay: 100ms;
+    }
+
+    .ellipseTwin {
+      transition-delay: 150ms;
+    }
+
+    img {
+      transform: rotate(-5deg);
+      transition-delay: 200ms;
+    }
+  }
 }
 
 .collection img {
@@ -50,7 +78,12 @@ $ellipse-color: #ffb703;
   z-index: 3;
   height: 90%;
   right: 10%;
-  top: 50%;
+  top: 45%;
+  transition: transform 0.5s;
+
+  @media (max-width: 1240px) {
+    opacity: 0;
+  }
 }
 
 .ellipse,
@@ -61,12 +94,21 @@ $ellipse-color: #ffb703;
   background-color: $ellipse-color;
   border-radius: 50px 50px 0 0;
   transform: rotate(-135deg) scale(7);
+  transition: transform 0.5s;
   right: 10%;
   top: 30%;
+
+  @media (max-width: 1240px) {
+    opacity: 0;
+  }
 }
 
 .ellipseTwin {
   top: calc(30% + 22px);
   right: calc(10% - 32px);
   opacity: 0.5;
+
+  @media (max-width: 1240px) {
+    opacity: 0;
+  }
 }

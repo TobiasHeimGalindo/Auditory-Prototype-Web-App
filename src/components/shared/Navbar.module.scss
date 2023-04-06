@@ -1,0 +1,52 @@
+.navbar {
+  box-shadow: none;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+
+  @media (min-width: 768px) {
+    padding: 0 3rem;
+  }
+
+  @media (min-width: 1200px) {
+    padding: 0 5rem;
+  }
+}
+
+.logo {
+  @media (max-width: 767px) {
+    display: none;
+  }
+}
+
+.menu {
+  display: flex;
+  gap: 4rem;
+  padding-left: 10%;
+  @media (max-width: 767px) {
+    gap: 2rem;
+    padding-left: 0;
+  }
+}
+
+.link {
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.3s;
+
+  &:hover {
+    color: #ffb703;
+  }
+}
+
+.search-and-cart {
+  display: flex;
+  align-items: center;
+
+  .MuiIconButton-root {
+    margin-left: 1rem;
+  }
+}

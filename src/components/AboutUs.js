@@ -1,6 +1,8 @@
 import React from "react";
 import styles from './AboutUs.module.scss';
 
+import video from '../assets/footage/journey.mp4';
+
 const AboutUs = () => {
   return (
     <div className={styles.container}>
@@ -12,7 +14,16 @@ const AboutUs = () => {
           of Japanese cuisine
         </p>
       </div>
-      <div className={styles.rectangle}></div>
+      <div className={styles.rectangle}>
+        <video
+          className={styles.video}
+          src={video}
+          playsInline
+          autoPlay
+          muted
+          loop
+        ></video>
+      </div>
     </div>
   );
 };

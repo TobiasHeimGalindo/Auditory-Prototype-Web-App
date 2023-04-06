@@ -16,20 +16,28 @@ const FeaturedFavorites = () => {
         </p>
       </div>
       <div className={styles.left}>
-        <CardComponent
-          videoSrc={umamiRamen}
-          title="Umami Ramen"
-          ingredients="Pork belly, chicken broth, ramen noodles, soft-boiled egg"
-          price="9.50€"
-        />
+        <div>
+          <div className={styles.cardContainer}>
+            <CardComponent
+              videoSrc={umamiRamen}
+              title="Umami Ramen"
+              ingredients="Pork belly, chicken broth, ramen noodles, soft-boiled egg"
+              price="9.50€"
+            />
+          </div>
+        </div>
       </div>
       <div className={styles.right}>
-        <CardComponent
-          videoSrc={tokyoSunrise}
-          title="Tokyo Sunrise"
-          ingredients="Salmon, sushi rice, rice vinegar, cucumber, carrot, daikon radish, furikake"
-          price="11.50€"
-        />
+        <div>
+          <div className={styles.cardContainer}>
+            <CardComponent
+              videoSrc={tokyoSunrise}
+              title="Tokyo Sunrise"
+              ingredients="Salmon, sushi rice, rice vinegar, cucumber, carrot, daikon radish, furikake"
+              price="11.50€"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

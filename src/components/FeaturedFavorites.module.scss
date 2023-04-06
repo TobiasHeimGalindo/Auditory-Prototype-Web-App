@@ -12,7 +12,6 @@
   background-image: url("../assets/footage/featuredLeafs.png");
   background-position: right 100% bottom 5%;
   background-repeat: space;
- 
 }
 
 .header {
@@ -37,6 +36,17 @@
   display: flex;
   justify-content: center;
   flex-grow: 1;
+}
+
+.cardContainer {
+  border-radius: 25px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 14px rgba(0, 0, 0, 0.2);
+  }
 }
 
 .left {

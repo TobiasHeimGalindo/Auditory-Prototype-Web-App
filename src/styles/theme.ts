@@ -65,6 +65,12 @@ export const themeOptions: ThemeOptions = {
         },
         containedPrimary: {
           boxShadow: "0px 8px 15px 0px rgba(255, 183, 3, 0.5)",
+          "&:hover": {
+            backgroundColor: "#FFD166",
+          },
+          "&:active": {
+            backgroundColor: "#FFC045",
+          },
         },
       },
     },
