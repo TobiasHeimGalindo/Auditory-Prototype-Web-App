@@ -1,12 +1,22 @@
-import React from "react";
-import styles from './HeroSection.module.scss';
-
+import React, { useState } from "react";
+import styles from "./HeroSection.module.scss";
+import ReactHowler from "react-howler";
 import bowl from "../assets/footage/cropped.png";
-
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import { useAudio } from '../AudioContext';
+
+
+import softSelection from "../assets/sounds/Earcon/SoftSelection.mp3";
 
 const HeroSection = () => {
+  const [playSoftSelection, setPlaySoftSelection] = useState(false);
+  const { volume, muted } = useAudio();
+
+  const handleMenuClick = () => {
+    setPlaySoftSelection(true);
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
@@ -18,7 +28,9 @@ const HeroSection = () => {
             </p>
             <Stack direction="row" spacing={2} sx={{ paddingTop: "31px" }}>
               <Button variant="outlined">Contact</Button>
-              <Button variant="contained">Menu</Button>
+              <Button variant="contained" onClick={handleMenuClick}>
+                Menu
+              </Button>
             </Stack>
           </div>
           <div className={styles.collection}>
@@ -28,6 +40,12 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+      <ReactHowler
+        src={softSelection}
+        volume={muted ? 0 : volume}
+        playing={playSoftSelection}
+        onEnd={() => setPlaySoftSelection(false)}
+      />
     </div>
   );
 };

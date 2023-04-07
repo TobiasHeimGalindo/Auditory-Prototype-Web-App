@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import "./App.css";
 import HeroSection from "./components/HeroSection";
 import AboutUs from "./components/AboutUs";
@@ -7,26 +7,49 @@ import OurMenu from "./components/OurMenu";
 import Location from "./components/Location";
 import Footer from "./components/shared/Footer";
 import Navbar from "./components/shared/Navbar";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { themeOptions } from "../src/styles/theme.ts";
 import ReactHowler from "react-howler";
 import { throttle } from "lodash";
 
-import auditoryBackground from "./assets/sounds/kitchen-loop.mp3";
+import { useAudio } from "./AudioContext";
 
-const theme = createTheme(themeOptions);
+import auditoryBackground from "./assets/sounds/boiling-sizzling-cutting.mp3";
+
+//Max volumes for each Section
+const sectionVolumes = {
+  home: 0.3,
+  about: 0.3,
+  favorites: 0.2,
+  menu: 0.1,
+  location: 0.05,
+};
 
 function App() {
-  const [volume, setVolume] = useState(0);
-  const sectionVolumes = {
-    home: 0.2,
-    about: 0.2,
-    favorites: 0.1,
-    menu: 0.05,
-    location: 0.05,
+  const [scrollVolume, setScrollVolume] = useState(0);
+  const { volume, muted } = useAudio();
+
+  const howlerRef = useRef(null);
+  //mute auditoryBackground when User tabs out.
+  const handleVisibilityChange = () => {
+    if (document.visibilityState === "hidden") {
+      if (howlerRef.current) {
+        howlerRef.current.pause();
+      }
+    } else if (document.visibilityState === "visible") {
+      if (howlerRef.current) {
+        howlerRef.current.play();
+      }
+    }
   };
+
+  useEffect(() => {
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
   // This function calculates the volume based on the user's scroll position.
-  const getSectionVolume = (scrollPosition) => {
+  const getSectionVolume = useCallback((scrollPosition) => {
     // Select all sections that we want to control the volume for.
     const sections = document.querySelectorAll(
       ".home-section, .about-section, .favorites-section, .menu-section, .location-section"
@@ -71,52 +94,59 @@ function App() {
 
     // If the scroll position is not within any of the sections, set the volume to 0.
     return 0;
-  };
+  }, []);
 
   useEffect(() => {
-    // Throttle the handleScroll frequency to fix distorted/bad audio quality.
     const handleScroll = throttle(() => {
       const scrollPosition = window.pageYOffset + window.innerHeight / 2;
       const volume = getSectionVolume(scrollPosition);
-      setVolume(volume);
-    }, 100); // Limit the number of times the scroll handler is called to once every 100 ms.
+      setScrollVolume(volume);
+    }, 100);
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [getSectionVolume]);
+
+  const finalVolume = muted
+    ? 0
+    : Number.isFinite(volume * scrollVolume)
+    ? volume * scrollVolume
+    : 0;
+
+  console.log("finalVolume", finalVolume);
+
   return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
-        <section className="Navbar">
-          <Navbar />
-        </section>
-        <section className="home-section" data-section="home">
-          <div className="bg-color"></div>
-          <HeroSection />
-        </section>
-        <section className="about-section" data-section="about">
-          <AboutUs />
-        </section>
-        <section className="favorites-section" data-section="favorites">
-          <FeaturedFavorites />
-        </section>
-        <section className="menu-section" data-section="menu">
-          <OurMenu />
-        </section>
-        <section className="location-section" data-section="location">
-          <Location />
-        </section>
-        <footer className="footer">
-          <Footer />
-        </footer>
-        <ReactHowler
-          src={auditoryBackground}
-          volume={volume}
-          loop={true}
-          preload={true}
-        />
-      </div>
-    </ThemeProvider>
+    <div className="App">
+      <section className="Navbar">
+        <Navbar />
+      </section>
+      <section className="home-section" data-section="home">
+        <div className="bg-color"></div>
+        <HeroSection />
+      </section>
+      <section className="about-section" data-section="about">
+        <AboutUs />
+      </section>
+      <section className="favorites-section" data-section="favorites">
+        <FeaturedFavorites />
+      </section>
+      <section className="menu-section" data-section="menu">
+        <OurMenu />
+      </section>
+      <section className="location-section" data-section="location">
+        <Location />
+      </section>
+      <footer className="footer">
+        <Footer />
+      </footer>
+      <ReactHowler
+        ref={howlerRef}
+        src={auditoryBackground}
+        volume={finalVolume}
+        loop={true}
+        preload={true}
+      />
+    </div>
   );
 }
 

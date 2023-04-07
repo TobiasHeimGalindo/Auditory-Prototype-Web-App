@@ -3,18 +3,32 @@ import { Card, CardContent, Typography, Box } from "@mui/material";
 import styles from "./CardComponent.module.scss";
 import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
 
-const CardComponent = ({ videoSrc, title, ingredients, price }) => {
+const CardComponent = ({ videoSrc, title, ingredients, price, onHover }) => {
+  const handleMouseEnter = (e) => {
+    const videoElement = e.currentTarget.querySelector("video");
+    if (videoElement) {
+      videoElement.play();
+    }
+    if (onHover) {
+      onHover();
+    }
+  };
+
+  const handleMouseLeave = (e) => {
+    const videoElement = e.currentTarget.querySelector("video");
+    if (videoElement) {
+      videoElement.pause();
+    }
+  };
+
   return (
-    <Card className={styles.card}>
+    <Card
+      className={styles.card}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div className={styles.videoWrapper}>
-        <video
-          className={styles.video}
-          src={videoSrc}
-          onMouseOver={(e) => e.target.play()}
-          onMouseOut={(e) => e.target.pause()}
-          loop
-          muted
-        />
+        <video className={styles.video} src={videoSrc} loop muted />
       </div>
       <CardContent>
         <Typography variant="h5" component="div" align="left">
