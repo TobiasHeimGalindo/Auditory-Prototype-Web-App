@@ -24,7 +24,7 @@ const sectionVolumes = {
 };
 
 function App() {
-  const [scrollVolume, setScrollVolume] = useState(0);
+  const [scrollVolume, setScrollVolume] = useState(0.3);
   const { volume, muted } = useAudio();
 
   const howlerRef = useRef(null);

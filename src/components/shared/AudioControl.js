@@ -6,6 +6,7 @@ import Slider from "@mui/material/Slider";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import CloseIcon from "@mui/icons-material/Close";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -38,7 +39,7 @@ const AudioControl = () => {
           sx={{ marginRight: 2 }}
           ref={audioControlButtonRef}
         >
-          <VolumeUpIcon />
+          {muted ? <VolumeOffIcon /> : <VolumeUpIcon />}
         </IconButton>
       </Tooltip>
       <Popover

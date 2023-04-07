@@ -8,7 +8,7 @@ export const useAudio = () => {
 
 export const AudioProvider = ({ children }) => {
   const [volume, setVolume] = useState(0.5);
-  const [muted, setMuted] = useState(false);
+  const [muted, setMuted] = useState(true);
 
   const value = {
     volume,
