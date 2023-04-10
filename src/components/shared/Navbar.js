@@ -14,6 +14,45 @@ const Navbar = () => {
   const menuItems = ["Home", "About", "Menu"];
   const location = useLocation();
 
+  const renderMenuItems = (item, index) => {
+    if (item === "Menu") {
+      return (
+        <NavLink
+          key={index}
+          to={`/${item.toLowerCase()}`}
+          className={styles.link}
+        >
+          {item}
+        </NavLink>
+      );
+    } else if (location.pathname === "/menu") {
+      return (
+        <NavLink
+          key={index}
+          to={{
+            pathname: "/",
+            hash: `${item.toLowerCase()}-section`,
+          }}
+          className={styles.link}
+        >
+          {item}
+        </NavLink>
+      );
+    } else {
+      return (
+        <Link
+          key={index}
+          to={`${item.toLowerCase()}-section`}
+          smooth={true}
+          duration={500}
+          className={styles.link}
+        >
+          {item}
+        </Link>
+      );
+    }
+  };
+
   return (
     <AppBar
       position="sticky"
@@ -25,46 +64,7 @@ const Navbar = () => {
         <Typography variant="h6" className={styles.logo}>
           Logo
         </Typography>
-        <nav className={styles.menu}>
-          {menuItems.map((item, index) => {
-            if (item === "Menu") {
-              return (
-                <NavLink
-                  key={index}
-                  to={`/${item.toLowerCase()}`}
-                  className={styles.link}
-                >
-                  {item}
-                </NavLink>
-              );
-            } else if (location.pathname === "/menu") {
-              return (
-                <NavLink
-                  key={index}
-                  to={{
-                    pathname: "/",
-                    hash: `${item.toLowerCase()}-section`,
-                  }}
-                  className={styles.link}
-                >
-                  {item}
-                </NavLink>
-              );
-            } else {
-              return (
-                <Link
-                  key={index}
-                  to={`${item.toLowerCase()}-section`}
-                  smooth={true}
-                  duration={500}
-                  className={styles.link}
-                >
-                  {item}
-                </Link>
-              );
-            }
-          })}
-        </nav>
+        <nav className={styles.menu}>{menuItems.map(renderMenuItems)}</nav>
         <Box sx={{ flexGrow: 1 }} />
         <AudioControl />
         <IconButton edge="end" color="inherit">
