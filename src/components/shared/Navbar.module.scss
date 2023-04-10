@@ -35,9 +35,14 @@
 .link {
   cursor: pointer;
   text-decoration: none;
+  color: inherit;
   transition: color 0.3s;
 
   &:hover {
     color: #ffb703;
   }
+}
+
+.active {
+  color: #ffb703;
 }

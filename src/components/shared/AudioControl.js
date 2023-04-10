@@ -55,7 +55,7 @@ const AudioControl = () => {
           vertical: "top",
           horizontal: "center",
         }}
-        container={audioControlButtonRef.current?.parentNode}
+        container={audioControlButtonRef.current}
         PaperProps={{
           sx: { minWidth: 200, minHeight: 150 },
         }}

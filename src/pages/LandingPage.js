@@ -1,18 +1,19 @@
 import React, { useEffect, useState, useCallback, useRef } from "react";
-import "./App.css";
-import HeroSection from "./components/HeroSection";
-import AboutUs from "./components/AboutUs";
-import FeaturedFavorites from "./components/FeaturedFavorites";
-import OurMenu from "./components/OurMenu";
-import Location from "./components/Location";
-import Footer from "./components/shared/Footer";
-import Navbar from "./components/shared/Navbar";
+import styles from "./Landingpage.module.scss";
+import Navbar from "../components/shared/Navbar";
+import { useLocation } from "react-router-dom";
+import { scroller } from "react-scroll";
+import HeroSection from "../components/HeroSection";
+import AboutUs from "../components/AboutUs";
+import FeaturedFavorites from "../components/FeaturedFavorites";
+import OurMenu from "../components/OurMenu";
+import Location from "../components/Location";
+import Footer from "../components/shared/Footer";
 import ReactHowler from "react-howler";
 import { throttle } from "lodash";
+import { useAudio } from "../AudioContext";
 
-import { useAudio } from "./AudioContext";
-
-import auditoryBackground from "./assets/sounds/boiling-sizzling-cutting.mp3";
+import auditoryBackground from "../assets/sounds/boiling-sizzling-cutting.mp3";
 
 //Max volumes for each Section
 const sectionVolumes = {
@@ -23,9 +24,20 @@ const sectionVolumes = {
   location: 0.05,
 };
 
-function App() {
+function LandingPage() {
   const [scrollVolume, setScrollVolume] = useState(0.3);
   const { volume, muted } = useAudio();
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      scroller.scrollTo(location.hash.slice(1), {
+        duration: 500,
+        smooth: true,
+      });
+    }
+  }, [location]);
 
   const howlerRef = useRef(null);
   //mute auditoryBackground when User tabs out.
@@ -117,26 +129,34 @@ function App() {
 
   return (
     <div className="App">
-      <section className="Navbar">
+      <section className={styles.navbar}>
         <Navbar />
       </section>
-      <section className="home-section" data-section="home">
-        <div className="bg-color"></div>
+      <section id="home-section" className={styles.home} data-section="home">
+        <div className={styles.bgColor}></div>
         <HeroSection />
       </section>
-      <section className="about-section" data-section="about">
+      <section id="about-section" className={styles.about} data-section="about">
         <AboutUs />
       </section>
-      <section className="favorites-section" data-section="favorites">
+      <section
+        id="favorites-section"
+        className={styles.favorites}
+        data-section="favorites"
+      >
         <FeaturedFavorites />
       </section>
-      <section className="menu-section" data-section="menu">
+      <section id="menu-section" data-section="menu">
         <OurMenu />
       </section>
-      <section className="location-section" data-section="location">
+      <section
+        id="location-section"
+        className={styles.location}
+        data-section="location"
+      >
         <Location />
       </section>
-      <footer className="footer">
+      <footer className={styles.footer}>
         <Footer />
       </footer>
       <ReactHowler
@@ -150,4 +170,4 @@ function App() {
   );
 }
 
-export default App;
+export default LandingPage;

@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./Navbar.module.scss";
 import { Link } from "react-scroll";
+import { NavLink, useLocation } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -9,9 +10,9 @@ import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AudioControl from "./AudioControl";
 
-// Navbar Component
 const Navbar = () => {
   const menuItems = ["Home", "About", "Menu"];
+  const location = useLocation();
 
   return (
     <AppBar
@@ -25,17 +26,46 @@ const Navbar = () => {
           Logo
         </Typography>
         <nav className={styles.menu}>
-          {menuItems.map((item, index) => (
-            <Link
-              key={index}
-              to={`${item.toLowerCase()}-section`}
-              smooth={true}
-              duration={500}
-              className={styles.link}
-            >
-              {item}
-            </Link>
-          ))}
+          {menuItems.map((item, index) => {
+            if (item === "Menu") {
+              return (
+                <NavLink
+                  key={index}
+                  to={`/${item.toLowerCase()}`}
+                  className={styles.link}
+                  activeClassName={styles.active}
+                >
+                  {item}
+                </NavLink>
+              );
+            } else if (location.pathname === "/menu") {
+              return (
+                <NavLink
+                  key={index}
+                  to={{
+                    pathname: "/",
+                    hash: `${item.toLowerCase()}-section`,
+                  }}
+                  className={styles.link}
+                  activeClassName={styles.active}
+                >
+                  {item}
+                </NavLink>
+              );
+            } else {
+              return (
+                <Link
+                  key={index}
+                  to={`${item.toLowerCase()}-section`}
+                  smooth={true}
+                  duration={500}
+                  className={styles.link}
+                >
+                  {item}
+                </Link>
+              );
+            }
+          })}
         </nav>
         <Box sx={{ flexGrow: 1 }} />
         <AudioControl />

@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-.Navbar {
+.navbar {
   position: absolute;
   top: 0;
   left: 0;
@@ -10,7 +10,7 @@
   z-index: 3;
 }
 
-.bg-color {
+.bgColor {
   position: absolute;
   z-index: 0;
   top: 0;
@@ -20,12 +20,12 @@
   background-color: #fff1d9;
 }
 
-.home-section {
+.home {
   position: relative;
   z-index: 2;
 }
 
-.about-section {
+.about {
   position: relative;
   z-index: 1;
   margin-top: -140px;
