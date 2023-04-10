@@ -62,9 +62,9 @@ function LandingPage() {
 
   // This function calculates the volume based on the user's scroll position.
   const getSectionVolume = useCallback((scrollPosition) => {
-    // Select all sections that we want to control the volume for.
+    // Select all sections that we want to control the volume for. Sccs classnames get hashed, hence the usage of data-section
     const sections = document.querySelectorAll(
-      ".home-section, .about-section, .favorites-section, .menu-section, .location-section"
+      '[data-section="home"], [data-section="about"], [data-section="favorites"], [data-section="menu"], [data-section="location"]'
     );
 
     // Iterate through each section.
@@ -99,7 +99,6 @@ function LandingPage() {
         // This will create a smooth transition between the base volumes of the current and next sections.
         const currentVolume =
           sectionBaseVolume + volumeDifference * relativeScrollPosition;
-
         return currentVolume;
       }
     }
@@ -125,8 +124,6 @@ function LandingPage() {
     ? volume * scrollVolume
     : 0;
 
-  console.log("finalVolume", finalVolume);
-
   return (
     <div className="App">
       <section className={styles.navbar}>
@@ -146,7 +143,7 @@ function LandingPage() {
       >
         <FeaturedFavorites />
       </section>
-      <section id="menu-section" data-section="menu">
+      <section id="menu-section" className={styles.menu} data-section="menu">
         <OurMenu />
       </section>
       <section

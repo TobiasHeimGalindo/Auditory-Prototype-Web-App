@@ -33,7 +33,6 @@ const Navbar = () => {
                   key={index}
                   to={`/${item.toLowerCase()}`}
                   className={styles.link}
-                  activeClassName={styles.active}
                 >
                   {item}
                 </NavLink>
@@ -47,7 +46,6 @@ const Navbar = () => {
                     hash: `${item.toLowerCase()}-section`,
                   }}
                   className={styles.link}
-                  activeClassName={styles.active}
                 >
                   {item}
                 </NavLink>
