@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styles from "./FeaturedFavorites.module.scss";
 import CardComponent from "./shared/CardComponent";
-import ReactHowler from "react-howler";
 import { useAudio } from "../AudioContext";
 
 import umamiRamen from "../assets/footage/umami-ramen.mp4";
@@ -14,7 +13,19 @@ const FeaturedFavorites = () => {
   const [umamiRamenHovered, setUmamiRamenHovered] = useState(false);
   const [tokyoSunriseHovered, setTokyoSunriseHovered] = useState(false);
 
-  const { volume, muted } = useAudio();
+  const { setPlaying, setSrc } = useAudio();
+
+  const handleUmamiRamenHover = () => {
+    setPlaying(true);
+    setSrc(sizzlingBowl);
+    setUmamiRamenHovered(true);
+  };
+
+  const handleTokyoSunriseHover = () => {
+    setPlaying(true);
+    setSrc(plateDrop);
+    setTokyoSunriseHovered(true);
+  };
 
   return (
     <div className={styles.container}>
@@ -33,7 +44,7 @@ const FeaturedFavorites = () => {
               title="Umami Ramen"
               ingredients="Pork belly, chicken broth, ramen noodles, soft-boiled egg"
               price="9.50€"
-              onHover={() => setUmamiRamenHovered(true)}
+              onHover={handleUmamiRamenHover}
             />
           </div>
         </div>
@@ -46,27 +57,11 @@ const FeaturedFavorites = () => {
               title="Tokyo Sunrise"
               ingredients="Salmon, sushi rice, rice vinegar, cucumber, carrot, daikon radish, furikake"
               price="11.50€"
-              onHover={() => setTokyoSunriseHovered(true)}
+              onHover={handleTokyoSunriseHover}
             />
           </div>
         </div>
       </div>
-      {umamiRamenHovered && (
-        <ReactHowler
-          volume={muted ? 0 : volume}
-          src={sizzlingBowl}
-          playing={true}
-          onEnd={() => setUmamiRamenHovered(false)}
-        />
-      )}
-      {tokyoSunriseHovered && (
-        <ReactHowler
-          src={plateDrop}
-          volume={muted ? 0 : volume}
-          playing={true}
-          onEnd={() => setTokyoSunriseHovered(false)}
-        />
-      )}
     </div>
   );
 };
