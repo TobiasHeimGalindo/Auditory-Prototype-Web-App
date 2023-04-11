@@ -5,6 +5,8 @@ import bowl from "../assets/footage/cropped.png";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useAudio } from '../AudioContext';
+import { useNavigate } from "react-router-dom";
+
 
 
 import softSelection from "../assets/sounds/Earcon/SoftSelection.mp3";
@@ -12,9 +14,11 @@ import softSelection from "../assets/sounds/Earcon/SoftSelection.mp3";
 const HeroSection = () => {
   const [playSoftSelection, setPlaySoftSelection] = useState(false);
   const { volume, muted } = useAudio();
+  const navigate = useNavigate();
 
   const handleMenuClick = () => {
     setPlaySoftSelection(true);
+    navigate("/menu");
   };
 
   return (

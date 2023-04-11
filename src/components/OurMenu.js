@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import { styled } from "@mui/system";
 import Stack from "@mui/material/Stack";
 import styles from "./OurMenu.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const DineInButton = styled(Button)({
   flexGrow: 1,
@@ -14,6 +15,12 @@ const DineInButton = styled(Button)({
 });
 
 const OurMenu = () => {
+  const navigate = useNavigate();
+
+  const handleMenuClick = () => {
+    navigate("/menu");
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -33,10 +40,19 @@ const OurMenu = () => {
               paddingTop: "27px",
             }}
           >
-            <Button variant="contained" sx={{ flexGrow: 1 }} color="primary">
+            <Button
+              variant="contained"
+              sx={{ flexGrow: 1 }}
+              color="primary"
+              onClick={handleMenuClick}
+            >
               Delivery Menu
             </Button>
-            <DineInButton variant="contained" color="primary">
+            <DineInButton
+              variant="contained"
+              color="primary"
+              onClick={handleMenuClick}
+            >
               Dine-In Menu
             </DineInButton>
           </Stack>

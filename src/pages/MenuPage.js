@@ -1,14 +1,17 @@
 import React from "react";
 import styles from "./MenuPage.module.scss";
 import Navbar from "../components/shared/Navbar";
+import MenuSelection from "../components/MenuSelection";
 
 import cooking from "../assets/footage/menu.mp4";
 
 const MenuPage = () => {
   return (
     <div className={styles.wrapper}>
-      <div className={styles.headerContent}>
+      <div className={styles.navbar}>
         <Navbar />
+      </div>
+      <div className={styles.headerContent}>
         <div className={styles.flexWrapper}>
           <div className={styles.headerText}>
             <h2>DISCOVER OUR MENU</h2>
@@ -28,6 +31,9 @@ const MenuPage = () => {
             ></video>
           </div>
         </div>
+      </div>
+      <div className={styles.menuContent}>
+        <MenuSelection />
       </div>
     </div>
   );

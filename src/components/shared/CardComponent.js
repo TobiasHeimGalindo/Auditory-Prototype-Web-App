@@ -3,7 +3,14 @@ import { Card, CardContent, Typography, Box } from "@mui/material";
 import styles from "./CardComponent.module.scss";
 import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
 
-const CardComponent = ({ videoSrc, title, ingredients, price, onHover }) => {
+const CardComponent = ({
+  videoSrc,
+  title,
+  ingredients,
+  price,
+  onHover,
+  cardClass,
+}) => {
   const handleMouseEnter = (e) => {
     const videoElement = e.currentTarget.querySelector("video");
     if (videoElement) {
@@ -23,7 +30,7 @@ const CardComponent = ({ videoSrc, title, ingredients, price, onHover }) => {
 
   return (
     <Card
-      className={styles.card}
+    className={`${styles.card} ${cardClass}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
