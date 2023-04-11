@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './AboutUs.module.scss';
 
-import video from '../assets/footage/journey.mp4';
+import steamBasket from '../assets/footage/journey.mp4';
 
 const AboutUs = () => {
   return (
@@ -17,7 +17,7 @@ const AboutUs = () => {
       <div className={styles.rectangle}>
         <video
           className={styles.video}
-          src={video}
+          src={steamBasket}
           playsInline
           autoPlay
           muted
