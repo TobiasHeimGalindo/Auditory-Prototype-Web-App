@@ -6,9 +6,9 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import IconButton from "@mui/material/IconButton";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AudioControl from "./AudioControl";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 const Navbar = () => {
   const menuItems = ["Home", "About", "Menu"];
@@ -67,9 +67,14 @@ const Navbar = () => {
         <nav className={styles.menu}>{menuItems.map(renderMenuItems)}</nav>
         <Box sx={{ flexGrow: 1 }} />
         <AudioControl />
-        <IconButton edge="end" color="inherit">
-          <ShoppingCartIcon />
-        </IconButton>
+        <Box sx={{ minWidth: 50 }} />
+        <ClickAwayListener onClickAway={() => {}}>
+          <ShoppingCartIcon
+            edge="end"
+            color="inherit"
+            sx={{ cursor: "pointer" }}
+          />
+        </ClickAwayListener>
       </Toolbar>
     </AppBar>
   );

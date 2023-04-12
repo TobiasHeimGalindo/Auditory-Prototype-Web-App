@@ -1,7 +1,6 @@
 import React, { useState, useRef } from "react";
-import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import Popover from "@mui/material/Popover";
+import Popper from "@mui/material/Popper";
 import Slider from "@mui/material/Slider";
 import Switch from "@mui/material/Switch";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -26,42 +25,31 @@ const AudioControl = () => {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "audio-controls-popover" : undefined;
+  const id = open ? "audio-controls-popper" : undefined;
 
   return (
-    <>
+    <div style={{cursor: "pointer"}}>
       <Tooltip title="Audio Controls" arrow>
-        <IconButton
+        <span
           edge="end"
           color="inherit"
           aria-describedby={id}
           onClick={handleClick}
-          sx={{ marginRight: 2 }}
           ref={audioControlButtonRef}
         >
           {muted ? <VolumeOffIcon /> : <VolumeUpIcon />}
-        </IconButton>
+        </span>
       </Tooltip>
-      <Popover
+      <Popper
         id={id}
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "center",
-        }}
         container={audioControlButtonRef.current?.parent}
-        PaperProps={{
-          sx: { minWidth: 200, minHeight: 150 },
-        }}
+        sx={{ backgroundColor: "white", minWidth: 200, minHeight: 150, borderRadius: 4 }}
       >
         <Box p={2} position="relative">
-          <IconButton
+          <CloseIcon
             edge="end"
             color="inherit"
             aria-label="close"
@@ -71,10 +59,9 @@ const AudioControl = () => {
               top: 8,
               right: 8,
               padding: "6px",
+              cursor: "pointer",
             }}
-          >
-            <CloseIcon />
-          </IconButton>
+          />
           <Typography variant="subtitle1" gutterBottom>
             Volume
           </Typography>
@@ -98,8 +85,8 @@ const AudioControl = () => {
             label="Mute"
           />
         </Box>
-      </Popover>
-    </>
+      </Popper>
+    </div>
   );
 };
 
