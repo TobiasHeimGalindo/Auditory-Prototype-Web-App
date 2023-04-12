@@ -52,7 +52,7 @@ export const themeOptions: ThemeOptions = {
       },
       styleOverrides: {
         root: {
-          borderRadius: "45px",
+          borderRadius: 45,
           minWidth: "171px",
           minHeight: "67px",
           padding: "12px 24px",
@@ -79,6 +79,27 @@ export const themeOptions: ThemeOptions = {
         root: {
           borderRadius: "25px",
           boxShadow: "0 4px 25px rgba(0, 0, 0, 0.15)",
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 45,
+          minWidth: 230,
+          fontSize: "1.5rem",
+          boxShadow: "none",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "1rem",
+          padding: "17px",
+          backgroundColor: "#FFB703",
+          color: "#161713",
+          "&:hover": {
+            boxShadow: "none",
+            backgroundColor: "#FFD166",
+          },
         },
       },
     },

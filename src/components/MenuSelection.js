@@ -1,16 +1,43 @@
 import React, { useState } from "react";
-import { Button, Grid } from "@mui/material";
-import CardComponent from "./shared/CardComponent";
+import { Grid } from "@mui/material";
 import styles from "./MenuSelection.module.scss";
+import IconButton from "@mui/material/IconButton";
+import ramen from "../assets/footage/bowl.svg";
+import rice from "../assets/footage/onigiri.svg";
+import drink from "../assets/footage/drink.svg";
+import dessert from "../assets/footage/tart.svg";
+import ImageCard from "./shared/ImageCard";
+
+import misoRamen from "../assets/footage/ramen/miso.jpg";
+import tonkotsuRamen from "../assets/footage/ramen/tonkotsuRamen.jpg";
+import veggieRamen from "../assets/footage/ramen/veggie.jpg";
+import shoyuRamen from "../assets/footage/ramen/small.jpg";
+import karaageRamen from "../assets/footage/ramen/karaageRamen.jpg";
+import seafoodRamen from "../assets/footage/ramen/seafoodRamen.jpg";
+
+import beefRice from "../assets/footage/rice/beefRice.jpg";
+import shrimpRice from "../assets/footage/rice/shrimpRice.jpg";
+import veggieRice from "../assets/footage/rice/veggieRice.jpg";
+import salmonRice from "../assets/footage/rice/salmonRice.jpg";
+
+import matchaLatte from "../assets/footage/drinks/matchaLatte.jpg";
+import lemonade from "../assets/footage/drinks/lemonade.jpg";
+import icedTea from "../assets/footage/drinks/icedTea.jpg";
+import mangoSmoothie from "../assets/footage/drinks/mangoSmoothie.jpg";
+
+import matchaCake from "../assets/footage/dessert/matchaCake.jpg";
+import matchaCream from "../assets/footage/dessert/matchaCream.jpg";
+import sesamePudding from "../assets/footage/dessert/sesamePudding.jpg";
+import mochiDonut from "../assets/footage/dessert/mochiDonut.jpg";
 
 const MenuSelection = () => {
   const [selectedCategory, setSelectedCategory] = useState("Ramen");
 
   const categories = [
-    { id: "Ramen", label: "Ramen" },
-    { id: "Rice", label: "Rice" },
-    { id: "Drinks", label: "Drinks" },
-    { id: "Dessert", label: "Dessert" },
+    { id: 1, label: "Ramen", icon: ramen },
+    { id: 2, label: "Rice", icon: rice },
+    { id: 3, label: "Drinks", icon: drink },
+    { id: 4, label: "Dessert", icon: dessert },
   ];
 
   const dishes = [
@@ -20,6 +47,8 @@ const MenuSelection = () => {
       title: "Spicy Miso Ramen",
       ingredients: "Pork, egg, noodles, miso, chili oil",
       price: "$12.99",
+      imageSrc: misoRamen,
+      popular: true,
     },
     {
       id: 2,
@@ -27,6 +56,8 @@ const MenuSelection = () => {
       title: "Tonkotsu Ramen",
       ingredients: "Pork, egg, noodles, pork bone broth",
       price: "$13.99",
+      imageSrc: tonkotsuRamen,
+      popular: true,
     },
     {
       id: 3,
@@ -34,6 +65,7 @@ const MenuSelection = () => {
       title: "Vegetarian Ramen",
       ingredients: "Tofu, mushrooms, noodles, miso broth",
       price: "$11.99",
+      imageSrc: veggieRamen,
     },
     {
       id: 4,
@@ -41,69 +73,124 @@ const MenuSelection = () => {
       title: "Shoyu Ramen",
       ingredients: "Chicken, noodles, soy sauce broth",
       price: "$12.99",
+      imageSrc: shoyuRamen,
     },
     {
       id: 5,
+      category: "Ramen",
+      title: "Karaage Ramen",
+      ingredients: "karaage, noodles, soy sauce broth",
+      price: "$13.99",
+      imageSrc: karaageRamen,
+    },
+    {
+      id: 6,
+      category: "Ramen",
+      title: "Seafood Ramen",
+      ingredients: "Shrimp, squid, noodles, miso broth",
+      price: "$15.99",
+      imageSrc: seafoodRamen,
+    },
+
+    {
+      id: 7,
       category: "Rice",
       title: "Beef Bulgogi Rice Bowl",
       ingredients: "Beef, rice, bulgogi sauce, carrots, spinach",
       price: "$10.99",
+      imageSrc: beefRice,
     },
     {
-      id: 6,
+      id: 8,
       category: "Rice",
       title: "Shrimp Fried Rice",
       ingredients: "Shrimp, rice, eggs, peas, carrots",
       price: "$9.99",
+      imageSrc: shrimpRice,
     },
     {
-      id: 7,
+      id: 9,
       category: "Rice",
       title: "Vegetable Curry Rice",
       ingredients: "Mixed vegetables, curry sauce, rice",
       price: "$8.99",
+      imageSrc: veggieRice,
     },
     {
-      id: 8,
+      id: 10,
+      category: "Rice",
+      title: "Salmon Teriyaki Rice",
+      ingredients: "Salmon, rice, teriyaki sauce, broccoli",
+      price: "$12.99",
+      imageSrc: salmonRice,
+      popular: true,
+    },
+    {
+      id: 11,
       category: "Drinks",
       title: "Iced Matcha Latte",
       ingredients: "Matcha powder, milk, ice",
       price: "$4.99",
+      imageSrc: matchaLatte,
+      popular: true,
     },
     {
-      id: 9,
+      id: 12,
       category: "Drinks",
       title: "Thai Iced Tea",
       ingredients: "Thai tea, condensed milk, ice",
       price: "$3.99",
+      imageSrc: icedTea,
     },
     {
-      id: 10,
+      id: 13,
       category: "Drinks",
       title: "Lemonade",
       ingredients: "Lemon juice, water, sugar",
       price: "$2.99",
+      imageSrc: lemonade,
     },
     {
-      id: 11,
+      id: 14,
+      category: "Drinks",
+      title: "Mango Smoothie",
+      ingredients: "Mango, yogurt, honey, ice",
+      price: "$5.99",
+      imageSrc: mangoSmoothie,
+    },
+
+    {
+      id: 15,
       category: "Dessert",
-      title: "Matcha Mochi Ice Cream",
+      title: "Matcha Ice Cream",
       ingredients: "Mochi, matcha ice cream",
       price: "$4.99",
+      imageSrc: matchaCream,
     },
     {
-      id: 12,
+      id: 16,
       category: "Dessert",
       title: "Black Sesame Pudding",
       ingredients: "Black sesame paste, milk, sugar",
       price: "$3.99",
+      imageSrc: sesamePudding,
     },
     {
-      id: 13,
+      id: 17,
       category: "Dessert",
       title: "Matcha Cheesecake",
       ingredients: "Cream cheese, matcha powder, sugar",
       price: "$5.99",
+      imageSrc: matchaCake,
+      popular: true,
+    },
+    {
+      id: 18,
+      category: "Dessert",
+      title: "Mochi Donuts",
+      ingredients: "Mochiko flour, sugar, eggs",
+      price: "$4.99",
+      imageSrc: mochiDonut,
     },
   ];
 
@@ -111,28 +198,43 @@ const MenuSelection = () => {
     (dish) => dish.category === selectedCategory
   );
 
+  const categoryStyle = {
+    display: "inline-flex",
+    marginRight: "1rem",
+    marginBottom: "1rem",
+  };
+
   return (
     <div>
       <div className={styles.menuSelection}>
         {categories.map((category) => (
-          <Button
-            key={category.id}
-            variant="contained"
-            onClick={() => setSelectedCategory(category.id)}
-          >
-            {category.label}
-          </Button>
+          <div key={category.id} style={categoryStyle}>
+            <IconButton
+              onClick={() => setSelectedCategory(category.label)}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <img src={category.icon} alt={category.label} height="32" />
+              {category.label}
+            </IconButton>
+          </div>
         ))}
       </div>
+
+      <div className={styles.categoryText}>Choose {selectedCategory}</div>
 
       <Grid container spacing={2}>
         {filteredDishes.map((dish) => (
           <Grid item key={dish.id} xs={12} sm={6} md={4}>
-            <CardComponent
+            <ImageCard
               cardClass={styles.menuCard}
               title={dish.title}
               ingredients={dish.ingredients}
               price={dish.price}
+              imageSrc={dish.imageSrc}
+              popular={dish.popular}
             />
           </Grid>
         ))}

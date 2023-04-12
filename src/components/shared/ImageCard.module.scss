@@ -1,0 +1,40 @@
+.card {
+  max-width: 380px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  cursor: pointer;
+}
+
+.imageWrapper {
+  flex-grow: 1;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 15px;
+    background-color: #e9cbb2;
+  }
+}
+
+.image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.popularFlame {
+  margin-left: 8px;
+  width: 24px;
+  height: 24px;
+}
