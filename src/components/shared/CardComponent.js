@@ -10,6 +10,7 @@ const CardComponent = ({
   price,
   onHover,
   cardClass,
+  onClick,
 }) => {
   const handleMouseEnter = (e) => {
     const videoElement = e.currentTarget.querySelector("video");
@@ -30,7 +31,7 @@ const CardComponent = ({
 
   return (
     <Card
-    className={`${styles.card} ${cardClass}`}
+      className={`${styles.card} ${cardClass}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
@@ -53,7 +54,7 @@ const CardComponent = ({
           <Typography variant="h6" component="div" align="left">
             {price}
           </Typography>
-          <ShoppingBasketRoundedIcon />
+          <ShoppingBasketRoundedIcon onClick={onClick} />
         </Box>
       </CardContent>
     </Card>

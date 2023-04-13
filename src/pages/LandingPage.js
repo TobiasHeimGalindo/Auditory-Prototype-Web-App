@@ -127,7 +127,7 @@ function LandingPage() {
   return (
     <div className="App">
       <section className={styles.navbar}>
-        <Navbar />
+          <Navbar />     
       </section>
       <section id="home-section" className={styles.home} data-section="home">
         <div className={styles.bgColor}></div>
@@ -141,6 +141,7 @@ function LandingPage() {
         className={styles.favorites}
         data-section="favorites"
       >
+        {" "}
         <FeaturedFavorites />
       </section>
       <section id="menu-section" className={styles.menu} data-section="menu">

@@ -18,6 +18,7 @@ const AudioControl = () => {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    console.log("i have been clicked")
   };
 
   const handleClose = () => {
@@ -29,7 +30,7 @@ const AudioControl = () => {
 
   return (
     <div style={{cursor: "pointer"}}>
-      <Tooltip title="Audio Controls" arrow>
+      <Tooltip title="Audio Controls" placement="bottom">
         <span
           edge="end"
           color="inherit"
@@ -45,7 +46,7 @@ const AudioControl = () => {
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
-        container={audioControlButtonRef.current?.parent}
+        container={audioControlButtonRef.current}
         sx={{ backgroundColor: "white", minWidth: 200, minHeight: 150, borderRadius: 4 }}
       >
         <Box p={2} position="relative">

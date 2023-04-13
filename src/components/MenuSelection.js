@@ -7,6 +7,7 @@ import rice from "../assets/footage/onigiri.svg";
 import drink from "../assets/footage/drink.svg";
 import dessert from "../assets/footage/tart.svg";
 import ImageCard from "./shared/ImageCard";
+import { useCart } from "../CartContext";
 
 import misoRamen from "../assets/footage/ramen/miso.jpg";
 import tonkotsuRamen from "../assets/footage/ramen/tonkotsuRamen.jpg";
@@ -32,6 +33,8 @@ import mochiDonut from "../assets/footage/dessert/mochiDonut.jpg";
 
 const MenuSelection = () => {
   const [selectedCategory, setSelectedCategory] = useState("Ramen");
+
+  const { addToCart } = useCart();
 
   const categories = [
     { id: 1, label: "Ramen", icon: ramen },
@@ -205,7 +208,7 @@ const MenuSelection = () => {
   };
 
   return (
-    <div>
+    <div className={styles.menuSelectionWrapper}>
       <div className={styles.menuSelection}>
         {categories.map((category) => (
           <div key={category.id} style={categoryStyle}>
@@ -225,7 +228,7 @@ const MenuSelection = () => {
 
       <div className={styles.categoryText}>Choose {selectedCategory}</div>
 
-      <Grid container spacing={2}>
+     <Grid container spacing={2}>
         {filteredDishes.map((dish) => (
           <Grid item key={dish.id} xs={12} sm={6} md={4}>
             <ImageCard
@@ -235,6 +238,7 @@ const MenuSelection = () => {
               price={dish.price}
               imageSrc={dish.imageSrc}
               popular={dish.popular}
+              onClick={() => addToCart(dish)}
             />
           </Grid>
         ))}

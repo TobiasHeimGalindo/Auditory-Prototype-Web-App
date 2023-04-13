@@ -73,5 +73,13 @@
 }
 
 .menuContent {
-  padding: 150px 160px ;
+  background-color: #fffaf0;
+  display: flex;
+  padding: 150px 160px;
+  align-items: stretch;
+  gap: 15px;
+
+  @media (max-width: 1715px) {
+    flex-direction: column;
+  }
 }

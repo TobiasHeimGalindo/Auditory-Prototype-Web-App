@@ -3,6 +3,8 @@ import styles from "./MenuPage.module.scss";
 import Navbar from "../components/shared/Navbar";
 import MenuSelection from "../components/MenuSelection";
 
+import Cart from "../components/Cart";
+
 import cooking from "../assets/footage/menu.mp4";
 
 const MenuPage = () => {
@@ -34,6 +36,7 @@ const MenuPage = () => {
       </div>
       <div className={styles.menuContent}>
         <MenuSelection />
+        <Cart />
       </div>
     </div>
   );

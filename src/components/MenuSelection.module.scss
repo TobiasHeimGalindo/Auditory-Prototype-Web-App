@@ -11,3 +11,10 @@
   margin-top: 2rem;
   text-align: left;
 }
+
+
+.menuSelectionWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
