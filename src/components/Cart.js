@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useCart } from "../CartContext";
 import { Box, Typography, Button } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
+import { useAudio } from "../AudioContext";
+import ReactHowler from "react-howler";
+
+import increment from "../assets/sounds/Earcon/increment.mp3";
+import decrement from "../assets/sounds/Earcon/decrement.mp3";
+import orderBell from "../assets/sounds/order-confirm.mp3";
 
 import styles from "./Cart.module.scss";
 
@@ -12,7 +18,9 @@ const CartControlButton = ({ onClick, children, ...rest }) => (
 );
 
 const Cart = () => {
+  const [orderConfirm, confirmOrder] = useState(false);
   const { cart, updateCartItemQuantity, removeCartItem } = useCart();
+  const { setPlaying, setSrc, volume, muted } = useAudio();
 
   const taxRate = 0.1;
   const totalItemCount = cart.reduce((total, item) => total + item.quantity, 0);
@@ -61,6 +69,8 @@ const Cart = () => {
                 <Box className={styles.cartItemControls}>
                   <CartControlButton
                     onClick={() => {
+                      setPlaying(true);
+                      setSrc(decrement);
                       if (item.quantity === 1) {
                         removeCartItem(item.id);
                       } else {
@@ -74,9 +84,11 @@ const Cart = () => {
                     {item.quantity}
                   </Typography>
                   <CartControlButton
-                    onClick={() =>
-                      updateCartItemQuantity(item.id, item.quantity + 1)
-                    }
+                    onClick={() => {
+                      setPlaying(true);
+                      setSrc(increment);
+                      updateCartItemQuantity(item.id, item.quantity + 1);
+                    }}
                   >
                     <Add />
                   </CartControlButton>
@@ -102,11 +114,21 @@ const Cart = () => {
           color="primary"
           fullWidth
           sx={{ marginTop: 2 }}
-          onClick={() => console.log("Order placed")}
+          onClick={() => {
+            confirmOrder(true);
+            console.log("Order placed");
+          }}
         >
           Order Now
         </Button>
       </Box>
+      <ReactHowler
+        key={1}
+        src={orderBell}
+        volume={muted ? 0 : volume}
+        playing={orderConfirm}
+        onEnd={() => confirmOrder(false)}
+      ></ReactHowler>
     </Box>
   );
 };

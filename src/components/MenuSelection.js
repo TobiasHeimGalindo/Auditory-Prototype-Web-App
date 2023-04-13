@@ -8,7 +8,7 @@ import drink from "../assets/footage/drink.svg";
 import dessert from "../assets/footage/tart.svg";
 import ImageCard from "./shared/ImageCard";
 import { useCart } from "../CartContext";
-
+import { useAudio } from "../AudioContext";
 import misoRamen from "../assets/footage/ramen/miso.jpg";
 import tonkotsuRamen from "../assets/footage/ramen/tonkotsuRamen.jpg";
 import veggieRamen from "../assets/footage/ramen/veggie.jpg";
@@ -31,16 +31,28 @@ import matchaCream from "../assets/footage/dessert/matchaCream.jpg";
 import sesamePudding from "../assets/footage/dessert/sesamePudding.jpg";
 import mochiDonut from "../assets/footage/dessert/mochiDonut.jpg";
 
-const MenuSelection = () => {
+//Earcons
+import selectItem from "../assets/sounds/Earcon/selectItem.mp3";
+
+//Auditory Icons
+import drinks from "../assets/sounds/Auditory Icon/drinks.mp3";
+import sizzlingBowl from "../assets/sounds/Auditory Icon/SizzlingBowl.mp3";
+import softSizzle from "../assets/sounds/Auditory Icon/soft-sizzle.mp3";
+import teaSpoon from "../assets/sounds/Auditory Icon/teaSpoon.mp3";
+import popularFlame from "../assets/sounds/Auditory Icon/popularFire.mp3";
+
+const MenuSelection = ({ setCartHasItems }) => {
   const [selectedCategory, setSelectedCategory] = useState("Ramen");
+  const [hoveredDishes, setHoveredDishes] = useState(new Set());
 
   const { addToCart } = useCart();
+  const { setPlaying, setSrc } = useAudio();
 
   const categories = [
-    { id: 1, label: "Ramen", icon: ramen },
-    { id: 2, label: "Rice", icon: rice },
-    { id: 3, label: "Drinks", icon: drink },
-    { id: 4, label: "Dessert", icon: dessert },
+    { id: 1, label: "Ramen", icon: ramen, sound: softSizzle },
+    { id: 2, label: "Rice", icon: rice, sound: sizzlingBowl },
+    { id: 3, label: "Drinks", icon: drink, sound: drinks },
+    { id: 4, label: "Dessert", icon: dessert, sound: teaSpoon },
   ];
 
   const dishes = [
@@ -51,7 +63,6 @@ const MenuSelection = () => {
       ingredients: "Pork, egg, noodles, miso, chili oil",
       price: "$12.99",
       imageSrc: misoRamen,
-      popular: true,
     },
     {
       id: 2,
@@ -207,13 +218,30 @@ const MenuSelection = () => {
     marginBottom: "1rem",
   };
 
+  const playHoverSound = (dish) => {
+    if (dish.popular && !hoveredDishes.has(dish.id)) {
+      setPlaying(true);
+      setSrc(popularFlame);
+      setHoveredDishes((prev) => new Set([...prev, dish.id]));
+    }
+  };
+
+  const playClickSound = () => {
+    setPlaying(true);
+    setSrc(selectItem);
+  };
+
   return (
     <div className={styles.menuSelectionWrapper}>
       <div className={styles.menuSelection}>
         {categories.map((category) => (
           <div key={category.id} style={categoryStyle}>
             <IconButton
-              onClick={() => setSelectedCategory(category.label)}
+              onClick={() => {
+                setSelectedCategory(category.label);
+                setSrc(category.sound);
+                setPlaying(true);
+              }}
               style={{
                 display: "flex",
                 justifyContent: "center",
@@ -228,7 +256,7 @@ const MenuSelection = () => {
 
       <div className={styles.categoryText}>Choose {selectedCategory}</div>
 
-     <Grid container spacing={2}>
+      <Grid container spacing={2}>
         {filteredDishes.map((dish) => (
           <Grid item key={dish.id} xs={12} sm={6} md={4}>
             <ImageCard
@@ -238,7 +266,11 @@ const MenuSelection = () => {
               price={dish.price}
               imageSrc={dish.imageSrc}
               popular={dish.popular}
-              onClick={() => addToCart(dish)}
+              onClick={() => {
+                playClickSound();
+                addToCart(dish);
+              }}
+              onMouseEnter={() => playHoverSound(dish)}
             />
           </Grid>
         ))}

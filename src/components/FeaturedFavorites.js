@@ -11,7 +11,7 @@ import tokyoSunrise from "../assets/footage/tokyo-sunrise.mp4";
 import umamiImage from "../assets/footage/umamiImage.PNG";
 import tokyoImage from "../assets/footage/tokyoImage.PNG";
 
-import sizzlingBowl from "../assets/sounds/Auditory Icon/SizzlingBowl.mp3";
+import softSizzle from "../assets/sounds/Auditory Icon/soft-sizzle.mp3";
 import plateDrop from "../assets/sounds/Auditory Icon/PlateDrop.mp3";
 
 const FeaturedFavorites = () => {
@@ -24,7 +24,7 @@ const FeaturedFavorites = () => {
 
   const handleUmamiRamenHover = () => {
     setPlaying(true);
-    setSrc(sizzlingBowl);
+    setSrc(softSizzle);
     setUmamiRamenHovered(true);
   };
 

@@ -13,9 +13,14 @@ const ImageCard = ({
   cardClass,
   popular,
   onClick,
+  onMouseEnter,
 }) => {
   return (
-    <Card onClick={onClick} className={`${styles.card} ${cardClass}`}>
+    <Card
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      className={`${styles.card} ${cardClass}`}
+    >
       <div className={styles.imageWrapper}>
         <img className={styles.image} src={imageSrc} alt={title} />
       </div>
@@ -44,7 +49,7 @@ const ImageCard = ({
           <Typography variant="h6" component="div" align="left">
             {price}
           </Typography>
-          <ShoppingBasketRoundedIcon/>
+          <ShoppingBasketRoundedIcon />
         </Box>
       </CardContent>
     </Card>
