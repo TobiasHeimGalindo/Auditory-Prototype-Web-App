@@ -10,6 +10,7 @@ import OurMenu from "../components/OurMenu";
 import Location from "../components/Location";
 import Footer from "../components/shared/Footer";
 import ReactHowler from "react-howler";
+import { useAudio } from "../AudioContext";
 import { useAuditoryBackground } from "../components/shared/useAuditoryBackground";
 
 import auditoryBackground from "../assets/sounds/boiling-sizzling-cutting.mp3";
@@ -17,6 +18,7 @@ import auditoryBackground from "../assets/sounds/boiling-sizzling-cutting.mp3";
 function LandingPage() {
   const { finalVolume, howlerRef } = useAuditoryBackground();
 
+  const { muted } = useAudio();
   const location = useLocation();
 
   useEffect(() => {
@@ -60,13 +62,16 @@ function LandingPage() {
       <footer className={styles.footer}>
         <Footer />
       </footer>
-      <ReactHowler
-        ref={howlerRef}
-        src={auditoryBackground}
-        volume={finalVolume}
-        loop={true}
-        preload={true}
-      />
+      {!muted ? (
+        <ReactHowler
+          ref={howlerRef}
+          src={auditoryBackground}
+          volume={finalVolume}
+          loop={true}
+        />
+      ) : (
+        0
+      )}
     </div>
   );
 }

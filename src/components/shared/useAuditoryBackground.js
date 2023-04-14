@@ -26,7 +26,6 @@ export const useAuditoryBackground = (additionalMutedCondition = false) => {
   });
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     const handleScroll = throttle(() => {
       const scrollPosition = window.pageYOffset;
       const windowHeight = window.innerHeight;

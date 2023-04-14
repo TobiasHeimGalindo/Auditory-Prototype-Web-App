@@ -7,10 +7,12 @@ import cooking from "../assets/footage/menu.mp4";
 import ReactHowler from "react-howler";
 import { useAuditoryBackground } from "../components/shared/useAuditoryBackground";
 import { useCart } from "../CartContext";
+import { useAudio } from "../AudioContext";
 import auditoryBackground from "../assets/sounds/boiling-sizzling-cutting.mp3"; // TODO: REPLACE WITH UNIQUE MENU AUDIO
 
 const MenuPage = () => {
   const { cartHasItems } = useCart();
+  const { muted } = useAudio();
   const { finalVolume, howlerRef } = useAuditoryBackground(cartHasItems);
 
   return (
@@ -43,13 +45,16 @@ const MenuPage = () => {
         <MenuSelection />
         <Cart />
       </div>
-      <ReactHowler
-        ref={howlerRef}
-        src={auditoryBackground}
-        volume={finalVolume}
-        loop={true}
-        preload={true}
-      />
+      {!muted ? (
+        <ReactHowler
+          ref={howlerRef}
+          src={auditoryBackground}
+          volume={finalVolume}
+          loop={true}
+        />
+      ) : (
+        0
+      )}
     </div>
   );
 };
