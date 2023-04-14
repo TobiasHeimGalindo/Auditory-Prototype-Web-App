@@ -10,6 +10,7 @@ import decrement from "../assets/sounds/Earcon/decrement.mp3";
 import orderBell from "../assets/sounds/order-confirm.mp3";
 
 import styles from "./Cart.module.scss";
+import OrderConfirmModal from "./shared/OrderConfirmModal";
 
 const CartControlButton = ({ onClick, children, ...rest }) => (
   <Button onClick={onClick} className={styles.cartControlButton} {...rest}>
@@ -19,7 +20,7 @@ const CartControlButton = ({ onClick, children, ...rest }) => (
 
 const Cart = () => {
   const [orderConfirm, confirmOrder] = useState(false);
-  const { cart, updateCartItemQuantity, removeCartItem } = useCart();
+  const { cart, updateCartItemQuantity, removeCartItem, emptyCart } = useCart();
   const { setPlaying, setSrc, volume, muted } = useAudio();
 
   const taxRate = 0.1;
@@ -30,6 +31,11 @@ const Cart = () => {
   );
   const tax = subtotal * taxRate;
   const total = subtotal + tax;
+
+  const handleOrder = () => {
+    confirmOrder(true);
+    emptyCart();
+  };
 
   return (
     <Box className={styles.cartContainer}>
@@ -114,10 +120,8 @@ const Cart = () => {
           color="primary"
           fullWidth
           sx={{ marginTop: 2 }}
-          onClick={() => {
-            confirmOrder(true);
-            console.log("Order placed");
-          }}
+          onClick={handleOrder}
+          disabled={cart.length === 0}
         >
           Order Now
         </Button>
@@ -127,8 +131,11 @@ const Cart = () => {
         src={orderBell}
         volume={muted ? 0 : volume}
         playing={orderConfirm}
-        onEnd={() => confirmOrder(false)}
       ></ReactHowler>
+      <OrderConfirmModal
+        open={orderConfirm}
+        handleClose={() => confirmOrder(false)}
+      />
     </Box>
   );
 };

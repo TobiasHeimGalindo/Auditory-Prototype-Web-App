@@ -18,7 +18,6 @@ const AudioControl = () => {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    console.log("i have been clicked")
   };
 
   const handleClose = () => {

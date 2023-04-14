@@ -41,7 +41,7 @@ import softSizzle from "../assets/sounds/Auditory Icon/soft-sizzle.mp3";
 import teaSpoon from "../assets/sounds/Auditory Icon/teaSpoon.mp3";
 import popularFlame from "../assets/sounds/Auditory Icon/popularFire.mp3";
 
-const MenuSelection = ({ setCartHasItems }) => {
+const MenuSelection = () => {
   const [selectedCategory, setSelectedCategory] = useState("Ramen");
   const [hoveredDishes, setHoveredDishes] = useState(new Set());
 
@@ -260,7 +260,6 @@ const MenuSelection = ({ setCartHasItems }) => {
         {filteredDishes.map((dish) => (
           <Grid item key={dish.id} xs={12} sm={6} md={4}>
             <ImageCard
-              cardClass={styles.menuCard}
               title={dish.title}
               ingredients={dish.ingredients}
               price={dish.price}

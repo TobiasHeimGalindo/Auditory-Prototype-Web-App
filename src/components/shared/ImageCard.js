@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, Typography, Box } from "@mui/material";
 import styles from "./ImageCard.module.scss";
 import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
@@ -10,16 +10,33 @@ const ImageCard = ({
   title,
   ingredients,
   price,
-  cardClass,
   popular,
   onClick,
   onMouseEnter,
 }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [hasPlayedAnimation, setHasPlayedAnimation] = useState(false);
+
+  const handleMouseEnter = () => {
+    if (!popular) return;
+
+    if (!hasPlayedAnimation) {
+      setIsHovered(true);
+      setHasPlayedAnimation(true);
+    }
+    onMouseEnter();
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
   return (
     <Card
       onClick={onClick}
-      onMouseEnter={onMouseEnter}
-      className={`${styles.card} ${cardClass}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className={`${styles.card} ${popular && isHovered ? styles.popularCard : ""}`}
     >
       <div className={styles.imageWrapper}>
         <img className={styles.image} src={imageSrc} alt={title} />
