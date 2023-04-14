@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect } from "react";
 import styles from "./Landingpage.module.scss";
 import Navbar from "../components/shared/Navbar";
 import { useLocation } from "react-router-dom";
@@ -10,14 +10,12 @@ import OurMenu from "../components/OurMenu";
 import Location from "../components/Location";
 import Footer from "../components/shared/Footer";
 import ReactHowler from "react-howler";
-import { throttle } from "lodash";
-import { useAudio } from "../AudioContext";
+import { useAuditoryBackground } from "../components/shared/useAuditoryBackground";
 
 import auditoryBackground from "../assets/sounds/boiling-sizzling-cutting.mp3";
 
 function LandingPage() {
-  const [scrollVolume, setScrollVolume] = useState(0.3);
-  const { volume, muted } = useAudio();
+  const { finalVolume, howlerRef } = useAuditoryBackground();
 
   const location = useLocation();
 
@@ -29,53 +27,6 @@ function LandingPage() {
       });
     }
   }, [location]);
-
-  const howlerRef = useRef(null);
-
-  const handleVisibilityChange = () => {
-    if (document.visibilityState === "hidden") {
-      if (howlerRef.current) {
-        howlerRef.current.pause();
-      }
-    } else if (document.visibilityState === "visible") {
-      if (howlerRef.current) {
-        howlerRef.current.play();
-      }
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = throttle(() => {
-      const scrollPosition = window.pageYOffset;
-      const windowHeight = window.innerHeight;
-      const maxVolume = 0.3;
-      const minVolume = 0.1;
-      const documentHeight = document.documentElement.scrollHeight;
-
-      const volumeRange = maxVolume - minVolume;
-      const scrollVolume =
-        maxVolume -
-        (scrollPosition / (documentHeight - windowHeight)) * volumeRange;
-
-      setScrollVolume(scrollVolume);
-    }, 100);
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const finalVolume = muted
-    ? 0
-    : Number.isFinite(volume * scrollVolume)
-    ? volume * scrollVolume
-    : 0;
 
   return (
     <div className="App">
