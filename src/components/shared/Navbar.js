@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Navbar.module.scss";
 import { Link } from "react-scroll";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -13,6 +13,7 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 const Navbar = () => {
   const menuItems = ["Home", "About", "Menu"];
   const location = useLocation();
+  const navigate = useNavigate();
 
   const renderMenuItems = (item, index) => {
     if (item === "Menu") {
@@ -73,6 +74,7 @@ const Navbar = () => {
             edge="end"
             color="inherit"
             sx={{ cursor: "pointer" }}
+            onClick={() => navigate("/menu")}
           />
         </ClickAwayListener>
       </Toolbar>
