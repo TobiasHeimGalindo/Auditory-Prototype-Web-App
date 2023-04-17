@@ -9,16 +9,13 @@ import FeaturedFavorites from "../components/FeaturedFavorites";
 import OurMenu from "../components/OurMenu";
 import Location from "../components/Location";
 import Footer from "../components/shared/Footer";
-import ReactHowler from "react-howler";
-import { useAudio } from "../AudioContext";
 import { useAuditoryBackground } from "../components/shared/useAuditoryBackground";
 
 import auditoryBackground from "../assets/sounds/boiling-sizzling-cutting.mp3";
 
 function LandingPage() {
-  const { finalVolume, howlerRef } = useAuditoryBackground();
+  const { setBgSrc } = useAuditoryBackground();
 
-  const { muted } = useAudio();
   const location = useLocation();
 
   useEffect(() => {
@@ -30,6 +27,9 @@ function LandingPage() {
     }
   }, [location]);
 
+  useEffect(() => {
+    setBgSrc(auditoryBackground);
+  }, [setBgSrc]);
   return (
     <div className="App">
       <section className={styles.navbar}>
@@ -62,16 +62,6 @@ function LandingPage() {
       <footer className={styles.footer}>
         <Footer />
       </footer>
-      {!muted ? (
-        <ReactHowler
-          ref={howlerRef}
-          src={auditoryBackground}
-          volume={finalVolume}
-          loop={true}
-        />
-      ) : (
-        0
-      )}
     </div>
   );
 }

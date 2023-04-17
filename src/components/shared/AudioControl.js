@@ -12,7 +12,16 @@ import Box from "@mui/material/Box";
 import { useAudio } from "../../AudioContext";
 
 const AudioControl = () => {
-  const { volume, setVolume, muted, setMuted } = useAudio();
+  const {
+    uiVolume,
+    setUIVolume,
+    uiMuted,
+    setUIMuted,
+    bgVolume,
+    setBGVolume,
+    bgMuted,
+    setBGMuted,
+  } = useAudio();
   const [anchorEl, setAnchorEl] = useState(null);
   const audioControlButtonRef = useRef(null);
 
@@ -28,7 +37,7 @@ const AudioControl = () => {
   const id = open ? "audio-controls-popper" : undefined;
 
   return (
-    <div style={{cursor: "pointer"}}>
+    <div style={{ cursor: "pointer" }}>
       <Tooltip title="Audio Controls" placement="bottom">
         <span
           edge="end"
@@ -37,7 +46,7 @@ const AudioControl = () => {
           onClick={handleClick}
           ref={audioControlButtonRef}
         >
-          {muted ? <VolumeOffIcon /> : <VolumeUpIcon />}
+          {uiMuted && bgMuted ? <VolumeOffIcon /> : <VolumeUpIcon />}
         </span>
       </Tooltip>
       <Popper
@@ -46,7 +55,12 @@ const AudioControl = () => {
         anchorEl={anchorEl}
         onClose={handleClose}
         container={audioControlButtonRef.current}
-        sx={{ backgroundColor: "white", minWidth: 200, minHeight: 150, borderRadius: 4 }}
+        sx={{
+          backgroundColor: "white",
+          minWidth: 200,
+          minHeight: 150,
+          borderRadius: 4,
+        }}
       >
         <Box p={2} position="relative">
           <CloseIcon
@@ -63,26 +77,48 @@ const AudioControl = () => {
             }}
           />
           <Typography variant="subtitle1" gutterBottom>
-            Volume
+            UI Volume
           </Typography>
           <Slider
-            value={volume}
+            value={uiVolume}
             min={0}
             max={1}
             defaultValue={0.5}
-            onChange={(_, newValue) => setVolume(newValue)}
+            onChange={(_, newValue) => setUIVolume(newValue)}
             valueLabelDisplay="auto"
-            aria-labelledby="volume-slider"
+            aria-labelledby="ui-volume-slider"
             step={0.01}
           />
           <FormControlLabel
             control={
               <Switch
-                checked={muted}
-                onChange={(event) => setMuted(event.target.checked)}
+                checked={uiMuted}
+                onChange={(event) => setUIMuted(event.target.checked)}
               />
             }
-            label="Mute"
+            label="Mute UI"
+          />
+          <Typography variant="subtitle1" gutterBottom>
+            Background Volume
+          </Typography>
+          <Slider
+            value={bgVolume}
+            min={0}
+            max={1}
+            defaultValue={0.5}
+            onChange={(_, newValue) => setBGVolume(newValue)}
+            valueLabelDisplay="auto"
+            aria-labelledby="bg-volume-slider"
+            step={0.01}
+          />
+          <FormControlLabel
+            control={
+              <Switch
+                checked={bgMuted}
+                onChange={(event) => setBGMuted(event.target.checked)}
+              />
+            }
+            label="Mute Background"
           />
         </Box>
       </Popper>

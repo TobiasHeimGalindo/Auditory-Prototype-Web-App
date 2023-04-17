@@ -3,7 +3,6 @@ import { useCart } from "../CartContext";
 import { Box, Typography, Button } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
 import { useAudio } from "../AudioContext";
-import ReactHowler from "react-howler";
 
 import increment from "../assets/sounds/Earcon/increment.mp3";
 import decrement from "../assets/sounds/Earcon/decrement.mp3";
@@ -21,7 +20,7 @@ const CartControlButton = ({ onClick, children, ...rest }) => (
 const Cart = () => {
   const [orderConfirm, confirmOrder] = useState(false);
   const { cart, updateCartItemQuantity, removeCartItem, emptyCart } = useCart();
-  const { setPlaying, setSrc, volume, muted } = useAudio();
+  const { setPlaying, setSrc } = useAudio();
 
   const taxRate = 0.1;
   const totalItemCount = cart.reduce((total, item) => total + item.quantity, 0);
@@ -35,8 +34,9 @@ const Cart = () => {
   const handleOrder = () => {
     confirmOrder(true);
     emptyCart();
+    setSrc(orderBell);
+    setPlaying(true);
   };
-
   return (
     <Box className={styles.cartContainer}>
       <Typography variant="h5" gutterBottom>
@@ -126,12 +126,6 @@ const Cart = () => {
           Order Now
         </Button>
       </Box>
-      <ReactHowler
-        key={1}
-        src={orderBell}
-        volume={muted ? 0 : volume}
-        playing={orderConfirm}
-      ></ReactHowler>
       <OrderConfirmModal
         open={orderConfirm}
         handleClose={() => confirmOrder(false)}

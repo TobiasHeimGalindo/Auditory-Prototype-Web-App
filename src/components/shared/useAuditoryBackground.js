@@ -3,9 +3,11 @@ import { throttle } from "lodash";
 import { useAudio } from "../../AudioContext";
 
 export const useAuditoryBackground = (additionalMutedCondition = false) => {
-  const [scrollVolume, setScrollVolume] = useState(0.3);
-  const { volume, muted } = useAudio();
+  const { bgVolume, bgMuted, setBgSrc, setFinalBgVolume, setHowlerRef } =
+    useAudio();
+  const [scrollVolume, setScrollVolume] = useState(bgVolume);
   const howlerRef = useRef(null);
+  setHowlerRef(howlerRef);
   const handleVisibilityChange = () => {
     if (document.visibilityState === "hidden") {
       if (howlerRef.current) {
@@ -29,7 +31,7 @@ export const useAuditoryBackground = (additionalMutedCondition = false) => {
     const handleScroll = throttle(() => {
       const scrollPosition = window.pageYOffset;
       const windowHeight = window.innerHeight;
-      const maxVolume = 0.3;
+      const maxVolume = bgVolume;
       const minVolume = 0.1;
       const documentHeight = document.documentElement.scrollHeight;
 
@@ -44,18 +46,22 @@ export const useAuditoryBackground = (additionalMutedCondition = false) => {
     handleScroll();
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [muted, additionalMutedCondition]);
+  }, [bgMuted, additionalMutedCondition, bgVolume]);
 
-  const finalMuted = muted || additionalMutedCondition;
+  const finalMuted = bgMuted || additionalMutedCondition;
 
   const finalVolume = finalMuted
     ? 0
-    : Number.isFinite(volume * scrollVolume)
-    ? volume * scrollVolume
+    : Number.isFinite(bgVolume * scrollVolume)
+    ? bgVolume * scrollVolume
     : 0;
 
+  useEffect(() => {
+    setFinalBgVolume(finalVolume);
+  }, [finalVolume, setFinalBgVolume]);
+
   return {
-    finalVolume,
     howlerRef,
+    setBgSrc,
   };
 };

@@ -1,5 +1,5 @@
-import React, { useState, createContext, useContext } from 'react';
-import ReactHowler from 'react-howler';
+import React, { useState, createContext, useContext } from "react";
+import ReactHowler from "react-howler";
 
 const AudioContext = createContext();
 
@@ -8,20 +8,34 @@ export const useAudio = () => {
 };
 
 export const AudioProvider = ({ children }) => {
-  const [volume, setVolume] = useState(0.5);
-  const [muted, setMuted] = useState(true);
+  const [uiVolume, setUIVolume] = useState(0.5);
+  const [uiMuted, setUIMuted] = useState(false);
+  const [bgVolume, setBGVolume] = useState(0.5);
+  const [finalBgVolume, setFinalBgVolume] = useState(0);
+  const [bgMuted, setBGMuted] = useState(true);
   const [playing, setPlaying] = useState(false);
   const [src, setSrc] = useState(null);
+  const [bgSrc, setBgSrc] = useState(null);
+  const [howlerRef, setHowlerRef] = useState(null);
 
   const value = {
-    volume,
-    setVolume,
-    muted,
-    setMuted,
+    uiVolume,
+    setUIVolume,
+    uiMuted,
+    setUIMuted,
+    bgVolume,
+    setBGVolume,
+    bgMuted,
+    setBGMuted,
     playing,
     setPlaying,
     src,
-    setSrc
+    setSrc,
+    bgSrc,
+    setBgSrc,
+    howlerRef,
+    setHowlerRef,
+    setFinalBgVolume,
   };
 
   return (
@@ -30,9 +44,18 @@ export const AudioProvider = ({ children }) => {
       {src && (
         <ReactHowler
           src={src}
-          volume={muted ? 0 : volume}
+          volume={uiMuted ? 0 : uiVolume}
           playing={playing}
           onEnd={() => setPlaying(false)}
+        />
+      )}
+      {bgSrc && (
+        <ReactHowler
+          ref={howlerRef}
+          src={bgSrc}
+          volume={bgMuted ? 0 : finalBgVolume}
+          playing={true}
+          loop={true}
         />
       )}
     </AudioContext.Provider>
