@@ -17,6 +17,10 @@ const AudioControl = () => {
     setUIVolume,
     uiMuted,
     setUIMuted,
+    spatialVolume,
+    setSpatialVolume,
+    spatialMuted,
+    setSpatialMuted,
     bgVolume,
     setBGVolume,
     bgMuted,
@@ -97,6 +101,28 @@ const AudioControl = () => {
               />
             }
             label="Mute UI"
+          />
+          <Typography variant="subtitle1" gutterBottom>
+            Spatial Audio Volume
+          </Typography>
+          <Slider
+            value={spatialVolume}
+            min={0}
+            max={1}
+            defaultValue={0.5}
+            onChange={(_, newValue) => setSpatialVolume(newValue)}
+            valueLabelDisplay="auto"
+            aria-labelledby="spatial-volume-slider"
+            step={0.01}
+          />
+          <FormControlLabel
+            control={
+              <Switch
+                checked={spatialMuted}
+                onChange={(event) => setSpatialMuted(event.target.checked)}
+              />
+            }
+            label="Mute Spatial Audio"
           />
           <Typography variant="subtitle1" gutterBottom>
             Background Volume

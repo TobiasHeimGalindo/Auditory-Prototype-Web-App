@@ -6,8 +6,6 @@ import deliveryBike from "../../assets/footage/delivery-bike.png";
 import styles from "./OrderConfirmModal.module.scss";
 
 const OrderConfirmModal = ({ open, handleClose }) => {
-  const randomDeliveryTime = Math.floor(Math.random() * 21) + 20;
-
   return (
     <Modal open={open} onClose={() => {}}>
       <Box className={styles.modalContent}>
@@ -32,9 +30,6 @@ const OrderConfirmModal = ({ open, handleClose }) => {
         <Box textAlign="center">
           <Typography>
             Thank you for your order! We'll start preparing it right away.
-          </Typography>
-          <Typography variant="body2">
-            Estimated delivery time: {randomDeliveryTime} minutes.
           </Typography>
         </Box>
         <img
