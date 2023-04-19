@@ -1,33 +1,46 @@
-import React, { useState, useRef } from "react";
-
+import React, { useEffect } from "react";
 import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
   Button,
-  Tooltip,
-  Popper,
+  Box,
+  Typography,
   Slider,
   Switch,
   FormControlLabel,
-  Typography,
 } from "@mui/material";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-import VolumeOffIcon from "@mui/icons-material/VolumeOff";
-import CloseIcon from "@mui/icons-material/Close";
 
-import Box from "@mui/material/Box";
-import { useAudio } from "../../AudioContext";
+import styles from "./AudioDialog.module.scss";
 
-import styles from "./AudioControl.module.scss";
+import { useDialog } from "../DialogContext";
+import { useAudio } from "../AudioContext";
 
 const AudioControlButton = ({ onClick, children, ...rest }) => (
-  <Button onClick={onClick} className={styles.audioControlButton} {...rest}>
+  <Button onClick={onClick} {...rest}>
     <Typography variant="body1">{children}</Typography>
   </Button>
 );
+const AudioDialog = () => {
+  const { dialogOpen, setDialogOpen } = useDialog();
+  const {
+    uiVolume,
+    setUIVolume,
+    uiMuted,
+    setUIMuted,
+    spatialVolume,
+    setSpatialVolume,
+    spatialMuted,
+    setSpatialMuted,
+    bgVolume,
+    setBGVolume,
+    bgMuted,
+    setBGMuted,
+  } = useAudio();
 
-const AudioControl = ({ highlight }) => {
-  const audioControlClass = `${styles.audioControl} ${
-    highlight ? styles.highlight : ""
-  }`;
   const setSoundProfile = (profile) => {
     setBGMuted(false);
     switch (profile) {
@@ -50,78 +63,79 @@ const AudioControl = ({ highlight }) => {
         break;
     }
   };
-  const {
-    uiVolume,
-    setUIVolume,
-    uiMuted,
-    setUIMuted,
-    spatialVolume,
-    setSpatialVolume,
-    spatialMuted,
-    setSpatialMuted,
-    bgVolume,
-    setBGVolume,
-    bgMuted,
-    setBGMuted,
-  } = useAudio();
-  const [anchorEl, setAnchorEl] = useState(null);
-  const audioControlButtonRef = useRef(null);
 
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleModalClose = () => {
+    setDialogOpen(false);
+    localStorage.setItem("visitedBefore", "true");
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  useEffect(() => {
+    const visitedBefore = localStorage.getItem("visitedBefore");
 
-  const open = Boolean(anchorEl);
-  const id = open ? "audio-controls-popper" : undefined;
+    if (!visitedBefore) {
+      setDialogOpen(true);
+    }
+  }, [setDialogOpen]);
 
   return (
-    <div className={audioControlClass} style={{ cursor: "pointer" }}>
-      <Tooltip title="Audio Controls" placement="bottom">
-        <span
-          edge="end"
-          color="inherit"
-          aria-describedby={id}
-          onClick={handleClick}
-          ref={audioControlButtonRef}
+    <Dialog
+      open={dialogOpen}
+      onClose={handleModalClose}
+      aria-labelledby="audio-control-modal-title"
+      aria-describedby="audio-control-modal-description"
+      className={styles.dialog}
+    >
+      <DialogTitle id="audio-control-modal-title">
+        Welcome to My Auditory Website :)
+      </DialogTitle>
+      <DialogContent>
+        <DialogContentText id="audio-control-modal-description">
+          We've designed this site with a unique audio experience that you can
+          personalize to your liking. You can choose from three predefined sound
+          profiles: Atmosphere, Default, and Subtle. Each profile adjusts the
+          UI, spatial audio, and background volume levels to create a different
+          ambiance.
+          <br />
+          <br />
+          Additionally, you can modify or mute each auditive element
+          individually to create your perfect audio mix. To access the Audio
+          Control panel and adjust the settings at any time, simply click on the
+          speaker icon (
+          <span className={styles.volumeIcon}>
+            <VolumeUpIcon />
+          </span>
+          ) located in the navbar.
+        </DialogContentText>
+
+        <Box mt={2} display="flex" justifyContent="space-between">
+          <AudioControlButton
+            variant="outlined"
+            onClick={() => setSoundProfile("Atmosphere")}
+          >
+            Atmosphere
+          </AudioControlButton>
+          <AudioControlButton
+            variant="outlined"
+            onClick={() => setSoundProfile("Default")}
+          >
+            Default
+          </AudioControlButton>
+          <AudioControlButton
+            variant="outlined"
+            onClick={() => setSoundProfile("Subtle")}
+          >
+            Subtle
+          </AudioControlButton>
+        </Box>
+        <Box
+          mt={2}
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
         >
-          {uiMuted && bgMuted ? <VolumeOffIcon /> : <VolumeUpIcon />}
-        </span>
-      </Tooltip>
-      <Popper
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        container={audioControlButtonRef.current}
-        sx={{
-          backgroundColor: "white",
-          minWidth: 200,
-          minHeight: 150,
-          borderRadius: 4,
-        }}
-      >
-        <Box p={2} position="relative">
-          <CloseIcon
-            edge="end"
-            color="inherit"
-            aria-label="close"
-            onClick={handleClose}
-            sx={{
-              position: "absolute",
-              top: 8,
-              right: 8,
-              padding: "6px",
-              cursor: "pointer",
-            }}
-          />
           <Typography variant="subtitle1" gutterBottom>
             UI Volume
           </Typography>
-      
           <Typography variant="body2" gutterBottom>
             Button clicks, selections, etc.
           </Typography>
@@ -195,31 +209,14 @@ const AudioControl = ({ highlight }) => {
             label="Mute Background"
           />
         </Box>
-        <Box p={2} position="relative">
-          <Box mt={2} display="flex" justifyContent="space-between">
-            <AudioControlButton
-              variant="outlined"
-              onClick={() => setSoundProfile("Atmosphere")}
-            >
-              Atmosphere
-            </AudioControlButton>
-            <AudioControlButton
-              variant="outlined"
-              onClick={() => setSoundProfile("Default")}
-            >
-              Default
-            </AudioControlButton>
-            <AudioControlButton
-              variant="outlined"
-              onClick={() => setSoundProfile("Subtle")}
-            >
-              Subtle
-            </AudioControlButton>
-          </Box>
-        </Box>
-      </Popper>
-    </div>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleModalClose} color="primary">
+          Close
+        </Button>
+      </DialogActions>
+    </Dialog>
   );
 };
 
-export default AudioControl;
+export default AudioDialog;

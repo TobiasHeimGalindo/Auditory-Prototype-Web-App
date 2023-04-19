@@ -11,10 +11,13 @@ import Location from "../components/Location";
 import Footer from "../components/shared/Footer";
 import { useAuditoryBackground } from "../components/shared/useAuditoryBackground";
 
+import { useDialog } from "../DialogContext";
+
 import auditoryBackground from "../assets/sounds/boiling-sizzling-cutting.mp3";
 
 function LandingPage() {
   const { setBgSrc } = useAuditoryBackground();
+  const { dialogOpen } = useDialog();
 
   const location = useLocation();
 
@@ -33,7 +36,7 @@ function LandingPage() {
   return (
     <div className="App">
       <section className={styles.navbar}>
-        <Navbar />
+      <Navbar dialogOpen={dialogOpen} />
       </section>
       <section id="home-section" className={styles.home} data-section="home">
         <div className={styles.bgColor}></div>

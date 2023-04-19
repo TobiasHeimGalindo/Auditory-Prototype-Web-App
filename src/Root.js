@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { AudioProvider, useAudio } from "./AudioContext";
 import { themeOptions } from "../src/styles/theme.ts";
@@ -8,8 +8,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { CartProvider } from "./CartContext";
 import { SnackbarProvider, useSnackbar } from "./SnackbarContext";
 import { Snackbar, Box, Typography } from "@mui/material";
+import { DialogProvider } from "./DialogContext";
 
 import notification from "./assets/sounds/Earcon/notification.mp3";
+import AudioDialog from "./components/AudioDialog";
 
 const AppSnackbar = () => {
   const {
@@ -64,21 +66,26 @@ const AppSnackbar = () => {
 const theme = createTheme(themeOptions);
 
 const Root = () => {
+  const [overlayVisible, setOverlayVisible] = useState(false);
+
   return (
     <ThemeProvider theme={theme}>
-      <AudioProvider>
-        <CartProvider>
-          <SnackbarProvider>
-            <Router>
-              <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/menu" element={<MenuPage />} />
-              </Routes>
-            </Router>
-            <AppSnackbar />
-          </SnackbarProvider>
-        </CartProvider>
-      </AudioProvider>
+      <DialogProvider>
+        <AudioProvider>
+          <AudioDialog />
+          <CartProvider>
+            <SnackbarProvider>
+              <Router>
+                <Routes>
+                  <Route path="/" element={<LandingPage />} />
+                  <Route path="/menu" element={<MenuPage />} />
+                </Routes>
+              </Router>
+              <AppSnackbar />
+            </SnackbarProvider>
+          </CartProvider>
+        </AudioProvider>
+      </DialogProvider>
     </ThemeProvider>
   );
 };

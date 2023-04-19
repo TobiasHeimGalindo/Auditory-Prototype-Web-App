@@ -7,10 +7,14 @@ import cooking from "../assets/footage/menu.mp4";
 import { useAuditoryBackground } from "../components/shared/useAuditoryBackground";
 import { useCart } from "../CartContext";
 import auditoryBackground from "../assets/sounds/boiling-sizzling-cutting.mp3";
+import { useDialog } from "../DialogContext";
+
 
 const MenuPage = () => {
   const { cartHasItems } = useCart();
   const { setBgSrc } = useAuditoryBackground(cartHasItems);
+
+  const { dialogOpen } = useDialog();
 
   useEffect(() => {
     setBgSrc(auditoryBackground);
@@ -19,7 +23,7 @@ const MenuPage = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.navbar}>
-        <Navbar />
+        <Navbar dialogOpen={dialogOpen} />
       </div>
       <div className={styles.headerContent}>
         <div className={styles.flexWrapper}>

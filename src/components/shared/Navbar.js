@@ -10,7 +10,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AudioControl from "./AudioControl";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 
-const Navbar = () => {
+const Navbar = ({ dialogOpen, setOverlayVisible }) => {
   const menuItems = ["Home", "About", "Menu"];
   const location = useLocation();
   const navigate = useNavigate();
@@ -67,7 +67,10 @@ const Navbar = () => {
         </Typography>
         <nav className={styles.menu}>{menuItems.map(renderMenuItems)}</nav>
         <Box sx={{ flexGrow: 1 }} />
-        <AudioControl />
+        <AudioControl
+          highlight={dialogOpen}
+          setOverlayVisible={setOverlayVisible}
+        />
         <Box sx={{ minWidth: 50 }} />
         <ClickAwayListener onClickAway={() => {}}>
           <ShoppingCartIcon
