@@ -6,7 +6,7 @@ import Cart from "../components/Cart";
 import cooking from "../assets/footage/menu.mp4";
 import { useAuditoryBackground } from "../components/shared/useAuditoryBackground";
 import { useCart } from "../CartContext";
-import auditoryBackground from "../assets/sounds/boiling-sizzling-cutting.mp3"; // TODO: REPLACE WITH UNIQUE MENU AUDIO
+import auditoryBackground from "../assets/sounds/boiling-sizzling-cutting.mp3";
 
 const MenuPage = () => {
   const { cartHasItems } = useCart();
