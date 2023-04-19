@@ -103,5 +103,15 @@ export const themeOptions: ThemeOptions = {
         },
       },
     },
+    MuiSnackbar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#fff",
+          borderRadius: "15px",
+          padding: "15px",
+          cursor: "pointer",
+        },
+      },
+    },
   },
 };

@@ -24,8 +24,6 @@ export const AudioProvider = ({ children }) => {
 
   const playSpatialAudio = (src, position) => {
     setSpatialSrc(src);
-    console.log("src", src);
-    console.log("spatialVolume", spatialVolume);
     const notificationSound = new Howl({
       src: [src],
       volume: spatialMuted ? 0 : spatialVolume,
