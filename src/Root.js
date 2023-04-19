@@ -31,7 +31,6 @@ const AppSnackbar = () => {
       const timer = setTimeout(() => {
         setShouldRenderSnackbar(true);
         const snackbarElement = snackbarRef.current;
-        console.log(snackbarElement);
         const rect = snackbarElement.getBoundingClientRect();
         const posX = rect.x + rect.width / 2;
         const posY = rect.y + rect.height / 2;
