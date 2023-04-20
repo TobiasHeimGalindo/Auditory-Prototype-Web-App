@@ -4,7 +4,7 @@ import { AudioProvider, useAudio } from "./Contexts/AudioContext";
 import { themeOptions } from "../src/styles/theme.ts";
 import LandingPage from "./pages/LandingPage";
 import MenuPage from "./pages/MenuPage";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import { CartProvider } from "./Contexts/CartContext";
 import { SnackbarProvider, useSnackbar } from "./Contexts/SnackbarContext";
 import { Snackbar, Box, Typography } from "@mui/material";
@@ -73,12 +73,12 @@ const Root = () => {
           <AudioDialog />
           <CartProvider>
             <SnackbarProvider>
-              <Router>
+              <HashRouter>
                 <Routes>
                   <Route path="/" element={<LandingPage />} />
                   <Route path="/menu" element={<MenuPage />} />
                 </Routes>
-              </Router>
+              </HashRouter>
               <AppSnackbar />
             </SnackbarProvider>
           </CartProvider>
