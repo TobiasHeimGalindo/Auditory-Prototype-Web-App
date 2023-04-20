@@ -27,7 +27,7 @@ const OrderConfirmModal = ({ open, handleClose }) => {
             }}
           />
         </Stack>
-        <Box textAlign="center">
+        <Box>
           <Typography>
             Thank you for your order! We'll start preparing it right away.
           </Typography>
