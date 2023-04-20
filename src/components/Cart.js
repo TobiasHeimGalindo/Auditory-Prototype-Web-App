@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCart } from "../Contexts/CartContext";
 import { Box, Typography, Button } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
@@ -8,6 +8,7 @@ import { useSnackbar } from "../Contexts/SnackbarContext";
 import increment from "../assets/sounds/Earcon/increment.mp3";
 import decrement from "../assets/sounds/Earcon/decrement.mp3";
 import orderBell from "../assets/sounds/order-confirm.mp3";
+import earconSpecial from "../assets/EarconSpecial.mp3"; //Secret
 
 import styles from "./Cart.module.scss";
 import OrderConfirmModal from "./shared/OrderConfirmModal";
@@ -20,10 +21,27 @@ const CartControlButton = ({ onClick, children, ...rest }) => (
 
 const Cart = () => {
   const [orderConfirm, confirmOrder] = useState(false);
+  const [showSecretButton, setShowSecretButton] = useState(false); //Secret
+  const [secretButtonClicked, setSecretButtonClicked] = useState(false); //Secret
   const { cart, updateCartItemQuantity, removeCartItem, emptyCart } = useCart();
   const { setPlaying, setSrc } = useAudio();
   const { setSnackbarOpen, setSnackbarContent, setSnackbarTimeout } =
     useSnackbar();
+
+  useEffect(() => {
+    const secretButtonState = localStorage.getItem("secretButtonClicked");
+    if (secretButtonState === "true") {
+      setSecretButtonClicked(true);
+    }
+  }, []); //Secret
+
+  const handleSecretButtonClick = () => {
+    setPlaying(true);
+    setSrc(earconSpecial);
+    setShowSecretButton(false);
+    setSecretButtonClicked(true);
+    localStorage.setItem("secretButtonClicked", "true");
+  }; //Secret
 
   const taxRate = 0.1;
   const totalItemCount = cart.reduce((total, item) => total + item.quantity, 0);
@@ -145,8 +163,21 @@ const Cart = () => {
         handleClose={() => {
           confirmOrder(false);
           handleSnackbarNotification();
+          setShowSecretButton(true);
         }}
       />
+      {showSecretButton &&
+        !secretButtonClicked && ( //Secret
+          <Button
+            variant="contained"
+            color="secondary"
+            fullWidth
+            sx={{ marginTop: 2 }}
+            onClick={handleSecretButtonClick}
+          >
+            Secret Foods here
+          </Button>
+        )}
     </Box>
   );
 };
