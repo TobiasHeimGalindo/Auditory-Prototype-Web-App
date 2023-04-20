@@ -1,7 +1,7 @@
 {
-  "name": "auditory-prototype-app",
+  "name": "auditory-prototype-web-app",
   "version": "0.1.0",
-  "homepage": "https://tobiasheimgalindo.github.io/auditory-prototype-app",
+  "homepage": "https://tobiasheimgalindo.github.io/Auditory-Prototype-Web-App/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.6",
