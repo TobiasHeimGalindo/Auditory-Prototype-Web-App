@@ -26,6 +26,7 @@ export const AudioProvider = ({ children }) => {
     setSpatialSrc(src);
     const notificationSound = new Howl({
       src: [src],
+      preload: true,
       volume: spatialMuted ? 0 : spatialVolume,
       pannerAttr: {
         panningModel: "HRTF",
@@ -80,6 +81,7 @@ export const AudioProvider = ({ children }) => {
           volume={uiMuted ? 0 : uiVolume}
           playing={playing}
           onEnd={() => setPlaying(false)}
+          preload={true}
         />
       )}
       {/* SpatialAudio Howler component */}
@@ -90,6 +92,7 @@ export const AudioProvider = ({ children }) => {
           volume={bgMuted ? 0 : finalBgVolume}
           playing={true}
           loop={true}
+          preload={true}
         />
       )}
     </AudioContext.Provider>
