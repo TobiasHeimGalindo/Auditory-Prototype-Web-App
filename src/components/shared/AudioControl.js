@@ -15,6 +15,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import Box from "@mui/material/Box";
 import { useAudio } from "../../AudioContext";
+import softSelection from "../../assets/sounds/Earcon/SoftSelection.mp3"
 
 import styles from "./AudioControl.module.scss";
 
@@ -30,11 +31,13 @@ const AudioControl = ({ highlight }) => {
   }`;
   const setSoundProfile = (profile) => {
     setBGMuted(false);
+    setSrc(softSelection);
+    setPlaying(true);
     switch (profile) {
       case "Atmosphere":
         setUIVolume(0.5);
         setSpatialVolume(0.4);
-        setBGVolume(0.8);
+        setBGVolume(0.6);
         break;
       case "Default":
         setUIVolume(0.5);
@@ -63,6 +66,8 @@ const AudioControl = ({ highlight }) => {
     setBGVolume,
     bgMuted,
     setBGMuted,
+    setSrc,
+    setPlaying,
   } = useAudio();
   const [anchorEl, setAnchorEl] = useState(null);
   const audioControlButtonRef = useRef(null);
@@ -88,7 +93,7 @@ const AudioControl = ({ highlight }) => {
           onClick={handleClick}
           ref={audioControlButtonRef}
         >
-          {uiMuted && bgMuted ? <VolumeOffIcon /> : <VolumeUpIcon />}
+          {uiMuted && bgMuted && spatialMuted ? <VolumeOffIcon /> : <VolumeUpIcon />}
         </span>
       </Tooltip>
       <Popper

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { AudioProvider, useAudio } from "./AudioContext";
 import { themeOptions } from "../src/styles/theme.ts";
@@ -66,8 +66,6 @@ const AppSnackbar = () => {
 const theme = createTheme(themeOptions);
 
 const Root = () => {
-  const [overlayVisible, setOverlayVisible] = useState(false);
-
   return (
     <ThemeProvider theme={theme}>
       <DialogProvider>

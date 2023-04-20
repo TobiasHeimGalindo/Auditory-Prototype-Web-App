@@ -13,6 +13,7 @@ import {
   FormControlLabel,
 } from "@mui/material";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
+import softSelection from "../assets/sounds/Earcon/SoftSelection.mp3"
 
 import styles from "./AudioDialog.module.scss";
 
@@ -39,15 +40,20 @@ const AudioDialog = () => {
     setBGVolume,
     bgMuted,
     setBGMuted,
+    setSrc,
+    setPlaying,
   } = useAudio();
 
   const setSoundProfile = (profile) => {
     setBGMuted(false);
+    setSrc(softSelection);
+    setPlaying(true);
+    
     switch (profile) {
       case "Atmosphere":
         setUIVolume(0.5);
         setSpatialVolume(0.4);
-        setBGVolume(0.8);
+        setBGVolume(0.6);
         break;
       case "Default":
         setUIVolume(0.5);
@@ -90,7 +96,7 @@ const AudioDialog = () => {
       </DialogTitle>
       <DialogContent>
         <DialogContentText id="audio-control-modal-description">
-          We've designed this site with a unique audio experience that you can
+          I've designed this site with a unique audio experience that you can
           personalize to your liking. You can choose from three predefined sound
           profiles: Atmosphere, Default, and Subtle. Each profile adjusts the
           UI, spatial audio, and background volume levels to create a different

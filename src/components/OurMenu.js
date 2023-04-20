@@ -4,6 +4,8 @@ import { styled } from "@mui/system";
 import Stack from "@mui/material/Stack";
 import styles from "./OurMenu.module.scss";
 import { useNavigate } from "react-router-dom";
+import { useAudio } from "../AudioContext";
+import softSelection from "../assets/sounds/Earcon/SoftSelection.mp3";
 
 const DineInButton = styled(Button)({
   flexGrow: 1,
@@ -15,9 +17,12 @@ const DineInButton = styled(Button)({
 });
 
 const OurMenu = () => {
+  const { setPlaying, setSrc } = useAudio();
   const navigate = useNavigate();
 
   const handleMenuClick = () => {
+    setPlaying(true);
+    setSrc(softSelection);
     navigate("/menu");
   };
 

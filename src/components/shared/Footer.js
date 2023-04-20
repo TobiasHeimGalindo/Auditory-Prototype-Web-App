@@ -5,7 +5,14 @@ import githubIcon from "../../assets/footage/github.png";
 import linkedInIcon from "../../assets/footage/linkedin.png";
 
 const Footer = () => {
-  const menuItems = ["Home", "About", "Favorites", "Menu", "Location", "Impressum"];
+  const menuItems = [
+    "Home",
+    "About",
+    "Favorites",
+    "Menu",
+    "Location",
+    "Impressum",
+  ];
 
   return (
     <footer className={styles.footer}>
@@ -30,10 +37,39 @@ const Footer = () => {
       </div>
       <div className={styles.bottom}>
         <div className={styles.credits}>
-          Sounds By Zapsplat, Videos and Images by XY
+          <div>
+            Sounds By{" "}
+            <a
+              href="https://www.zapsplat.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Zapsplat
+            </a>
+          </div>
+          <div>
+            Food sticker icons by{" "}
+            <a
+              href="https://www.figma.com/@fifilaw"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Fifilaw
+            </a>
+          </div>
+          <div>
+            Videos and Images Credits sourced with Pexels and Unsplash{" "}
+            <a
+              href="https://docs.google.com/document/d/1KnH6ta8vC1Yu_qs8EO2xNgYbtA7lcUFKKsNTyX25_Xg/edit?usp=sharing"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Documentation
+            </a>
+          </div>
         </div>
         <nav className={styles.menu}>
-        {menuItems.map((item, index) => (
+          {menuItems.map((item, index) => (
             <Link
               key={index}
               to={`${item.toLowerCase()}-section`}

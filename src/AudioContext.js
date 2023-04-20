@@ -11,9 +11,9 @@ export const useAudio = () => {
 export const AudioProvider = ({ children }) => {
   const [uiVolume, setUIVolume] = useState(0.5);
   const [uiMuted, setUIMuted] = useState(false);
-  const [spatialVolume, setSpatialVolume] = useState(0.3);
+  const [spatialVolume, setSpatialVolume] = useState(0.5);
   const [spatialMuted, setSpatialMuted] = useState(false);
-  const [bgVolume, setBGVolume] = useState(0.3);
+  const [bgVolume, setBGVolume] = useState(0.5);
   const [finalBgVolume, setFinalBgVolume] = useState(0);
   const [bgMuted, setBGMuted] = useState(true);
   const [playing, setPlaying] = useState(false);
