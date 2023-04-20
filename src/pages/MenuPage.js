@@ -5,9 +5,9 @@ import MenuSelection from "../components/MenuSelection";
 import Cart from "../components/Cart";
 import cooking from "../assets/footage/menu.mp4";
 import { useAuditoryBackground } from "../components/shared/useAuditoryBackground";
-import { useCart } from "../CartContext";
+import { useCart } from "../Contexts/CartContext";
 import auditoryBackground from "../assets/sounds/boiling-sizzling-cutting.mp3";
-import { useDialog } from "../DialogContext";
+import { useDialog } from "../Contexts/DialogContext";
 
 
 const MenuPage = () => {

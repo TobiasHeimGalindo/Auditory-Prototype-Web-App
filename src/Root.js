@@ -1,14 +1,14 @@
 import React, { useEffect, useRef } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { AudioProvider, useAudio } from "./AudioContext";
+import { AudioProvider, useAudio } from "./Contexts/AudioContext";
 import { themeOptions } from "../src/styles/theme.ts";
 import LandingPage from "./pages/LandingPage";
 import MenuPage from "./pages/MenuPage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { CartProvider } from "./CartContext";
-import { SnackbarProvider, useSnackbar } from "./SnackbarContext";
+import { CartProvider } from "./Contexts/CartContext";
+import { SnackbarProvider, useSnackbar } from "./Contexts/SnackbarContext";
 import { Snackbar, Box, Typography } from "@mui/material";
-import { DialogProvider } from "./DialogContext";
+import { DialogProvider } from "./Contexts/DialogContext";
 
 import notification from "./assets/sounds/Earcon/notification.mp3";
 import AudioDialog from "./components/AudioDialog";

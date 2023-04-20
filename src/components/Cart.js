@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useCart } from "../CartContext";
+import { useCart } from "../Contexts/CartContext";
 import { Box, Typography, Button } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
-import { useAudio } from "../AudioContext";
-import { useSnackbar } from "../SnackbarContext";
+import { useAudio } from "../Contexts/AudioContext";
+import { useSnackbar } from "../Contexts/SnackbarContext";
 
 import increment from "../assets/sounds/Earcon/increment.mp3";
 import decrement from "../assets/sounds/Earcon/decrement.mp3";

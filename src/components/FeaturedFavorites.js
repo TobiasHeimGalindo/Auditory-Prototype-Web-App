@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styles from "./FeaturedFavorites.module.scss";
 import CardComponent from "./shared/CardComponent";
-import { useAudio } from "../AudioContext";
+import { useAudio } from "../Contexts/AudioContext";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../CartContext";
+import { useCart } from "../Contexts/CartContext";
 
 import umamiRamen from "../assets/footage/umami-ramen.mp4";
 import tokyoSunrise from "../assets/footage/tokyo-sunrise.mp4";

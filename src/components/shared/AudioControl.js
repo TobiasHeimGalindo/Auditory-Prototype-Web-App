@@ -14,7 +14,7 @@ import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 import CloseIcon from "@mui/icons-material/Close";
 
 import Box from "@mui/material/Box";
-import { useAudio } from "../../AudioContext";
+import { useAudio } from "../../Contexts/AudioContext";
 import softSelection from "../../assets/sounds/Earcon/SoftSelection.mp3"
 
 import styles from "./AudioControl.module.scss";

@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { throttle } from "lodash";
-import { useAudio } from "../../AudioContext";
+import { useAudio } from "../../Contexts/AudioContext";
 
 export const useAuditoryBackground = (additionalMutedCondition = false) => {
   const { bgVolume, bgMuted, setBgSrc, setFinalBgVolume, setHowlerRef } =

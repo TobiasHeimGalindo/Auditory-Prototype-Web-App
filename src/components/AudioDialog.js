@@ -17,8 +17,8 @@ import softSelection from "../assets/sounds/Earcon/SoftSelection.mp3"
 
 import styles from "./AudioDialog.module.scss";
 
-import { useDialog } from "../DialogContext";
-import { useAudio } from "../AudioContext";
+import { useDialog } from "../Contexts/DialogContext";
+import { useAudio } from "../Contexts/AudioContext";
 
 const AudioControlButton = ({ onClick, children, ...rest }) => (
   <Button onClick={onClick} {...rest}>

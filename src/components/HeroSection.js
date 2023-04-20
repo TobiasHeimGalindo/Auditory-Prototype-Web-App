@@ -3,7 +3,7 @@ import styles from "./HeroSection.module.scss";
 import bowl from "../assets/footage/cropped.png";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { useAudio } from "../AudioContext";
+import { useAudio } from "../Contexts/AudioContext";
 import { useNavigate } from "react-router-dom";
 
 import softSelection from "../assets/sounds/Earcon/SoftSelection.mp3";

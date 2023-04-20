@@ -11,7 +11,7 @@ import Location from "../components/Location";
 import Footer from "../components/shared/Footer";
 import { useAuditoryBackground } from "../components/shared/useAuditoryBackground";
 
-import { useDialog } from "../DialogContext";
+import { useDialog } from "../Contexts/DialogContext";
 
 import auditoryBackground from "../assets/sounds/boiling-sizzling-cutting.mp3";
 
