@@ -48,13 +48,23 @@ const Footer = () => {
             </a>
           </div>
           <div>
-            Food sticker icons by{" "}
+            Food sticker icons created by{" "}
             <a
               href="https://www.figma.com/@fifilaw"
               target="_blank"
               rel="noreferrer"
             >
               Fifilaw
+            </a>
+          </div>
+          <div>
+            Motorcycle icon created by{" "}
+            <a
+              href="https://www.flaticon.com/free-icon/delivery-bike_9561688?term=motorcycle&page=1&position=14&origin=tag&related_id=9561688"
+              target="_blank"
+              rel="noreferrer"
+            >
+              kliwir art
             </a>
           </div>
           <div>
