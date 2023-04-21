@@ -84,7 +84,6 @@ export const AudioProvider = ({ children }) => {
           preload={true}
         />
       )}
-      {/* SpatialAudio Howler component */}
       {bgSrc && (
         <ReactHowler
           ref={howlerRef}
