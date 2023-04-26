@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useCart } from "../Contexts/CartContext";
 import { Box, Typography, Button } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
 import { useAudio } from "../Contexts/AudioContext";
-import { useSnackbar } from "../Contexts/SnackbarContext";
 
 import increment from "../assets/sounds/Earcon/increment.mp3";
 import decrement from "../assets/sounds/Earcon/decrement.mp3";
-import orderBell from "../assets/sounds/order-confirm.mp3";
-import earconSpecial from "../assets/EarconSpecial.mp3"; //Secret
 
 import styles from "./Cart.module.scss";
 import OrderConfirmModal from "./shared/OrderConfirmModal";
@@ -21,27 +18,9 @@ const CartControlButton = ({ onClick, children, ...rest }) => (
 
 const Cart = () => {
   const [orderConfirm, confirmOrder] = useState(false);
-  const [showSecretButton, setShowSecretButton] = useState(false); //Secret
-  const [secretButtonClicked, setSecretButtonClicked] = useState(false); //Secret
+  const [stage, setStage] = useState("payment");
   const { cart, updateCartItemQuantity, removeCartItem, emptyCart } = useCart();
   const { setPlaying, setSrc } = useAudio();
-  const { setSnackbarOpen, setSnackbarContent, setSnackbarTimeout } =
-    useSnackbar();
-
-  useEffect(() => {
-    const secretButtonState = localStorage.getItem("secretButtonClicked");
-    if (secretButtonState === "true") {
-      setSecretButtonClicked(true);
-    }
-  }, []); //Secret
-
-  const handleSecretButtonClick = () => {
-    setPlaying(true);
-    setSrc(earconSpecial);
-    setShowSecretButton(false);
-    setSecretButtonClicked(true);
-    localStorage.setItem("secretButtonClicked", "true");
-  }; //Secret
 
   const taxRate = 0.1;
   const totalItemCount = cart.reduce((total, item) => total + item.quantity, 0);
@@ -53,22 +32,11 @@ const Cart = () => {
   const total = subtotal + tax;
 
   const handleOrder = () => {
+    setStage("payment");
     confirmOrder(true);
     emptyCart();
-    setSrc(orderBell);
-    setPlaying(true);
   };
 
-  const handleSnackbarNotification = () => {
-    const deliveryTime = Math.floor(Math.random() * 21) + 20;
-    setSnackbarContent({
-      message: "Your order has been confirmed",
-      details: `Estimated Delivery time: ${deliveryTime} minutes`,
-    });
-
-    setSnackbarOpen(true);
-    setSnackbarTimeout(4000); // mock a notification delay on a confirmed Order
-  };
   return (
     <Box className={styles.cartContainer}>
       <Typography variant="h5" gutterBottom>
@@ -162,22 +130,12 @@ const Cart = () => {
         open={orderConfirm}
         handleClose={() => {
           confirmOrder(false);
-          handleSnackbarNotification();
-          setShowSecretButton(true);
+          setSrc(decrement);
+          setPlaying(true);
         }}
+        stage={stage}
+        setStage={setStage}
       />
-      {showSecretButton &&
-        !secretButtonClicked && ( //Secret
-          <Button
-            variant="contained"
-            color="secondary"
-            fullWidth
-            sx={{ marginTop: 2 }}
-            onClick={handleSecretButtonClick}
-          >
-            Secret Foods here
-          </Button>
-        )}
     </Box>
   );
 };
