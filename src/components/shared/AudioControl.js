@@ -5,9 +5,14 @@ import {
   Tooltip,
   Popper,
   Slider,
-  Switch,
   FormControlLabel,
   Typography,
+  Checkbox,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+  ButtonGroup,
 } from "@mui/material";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import VolumeOffIcon from "@mui/icons-material/VolumeOff";
@@ -15,7 +20,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import Box from "@mui/material/Box";
 import { useAudio } from "../../Contexts/AudioContext";
-import softSelection from "../../assets/sounds/Earcon/SoftSelection.mp3"
+import softSelection from "../../assets/sounds/Earcon/SoftSelection.mp3";
 
 import styles from "./AudioControl.module.scss";
 
@@ -93,7 +98,11 @@ const AudioControl = ({ highlight }) => {
           onClick={handleClick}
           ref={audioControlButtonRef}
         >
-          {uiMuted && bgMuted && spatialMuted ? <VolumeOffIcon /> : <VolumeUpIcon />}
+          {uiMuted && bgMuted && spatialMuted ? (
+            <VolumeOffIcon />
+          ) : (
+            <VolumeUpIcon />
+          )}
         </span>
       </Tooltip>
       <Popper
@@ -107,6 +116,8 @@ const AudioControl = ({ highlight }) => {
           minWidth: 200,
           minHeight: 150,
           borderRadius: 4,
+          boxShadow:
+            "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px",
         }}
       >
         <Box p={2} position="relative">
@@ -123,104 +134,155 @@ const AudioControl = ({ highlight }) => {
               cursor: "pointer",
             }}
           />
-          <Typography variant="subtitle1" gutterBottom>
-            UI Volume
-          </Typography>
-      
-          <Typography variant="body2" gutterBottom>
-            Button clicks, selections, etc.
-          </Typography>
-          <Slider
-            value={uiVolume}
-            min={0}
-            max={1}
-            defaultValue={0.5}
-            onChange={(_, newValue) => setUIVolume(newValue)}
-            valueLabelDisplay="auto"
-            aria-labelledby="ui-volume-slider"
-            step={0.01}
-          />
-          <FormControlLabel
-            control={
-              <Switch
-                checked={uiMuted}
-                onChange={(event) => setUIMuted(event.target.checked)}
-              />
-            }
-            label="Mute UI"
-          />
-          <Typography variant="subtitle1" gutterBottom>
-            Spatial Audio Volume
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            Notifications & alerts
-          </Typography>
-          <Slider
-            value={spatialVolume}
-            min={0}
-            max={1}
-            defaultValue={0.5}
-            onChange={(_, newValue) => setSpatialVolume(newValue)}
-            valueLabelDisplay="auto"
-            aria-labelledby="spatial-volume-slider"
-            step={0.01}
-          />
-          <FormControlLabel
-            control={
-              <Switch
-                checked={spatialMuted}
-                onChange={(event) => setSpatialMuted(event.target.checked)}
-              />
-            }
-            label="Mute Spatial Audio"
-          />
-          <Typography variant="subtitle1" gutterBottom>
-            Background Volume
-          </Typography>
-          <Typography variant="body2" gutterBottom>
-            Ambient Sounds
-          </Typography>
-          <Slider
-            value={bgVolume}
-            min={0}
-            max={1}
-            defaultValue={0.5}
-            onChange={(_, newValue) => setBGVolume(newValue)}
-            valueLabelDisplay="auto"
-            aria-labelledby="bg-volume-slider"
-            step={0.01}
-          />
-          <FormControlLabel
-            control={
-              <Switch
-                checked={bgMuted}
-                onChange={(event) => setBGMuted(event.target.checked)}
-              />
-            }
-            label="Mute Background"
-          />
-        </Box>
-        <Box p={2} position="relative">
-          <Box mt={2} display="flex" justifyContent="space-between">
-            <AudioControlButton
+          <Box padding={4}>
+            <ButtonGroup
               variant="outlined"
-              onClick={() => setSoundProfile("Atmosphere")}
+              sx={{ marginBottom: 2 }}
+              aria-label="sound profile button group"
             >
-              Atmosphere
-            </AudioControlButton>
-            <AudioControlButton
-              variant="outlined"
-              onClick={() => setSoundProfile("Default")}
-            >
-              Default
-            </AudioControlButton>
-            <AudioControlButton
-              variant="outlined"
-              onClick={() => setSoundProfile("Subtle")}
-            >
-              Subtle
-            </AudioControlButton>
+              <Button
+                sx={{ width: "175px" }}
+                onClick={() => setSoundProfile("Atmosphere")}
+              >
+                Atmosphere
+              </Button>
+              <Button
+                sx={{ width: "175px" }}
+                onClick={() => setSoundProfile("Default")}
+              >
+                Default
+              </Button>
+              <Button
+                sx={{ width: "175px" }}
+                onClick={() => setSoundProfile("Subtle")}
+              >
+                Subtle
+              </Button>
+            </ButtonGroup>
           </Box>
+          <Divider />
+
+          <List>
+            <ListItem>
+              <ListItemText
+                primary={
+                  <Box display="flex" alignItems="center">
+                    <Typography variant="subtitle1" gutterBottom>
+                      UI Volume
+                    </Typography>
+                  </Box>
+                }
+                secondary="Button clicks, selections, etc."
+              />
+              <Box display="flex" alignItems="center">
+                <Box width={150}>
+                  <Slider
+                    value={Math.round(uiVolume * 100)}
+                    min={0}
+                    max={100}
+                    defaultValue={50}
+                    onChange={(_, newValue) =>
+                      setUIVolume(Math.round(newValue) / 100)
+                    }
+                    valueLabelDisplay="auto"
+                    aria-labelledby="ui-volume-slider"
+                    step={1}
+                  />
+                </Box>
+
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={uiMuted}
+                      onChange={(event) => setUIMuted(event.target.checked)}
+                    />
+                  }
+                  label="Muted"
+                  sx={{ ml: 2 }}
+                />
+              </Box>
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary={
+                  <Box display="flex" alignItems="center">
+                    <Typography variant="subtitle1" gutterBottom>
+                      Spatial Audio Volume
+                    </Typography>
+                  </Box>
+                }
+                secondary="Notifications & alerts"
+              />
+              <Box display="flex" alignItems="center">
+                <Box width={150}>
+                  <Slider
+                    value={Math.round(spatialVolume * 100)}
+                    min={0}
+                    max={100}
+                    defaultValue={50}
+                    onChange={(_, newValue) =>
+                      setSpatialVolume(Math.round(newValue) / 100)
+                    }
+                    valueLabelDisplay="auto"
+                    aria-labelledby="spatial-volume-slider"
+                    step={1}
+                  />
+                </Box>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={spatialMuted}
+                      onChange={(event) =>
+                        setSpatialMuted(event.target.checked)
+                      }
+                    />
+                  }
+                  label="Muted"
+                  sx={{ ml: 2 }}
+                />
+              </Box>
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemText
+                primary={
+                  <Box display="flex" alignItems="center">
+                    <Typography variant="subtitle1" gutterBottom>
+                      Background Volume
+                    </Typography>
+                  </Box>
+                }
+                secondary="Ambient Sounds"
+              />
+              <Box display="flex" alignItems="center">
+                <Box width={150}>
+                  <Slider
+                    value={Math.round(bgVolume * 100)}
+                    min={0}
+                    max={100}
+                    defaultValue={50}
+                    onChange={(_, newValue) =>
+                      setBGVolume(Math.round(newValue) / 100)
+                    }
+                    valueLabelDisplay="auto"
+                    aria-labelledby="bg-volume-slider"
+                    step={1}
+                  />
+                </Box>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={bgMuted}
+                      onChange={(event) => setBGMuted(event.target.checked)}
+                    />
+                  }
+                  label="Muted"
+                  sx={{ ml: 2 }}
+                />
+              </Box>
+            </ListItem>
+          </List>
         </Box>
       </Popper>
     </div>
