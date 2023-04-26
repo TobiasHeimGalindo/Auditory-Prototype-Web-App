@@ -4,15 +4,18 @@ import {
   Box,
   Typography,
   Stack,
-  CircularProgress,
+  LinearProgress,
   Button,
   TextField,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import deliveryBike from "../../assets/footage/delivery-bike.png";
 import orderBell from "../../assets/sounds/order-confirm.mp3";
+import cashDrawer from "../../assets/sounds/Auditory Icon/cash-drawer-and-receipt.mp3";
 import { useAudio } from "../../Contexts/AudioContext";
 import { useSnackbar } from "../../Contexts/SnackbarContext";
+import { useCart } from "../../Contexts/CartContext";
+import reciept from "../../assets/footage/restaurant.png";
 
 import styles from "./OrderConfirmModal.module.scss";
 
@@ -20,6 +23,7 @@ const OrderConfirmModal = ({ open, handleClose, stage, setStage }) => {
   const { setPlaying, setSrc } = useAudio();
   const { setSnackbarOpen, setSnackbarContent, setSnackbarTimeout } =
     useSnackbar();
+  const { emptyCart } = useCart();
 
   useEffect(() => {
     if (stage === "confirmation") {
@@ -33,7 +37,7 @@ const OrderConfirmModal = ({ open, handleClose, stage, setStage }) => {
       });
 
       setSnackbarOpen(true);
-      setSnackbarTimeout(5000); // mock a notification delay on a confirmed Order
+      setSnackbarTimeout(4000); // mock a notification delay on a confirmed Order
     }
   }, [
     stage,
@@ -45,10 +49,13 @@ const OrderConfirmModal = ({ open, handleClose, stage, setStage }) => {
   ]);
 
   const handlePayNowClick = () => {
+    setSrc(cashDrawer);
+    setPlaying(true);
     setStage("loading");
     setTimeout(() => {
       setStage("confirmation");
-    }, 1000);
+      emptyCart();
+    }, 1500);
   };
 
   const renderContent = () => {
@@ -109,7 +116,15 @@ const OrderConfirmModal = ({ open, handleClose, stage, setStage }) => {
     } else if (stage === "loading") {
       return (
         <Box className={styles.loadingContainer}>
-          <CircularProgress size={100} />
+          <Box>
+            <img className={styles.recieptImage} src={reciept} alt="reciept" />
+          </Box>
+          <Box>
+            <Typography variant="h6" gutterBottom>
+              Processing Payment
+            </Typography>
+            <LinearProgress className={styles.linearProgress} />
+          </Box>
         </Box>
       );
     } else {

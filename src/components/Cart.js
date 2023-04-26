@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCart } from "../Contexts/CartContext";
 import { Box, Typography, Button } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
 import { useAudio } from "../Contexts/AudioContext";
+import { useOrderStage } from "../Contexts/OrderStageContext";
 
 import increment from "../assets/sounds/Earcon/increment.mp3";
 import decrement from "../assets/sounds/Earcon/decrement.mp3";
+import softSelection from "../assets/sounds/Earcon/SoftSelection.mp3";
 
 import styles from "./Cart.module.scss";
 import OrderConfirmModal from "./shared/OrderConfirmModal";
@@ -18,9 +20,10 @@ const CartControlButton = ({ onClick, children, ...rest }) => (
 
 const Cart = () => {
   const [orderConfirm, confirmOrder] = useState(false);
-  const [stage, setStage] = useState("payment");
-  const { cart, updateCartItemQuantity, removeCartItem, emptyCart } = useCart();
+  const [stage, setStage] = useState("");
+  const { cart, updateCartItemQuantity, removeCartItem } = useCart();
   const { setPlaying, setSrc } = useAudio();
+  const { setIsPayment } = useOrderStage();
 
   const taxRate = 0.1;
   const totalItemCount = cart.reduce((total, item) => total + item.quantity, 0);
@@ -34,8 +37,15 @@ const Cart = () => {
   const handleOrder = () => {
     setStage("payment");
     confirmOrder(true);
-    emptyCart();
   };
+
+  useEffect(() => {
+    if (stage === "payment" || stage === "loading") {
+      setIsPayment(true);
+    } else {
+      setIsPayment(false);
+    }
+  }, [stage, setIsPayment]);
 
   return (
     <Box className={styles.cartContainer}>
@@ -75,8 +85,8 @@ const Cart = () => {
                 <Box className={styles.cartItemControls}>
                   <CartControlButton
                     onClick={() => {
-                      setPlaying(true);
                       setSrc(decrement);
+                      setPlaying(true);
                       if (item.quantity === 1) {
                         removeCartItem(item.id);
                       } else {
@@ -91,8 +101,8 @@ const Cart = () => {
                   </Typography>
                   <CartControlButton
                     onClick={() => {
-                      setPlaying(true);
                       setSrc(increment);
+                      setPlaying(true);
                       updateCartItemQuantity(item.id, item.quantity + 1);
                     }}
                   >
@@ -120,7 +130,11 @@ const Cart = () => {
           color="primary"
           fullWidth
           sx={{ marginTop: 2 }}
-          onClick={handleOrder}
+          onClick={() => {
+            setSrc(softSelection);
+            setPlaying(true);
+            handleOrder();
+          }}
           disabled={cart.length === 0}
         >
           Order Now

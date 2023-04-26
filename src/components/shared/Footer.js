@@ -68,6 +68,16 @@ const Footer = () => {
             </a>
           </div>
           <div>
+            Reciept icon created by{" "}
+            <a
+              href="https://www.flaticon.com/free-icon/restaurant_3437522?term=bill+restaurant&related_id=3437522"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Freepik
+            </a>
+          </div>
+          <div>
             Videos and Images Credits sourced with Pexels and Unsplash{" "}
             <a
               href="https://docs.google.com/document/d/1KnH6ta8vC1Yu_qs8EO2xNgYbtA7lcUFKKsNTyX25_Xg/edit?usp=sharing"

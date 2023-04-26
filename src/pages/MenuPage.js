@@ -5,14 +5,14 @@ import MenuSelection from "../components/MenuSelection";
 import Cart from "../components/Cart";
 import cooking from "../assets/footage/menu.mp4";
 import { useAuditoryBackground } from "../components/shared/useAuditoryBackground";
-import { useCart } from "../Contexts/CartContext";
 import auditoryBackground from "../assets/sounds/boiling-sizzling-cutting.mp3";
 import { useDialog } from "../Contexts/DialogContext";
+import { useOrderStage } from "../Contexts/OrderStageContext";
 
 
 const MenuPage = () => {
-  const { cartHasItems } = useCart();
-  const { setBgSrc } = useAuditoryBackground(cartHasItems);
+  const { isPayment } = useOrderStage();
+  const { setBgSrc } = useAuditoryBackground(isPayment);
 
   const { dialogOpen } = useDialog();
 

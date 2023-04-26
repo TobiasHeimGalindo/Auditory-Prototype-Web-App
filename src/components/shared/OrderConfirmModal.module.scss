@@ -21,6 +21,7 @@
 
 .loadingContainer {
   display: flex;
+
   justify-content: center;
   align-items: center;
   flex-grow: 1;
@@ -29,6 +30,17 @@
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+
+.recieptImage {
+  width: 150px;
+  height: auto;
+  margin-right: 1rem;
+}
+
+.linearProgress {
+  width: 100%;
 }
 
 
