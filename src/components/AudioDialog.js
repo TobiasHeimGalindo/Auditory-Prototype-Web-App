@@ -167,6 +167,7 @@ const AudioDialog = () => {
                   valueLabelDisplay="auto"
                   aria-labelledby="ui-volume-slider"
                   step={1}
+                  disabled={uiMuted}
                 />
               </Box>
 
@@ -207,6 +208,7 @@ const AudioDialog = () => {
                   valueLabelDisplay="auto"
                   aria-labelledby="spatial-volume-slider"
                   step={1}
+                  disabled={spatialMuted}
                 />
               </Box>
               <FormControlLabel
@@ -246,6 +248,7 @@ const AudioDialog = () => {
                   valueLabelDisplay="auto"
                   aria-labelledby="bg-volume-slider"
                   step={1}
+                  disabled={bgMuted}
                 />
               </Box>
               <FormControlLabel
