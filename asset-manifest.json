@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Auditory-Prototype-Web-App/static/css/main.a27b3480.css",
-    "main.js": "/Auditory-Prototype-Web-App/static/js/main.59df480a.js",
+    "main.css": "/Auditory-Prototype-Web-App/static/css/main.a33e2d61.css",
+    "main.js": "/Auditory-Prototype-Web-App/static/js/main.2a1f3897.js",
     "static/js/787.57cfed49.chunk.js": "/Auditory-Prototype-Web-App/static/js/787.57cfed49.chunk.js",
     "static/media/menu.mp4": "/Auditory-Prototype-Web-App/static/media/menu.dff79d950375750415c9.mp4",
     "static/media/journey.mp4": "/Auditory-Prototype-Web-App/static/media/journey.0d888774ee4c72ab05af.mp4",
@@ -32,7 +32,6 @@
     "static/media/seafoodRamen.jpg": "/Auditory-Prototype-Web-App/static/media/seafoodRamen.a8e44b7885570d688578.jpg",
     "static/media/matchaCream.jpg": "/Auditory-Prototype-Web-App/static/media/matchaCream.89ee19d428967d8e67f2.jpg",
     "static/media/order-confirm.mp3": "/Auditory-Prototype-Web-App/static/media/order-confirm.de134e86452529f8d188.mp3",
-    "static/media/EarconSpecial.mp3": "/Auditory-Prototype-Web-App/static/media/EarconSpecial.66746abe5dfc34f54d34.mp3",
     "static/media/lemonade.jpg": "/Auditory-Prototype-Web-App/static/media/lemonade.ccaf7a3db26fcba6a6a6.jpg",
     "static/media/matchaLatte.jpg": "/Auditory-Prototype-Web-App/static/media/matchaLatte.4ea57bdaed8f08f59eef.jpg",
     "static/media/notification.mp3": "/Auditory-Prototype-Web-App/static/media/notification.31b198fa626315891ef8.mp3",
@@ -46,6 +45,7 @@
     "static/media/Outfit-Medium.ttf": "/Auditory-Prototype-Web-App/static/media/Outfit-Medium.214fc41dd609ce3049bc.ttf",
     "static/media/Outfit-Thin.ttf": "/Auditory-Prototype-Web-App/static/media/Outfit-Thin.1f780d7d6bc2b27b1779.ttf",
     "static/media/delivery-bike.png": "/Auditory-Prototype-Web-App/static/media/delivery-bike.ba0dd8077c67e515e5fc.png",
+    "static/media/cash-drawer-and-receipt.mp3": "/Auditory-Prototype-Web-App/static/media/cash-drawer-and-receipt.b8e64f04fead511cadfc.mp3",
     "static/media/drinks.mp3": "/Auditory-Prototype-Web-App/static/media/drinks.dd1f563ca2460608e4b4.mp3",
     "static/media/SizzlingBowl.mp3": "/Auditory-Prototype-Web-App/static/media/SizzlingBowl.e961c1016b0d94f4d848.mp3",
     "static/media/soft-sizzle.mp3": "/Auditory-Prototype-Web-App/static/media/soft-sizzle.756f0e82587e2a5897c4.mp3",
@@ -63,12 +63,12 @@
     "static/media/drink.svg": "/Auditory-Prototype-Web-App/static/media/drink.e82a1995c2f2777c2b77a17886f9f8f2.svg",
     "static/media/onigiri.svg": "/Auditory-Prototype-Web-App/static/media/onigiri.6e8a891f8150867d97038bd1366e6919.svg",
     "index.html": "/Auditory-Prototype-Web-App/index.html",
-    "main.a27b3480.css.map": "/Auditory-Prototype-Web-App/static/css/main.a27b3480.css.map",
-    "main.59df480a.js.map": "/Auditory-Prototype-Web-App/static/js/main.59df480a.js.map",
+    "main.a33e2d61.css.map": "/Auditory-Prototype-Web-App/static/css/main.a33e2d61.css.map",
+    "main.2a1f3897.js.map": "/Auditory-Prototype-Web-App/static/js/main.2a1f3897.js.map",
     "787.57cfed49.chunk.js.map": "/Auditory-Prototype-Web-App/static/js/787.57cfed49.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a27b3480.css",
-    "static/js/main.59df480a.js"
+    "static/css/main.a33e2d61.css",
+    "static/js/main.2a1f3897.js"
   ]
 }
