@@ -7,12 +7,19 @@ import MenuPage from "./pages/MenuPage";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { CartProvider } from "./Contexts/CartContext";
 import { SnackbarProvider, useSnackbar } from "./Contexts/SnackbarContext";
-import { Snackbar, Box, Typography } from "@mui/material";
+import { Snackbar, Box, Typography, Button } from "@mui/material";
 import { DialogProvider } from "./Contexts/DialogContext";
 import { OrderStageProvider } from "./Contexts/OrderStageContext";
 
 import notification from "./assets/sounds/Earcon/notification.mp3";
 import AudioDialog from "./components/AudioDialog";
+import styles from "./Root.module.scss";
+
+const SnackbarButton = ({ onClick, children, ...rest }) => (
+  <Button onClick={onClick} className={styles.snackbarButton} {...rest}>
+    <Typography variant="body1">{children}</Typography>
+  </Button>
+);
 
 const AppSnackbar = () => {
   const {
@@ -20,8 +27,10 @@ const AppSnackbar = () => {
     setSnackbarOpen,
     snackbarContent,
     snackbarTimeout,
+    setSnackbarTimeout,
     shouldRenderSnackbar,
     setShouldRenderSnackbar,
+    snackbarDuration,
   } = useSnackbar();
   const { playSpatialAudio } = useAudio();
   const snackbarRef = useRef(null);
@@ -45,6 +54,12 @@ const AppSnackbar = () => {
     }
   }, [snackbarOpen]);
 
+  useEffect(() => {
+    if (!shouldRenderSnackbar) {
+      setSnackbarTimeout(0);
+    }
+  }, [shouldRenderSnackbar]);
+
   return (
     <Snackbar
       open={shouldRenderSnackbar}
@@ -54,11 +69,24 @@ const AppSnackbar = () => {
         setSnackbarOpen(false);
         setShouldRenderSnackbar(false);
       }}
-      autoHideDuration={4000}
+      autoHideDuration={snackbarDuration}
+      className={styles.snackbar}
     >
       <Box>
-        <Typography variant="body1">{snackbarContent.message}</Typography>
-        <Typography variant="body2">{snackbarContent.details}</Typography>
+        <Box paddingBottom={1}>
+          <Typography variant="body1">{snackbarContent.message}</Typography>
+          <Typography variant="body2">{snackbarContent.details}</Typography>
+        </Box>
+        {snackbarContent.button && (
+          <SnackbarButton
+            onClick={snackbarContent.button.onClick}
+            color="primary"
+            variant="contained"
+            size="small"
+          >
+            {snackbarContent.button.label}
+          </SnackbarButton>
+        )}
       </Box>
     </Snackbar>
   );

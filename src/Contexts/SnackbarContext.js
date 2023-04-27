@@ -10,10 +10,12 @@ export const SnackbarProvider = ({ children }) => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   // snackbarTimeout & shouldRenderSnackbar states to mock a delayed notification
   const [snackbarTimeout, setSnackbarTimeout] = useState(0);
+  const [snackbarDuration, setSnackbarDuration] = useState(4000);
   const [shouldRenderSnackbar, setShouldRenderSnackbar] = useState(false);
   const [snackbarContent, setSnackbarContent] = useState({
     message: "",
     details: "",
+    button: null,
   });
 
   const value = {
@@ -25,6 +27,8 @@ export const SnackbarProvider = ({ children }) => {
     setSnackbarTimeout,
     shouldRenderSnackbar,
     setShouldRenderSnackbar,
+    snackbarDuration,
+    setSnackbarDuration,
   };
 
   return (

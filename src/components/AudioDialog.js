@@ -53,7 +53,7 @@ const AudioDialog = () => {
 
     switch (profile) {
       case "Atmosphere":
-        setUIVolume(0.6);
+        setUIVolume(0.9);
         setSpatialVolume(0.5);
         setBGVolume(0.7);
         break;

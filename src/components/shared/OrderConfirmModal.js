@@ -23,8 +23,12 @@ import styles from "./OrderConfirmModal.module.scss";
 
 const OrderConfirmModal = ({ open, handleClose, stage, setStage }) => {
   const { setPlaying, setSrc } = useAudio();
-  const { setSnackbarOpen, setSnackbarContent, setSnackbarTimeout } =
-    useSnackbar();
+  const {
+    setSnackbarOpen,
+    setSnackbarContent,
+    setSnackbarTimeout,
+    setSnackbarDuration,
+  } = useSnackbar();
   const {
     cart,
     updateCartItemQuantity,
@@ -45,6 +49,7 @@ const OrderConfirmModal = ({ open, handleClose, stage, setStage }) => {
       });
 
       setSnackbarOpen(true);
+      setSnackbarDuration(4000);
       setSnackbarTimeout(4000); // mock a notification delay on a confirmed Order
     }
   }, [

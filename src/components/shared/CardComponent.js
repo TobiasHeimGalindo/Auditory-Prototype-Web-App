@@ -10,7 +10,6 @@ const CardComponent = ({
   price,
   onHover,
   cardClass,
-  onClick,
 }) => {
   const handleMouseEnter = (e) => {
     const videoElement = e.currentTarget.querySelector("video");
@@ -54,7 +53,7 @@ const CardComponent = ({
           <Typography variant="h6" component="div" align="left">
             {price}
           </Typography>
-          <ShoppingBasketRoundedIcon onClick={onClick} />
+          <ShoppingBasketRoundedIcon />
         </Box>
       </CardContent>
     </Card>
