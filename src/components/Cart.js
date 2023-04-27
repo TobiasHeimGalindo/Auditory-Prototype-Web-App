@@ -1,22 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useCart } from "../Contexts/CartContext";
 import { Box, Typography, Button } from "@mui/material";
-import { Add, Remove } from "@mui/icons-material";
 import { useAudio } from "../Contexts/AudioContext";
 import { useOrderStage } from "../Contexts/OrderStageContext";
 
-import increment from "../assets/sounds/Earcon/increment.mp3";
 import decrement from "../assets/sounds/Earcon/decrement.mp3";
 import softSelection from "../assets/sounds/Earcon/SoftSelection.mp3";
 
 import styles from "./Cart.module.scss";
 import OrderConfirmModal from "./shared/OrderConfirmModal";
-
-const CartControlButton = ({ onClick, children, ...rest }) => (
-  <Button onClick={onClick} className={styles.cartControlButton} {...rest}>
-    {children}
-  </Button>
-);
+import CartItem from "./shared/CartItem";
 
 const Cart = () => {
   const [orderConfirm, confirmOrder] = useState(false);
@@ -54,64 +47,12 @@ const Cart = () => {
       </Typography>
       <Box className={styles.cartContent}>
         {cart.map((item) => (
-          <Box key={item.id} className={styles.cartItem}>
-            <Box className={styles.itemHead}>
-              <Box
-                sx={{
-                  width: "120px",
-                  height: "120px",
-                  borderRadius: "25px",
-                  overflow: "hidden",
-                }}
-              >
-                <img
-                  src={item.imageSrc}
-                  alt={item.title}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                  }}
-                />
-              </Box>
-              <Box className={styles.cartTitle}>
-                <Typography>{item.title}</Typography>
-                <Typography variant="body2" fontWeight="Light">
-                  {item.ingredients}
-                </Typography>
-                <Typography> {item.price}</Typography>
-              </Box>
-              <Box className={styles.controlWrapper}>
-                <Box className={styles.cartItemControls}>
-                  <CartControlButton
-                    onClick={() => {
-                      setSrc(decrement);
-                      setPlaying(true);
-                      if (item.quantity === 1) {
-                        removeCartItem(item.id);
-                      } else {
-                        updateCartItemQuantity(item.id, item.quantity - 1);
-                      }
-                    }}
-                  >
-                    <Remove />
-                  </CartControlButton>
-                  <Typography className={styles.cartItemQuantity}>
-                    {item.quantity}
-                  </Typography>
-                  <CartControlButton
-                    onClick={() => {
-                      setSrc(increment);
-                      setPlaying(true);
-                      updateCartItemQuantity(item.id, item.quantity + 1);
-                    }}
-                  >
-                    <Add />
-                  </CartControlButton>
-                </Box>
-              </Box>
-            </Box>
-          </Box>
+          <CartItem
+            key={item.id}
+            item={item}
+            updateCartItemQuantity={updateCartItemQuantity}
+            removeCartItem={removeCartItem}
+          />
         ))}
       </Box>
       <Box

@@ -7,6 +7,7 @@ import {
   LinearProgress,
   Button,
   TextField,
+  Divider,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import deliveryBike from "../../assets/footage/delivery-bike.png";
@@ -16,6 +17,7 @@ import { useAudio } from "../../Contexts/AudioContext";
 import { useSnackbar } from "../../Contexts/SnackbarContext";
 import { useCart } from "../../Contexts/CartContext";
 import reciept from "../../assets/footage/restaurant.png";
+import CartItem from "./CartItem";
 
 import styles from "./OrderConfirmModal.module.scss";
 
@@ -23,7 +25,13 @@ const OrderConfirmModal = ({ open, handleClose, stage, setStage }) => {
   const { setPlaying, setSrc } = useAudio();
   const { setSnackbarOpen, setSnackbarContent, setSnackbarTimeout } =
     useSnackbar();
-  const { emptyCart } = useCart();
+  const {
+    cart,
+    updateCartItemQuantity,
+    removeCartItem,
+    emptyCart,
+    cartHasItems,
+  } = useCart();
 
   useEffect(() => {
     if (stage === "confirmation") {
@@ -62,7 +70,9 @@ const OrderConfirmModal = ({ open, handleClose, stage, setStage }) => {
     if (stage === "payment") {
       return (
         <>
-          <Typography variant="h5" gutterBottom>
+          {cartHasItems ? <Divider /> : null}
+
+          <Typography variant="h5" gutterBottom paddingTop={2}>
             Payment
           </Typography>
           <Box>
@@ -108,6 +118,7 @@ const OrderConfirmModal = ({ open, handleClose, stage, setStage }) => {
             color="primary"
             fullWidth
             onClick={handlePayNowClick}
+            disabled={!cartHasItems}
           >
             Pay Now
           </Button>
@@ -151,7 +162,19 @@ const OrderConfirmModal = ({ open, handleClose, stage, setStage }) => {
             <Typography variant="h5" gutterBottom>
               {stage === "confirmation" ? "Order Confirmation" : ""}
             </Typography>
+            <Typography variant="h5" gutterBottom textAlign="left">
+              {stage === "payment" && cartHasItems ? "Order Summary" : ""}
+            </Typography>
           </Box>
+          {stage === "payment" &&
+            cart.map((item) => (
+              <CartItem
+                key={item.id}
+                item={item}
+                updateCartItemQuantity={updateCartItemQuantity}
+                removeCartItem={removeCartItem}
+              />
+            ))}
           {stage !== "loading" && (
             <Box position="absolute" top={0} right={0}>
               <CloseIcon

@@ -1,0 +1,39 @@
+.cartItem {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.itemHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 16px;
+}
+
+.cartTitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
+}
+.cartItemControls {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.cartControlButton {
+  min-width: initial !important;
+  min-height: initial !important;
+  padding: 0;
+}
+
+.controlWrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
