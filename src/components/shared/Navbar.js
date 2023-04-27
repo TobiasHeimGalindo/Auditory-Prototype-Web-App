@@ -1,19 +1,17 @@
 import React from "react";
 import styles from "./Navbar.module.scss";
-import { Link } from "react-scroll";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
+import { NavLink, useLocation } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AudioControl from "./AudioControl";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 const Navbar = ({ dialogOpen, setOverlayVisible }) => {
   const menuItems = ["Home", "About", "Menu"];
   const location = useLocation();
-  const navigate = useNavigate();
 
   const renderMenuItems = (item, index) => {
     if (item === "Menu") {
@@ -41,7 +39,7 @@ const Navbar = ({ dialogOpen, setOverlayVisible }) => {
       );
     } else {
       return (
-        <Link
+        <ScrollLink
           key={index}
           to={`${item.toLowerCase()}-section`}
           smooth={true}
@@ -49,7 +47,7 @@ const Navbar = ({ dialogOpen, setOverlayVisible }) => {
           className={styles.link}
         >
           {item}
-        </Link>
+        </ScrollLink>
       );
     }
   };
@@ -72,14 +70,20 @@ const Navbar = ({ dialogOpen, setOverlayVisible }) => {
           setOverlayVisible={setOverlayVisible}
         />
         <Box sx={{ minWidth: 50 }} />
-        <ClickAwayListener onClickAway={() => {}}>
+
+        <NavLink
+          to={{
+            pathname: "/menu",
+            hash: "cart",
+          }}
+          className={styles.cartIcon}
+        >
           <ShoppingCartIcon
             edge="end"
             color="inherit"
             sx={{ cursor: "pointer" }}
-            onClick={() => navigate("/menu")}
           />
-        </ClickAwayListener>
+        </NavLink>
       </Toolbar>
     </AppBar>
   );

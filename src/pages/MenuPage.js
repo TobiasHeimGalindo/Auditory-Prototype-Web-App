@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./MenuPage.module.scss";
 import Navbar from "../components/shared/Navbar";
 import MenuSelection from "../components/MenuSelection";
@@ -8,17 +8,50 @@ import { useAuditoryBackground } from "../components/shared/useAuditoryBackgroun
 import auditoryBackground from "../assets/sounds/boiling-sizzling-cutting.mp3";
 import { useDialog } from "../Contexts/DialogContext";
 import { useOrderStage } from "../Contexts/OrderStageContext";
-
+import FloatingCartButton from "../components/shared/FloatingCartButton";
+import { useLocation } from "react-router-dom";
+import { scroller } from "react-scroll";
 
 const MenuPage = () => {
   const { isPayment } = useOrderStage();
   const { setBgSrc } = useAuditoryBackground(isPayment);
-
   const { dialogOpen } = useDialog();
+  const location = useLocation();
+
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    if (location.hash) {
+      scroller.scrollTo(location.hash.slice(1), {
+        duration: 500,
+        smooth: true,
+      });
+    }
+  }, [location]);
+
+  const scrollToCart = () => {
+    scroller.scrollTo("cart", {
+      duration: 500,
+      smooth: true,
+    });
+  };
 
   useEffect(() => {
     setBgSrc(auditoryBackground);
   }, [setBgSrc]);
+
+  const handleResize = () => {
+    setIsSmallScreen(window.innerWidth <= 1715);
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -47,8 +80,11 @@ const MenuPage = () => {
         </div>
       </div>
       <div className={styles.menuContent}>
+        {isSmallScreen && <FloatingCartButton scrollToCart={scrollToCart} />}
         <MenuSelection />
-        <Cart />
+        <section id="cart" className={styles.cartSection}>
+          <Cart />
+        </section>
       </div>
     </div>
   );

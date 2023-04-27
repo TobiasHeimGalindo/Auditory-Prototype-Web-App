@@ -78,8 +78,14 @@
   padding: 150px 160px;
   align-items: stretch;
   gap: 15px;
+  flex-grow: 1;
 
   @media (max-width: 1715px) {
     flex-direction: column;
   }
+}
+
+.cartSection {
+  display: flex;
+  min-width: 25%;
 }

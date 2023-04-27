@@ -24,12 +24,6 @@ import softSelection from "../../assets/sounds/Earcon/SoftSelection.mp3";
 
 import styles from "./AudioControl.module.scss";
 
-const AudioControlButton = ({ onClick, children, ...rest }) => (
-  <Button onClick={onClick} className={styles.audioControlButton} {...rest}>
-    <Typography variant="body1">{children}</Typography>
-  </Button>
-);
-
 const AudioControl = ({ highlight }) => {
   const audioControlClass = `${styles.audioControl} ${
     highlight ? styles.highlight : ""
@@ -40,9 +34,9 @@ const AudioControl = ({ highlight }) => {
     setPlaying(true);
     switch (profile) {
       case "Atmosphere":
-        setUIVolume(0.5);
-        setSpatialVolume(0.4);
-        setBGVolume(0.6);
+        setUIVolume(0.6);
+        setSpatialVolume(0.5);
+        setBGVolume(0.7);
         break;
       case "Default":
         setUIVolume(0.5);

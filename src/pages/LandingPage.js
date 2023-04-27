@@ -36,7 +36,7 @@ function LandingPage() {
   return (
     <div className="App">
       <section className={styles.navbar}>
-      <Navbar dialogOpen={dialogOpen} />
+        <Navbar dialogOpen={dialogOpen} />
       </section>
       <section id="home-section" className={styles.home} data-section="home">
         <div className={styles.bgColor}></div>
