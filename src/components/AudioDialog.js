@@ -49,6 +49,7 @@ const AudioDialog = () => {
   const setSoundProfile = (profile) => {
     setSrc(softSelection);
     setPlaying(true);
+    setBGMuted(false);
 
     switch (profile) {
       case "Atmosphere":
