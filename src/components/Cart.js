@@ -87,6 +87,8 @@ const Cart = () => {
           confirmOrder(false);
           setSrc(closing);
           setPlaying(true);
+          setStage("");
+          setIsPayment(false);
         }}
         stage={stage}
         setStage={setStage}
