@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Auditory-Prototype-Web-App/static/css/main.915d264c.css",
-    "main.js": "/Auditory-Prototype-Web-App/static/js/main.7451ab4f.js",
+    "main.js": "/Auditory-Prototype-Web-App/static/js/main.48f44364.js",
     "static/js/787.57cfed49.chunk.js": "/Auditory-Prototype-Web-App/static/js/787.57cfed49.chunk.js",
     "static/media/menu.mp4": "/Auditory-Prototype-Web-App/static/media/menu.dff79d950375750415c9.mp4",
     "static/media/journey.mp4": "/Auditory-Prototype-Web-App/static/media/journey.0d888774ee4c72ab05af.mp4",
@@ -68,11 +68,11 @@
     "static/media/onigiri.svg": "/Auditory-Prototype-Web-App/static/media/onigiri.6e8a891f8150867d97038bd1366e6919.svg",
     "index.html": "/Auditory-Prototype-Web-App/index.html",
     "main.915d264c.css.map": "/Auditory-Prototype-Web-App/static/css/main.915d264c.css.map",
-    "main.7451ab4f.js.map": "/Auditory-Prototype-Web-App/static/js/main.7451ab4f.js.map",
+    "main.48f44364.js.map": "/Auditory-Prototype-Web-App/static/js/main.48f44364.js.map",
     "787.57cfed49.chunk.js.map": "/Auditory-Prototype-Web-App/static/js/787.57cfed49.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.915d264c.css",
-    "static/js/main.7451ab4f.js"
+    "static/js/main.48f44364.js"
   ]
 }
