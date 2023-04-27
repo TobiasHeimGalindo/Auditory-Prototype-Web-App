@@ -43,6 +43,9 @@ const MenuPage = () => {
         duration: 500,
         smooth: true,
       });
+    } else if (location.state && location.state.hash === "menu") {
+      transitionSwooshSound.play();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [location]);
 

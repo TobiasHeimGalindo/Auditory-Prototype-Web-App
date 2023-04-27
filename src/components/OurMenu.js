@@ -20,10 +20,10 @@ const OurMenu = () => {
   const { setPlaying, setSrc } = useAudio();
   const navigate = useNavigate();
 
-  const handleMenuClick = () => {
+  const handleMenuClick = (hash) => {
     setPlaying(true);
     setSrc(softSelection);
-    navigate("/menu");
+    navigate("/menu", { state: { hash } });
   };
 
   return (
@@ -49,14 +49,14 @@ const OurMenu = () => {
               variant="contained"
               sx={{ flexGrow: 1 }}
               color="primary"
-              onClick={handleMenuClick}
+              onClick={() => handleMenuClick("menu")}
             >
               Delivery Menu
             </Button>
             <DineInButton
               variant="contained"
               color="primary"
-              onClick={handleMenuClick}
+              onClick={() => handleMenuClick("menu")}
             >
               Dine-In Menu
             </DineInButton>
