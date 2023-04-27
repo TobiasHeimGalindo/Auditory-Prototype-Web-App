@@ -47,7 +47,6 @@ const AudioDialog = () => {
   } = useAudio();
 
   const setSoundProfile = (profile) => {
-    setBGMuted(false);
     setSrc(softSelection);
     setPlaying(true);
 

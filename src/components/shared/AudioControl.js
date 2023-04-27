@@ -31,7 +31,6 @@ const AudioControl = ({ highlight }) => {
     highlight ? styles.highlight : ""
   }`;
   const setSoundProfile = (profile) => {
-    setBGMuted(false);
     setSrc(softSelection);
     setPlaying(true);
     switch (profile) {
