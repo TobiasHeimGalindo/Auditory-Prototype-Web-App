@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/Auditory-Prototype-Web-App/static/css/main.853ed2a7.css",
+    "main.css": "/Auditory-Prototype-Web-App/static/css/main.ad6249cf.css",
     "main.js": "/Auditory-Prototype-Web-App/static/js/main.7b26e863.js",
     "static/js/787.57cfed49.chunk.js": "/Auditory-Prototype-Web-App/static/js/787.57cfed49.chunk.js",
     "static/media/menu.mp4": "/Auditory-Prototype-Web-App/static/media/menu.dff79d950375750415c9.mp4",
@@ -67,12 +67,12 @@
     "static/media/drink.svg": "/Auditory-Prototype-Web-App/static/media/drink.e82a1995c2f2777c2b77a17886f9f8f2.svg",
     "static/media/onigiri.svg": "/Auditory-Prototype-Web-App/static/media/onigiri.6e8a891f8150867d97038bd1366e6919.svg",
     "index.html": "/Auditory-Prototype-Web-App/index.html",
-    "main.853ed2a7.css.map": "/Auditory-Prototype-Web-App/static/css/main.853ed2a7.css.map",
+    "main.ad6249cf.css.map": "/Auditory-Prototype-Web-App/static/css/main.ad6249cf.css.map",
     "main.7b26e863.js.map": "/Auditory-Prototype-Web-App/static/js/main.7b26e863.js.map",
     "787.57cfed49.chunk.js.map": "/Auditory-Prototype-Web-App/static/js/787.57cfed49.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.853ed2a7.css",
+    "static/css/main.ad6249cf.css",
     "static/js/main.7b26e863.js"
   ]
 }
