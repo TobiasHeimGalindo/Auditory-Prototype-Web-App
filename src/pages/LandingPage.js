@@ -10,21 +10,52 @@ import OurMenu from "../components/OurMenu";
 import Location from "../components/Location";
 import Footer from "../components/shared/Footer";
 import { useAuditoryBackground } from "../components/shared/useAuditoryBackground";
-
+import { useAudio } from "../Contexts/AudioContext";
 import { useDialog } from "../Contexts/DialogContext";
+import transitionSwoosh from "../assets/sounds/transition-swoosh.mp3";
+import { Howl } from "howler";
 
 import auditoryBackground from "../assets/sounds/boiling-sizzling-cutting.mp3";
 
 function LandingPage() {
   const { setBgSrc } = useAuditoryBackground();
   const { dialogOpen } = useDialog();
-
+  const { bgVolume, bgMuted } = useAudio();
   const location = useLocation();
+
+  const transitionSwooshSound = new Howl({
+    src: [transitionSwoosh],
+    volume: bgMuted ? 0 : bgVolume * 0.2,
+    preload: true,
+  });
+
+  const calculateScrollDuration = (start, end) => {
+    const distance = Math.abs(end - start);
+    const duration = (distance / 1000) * 500; // speed of scrolling
+
+    return duration;
+  };
 
   useEffect(() => {
     if (location.hash) {
-      scroller.scrollTo(location.hash.slice(1), {
-        duration: 500,
+      const targetId = location.hash.slice(1);
+      const startScrollPosition = window.scrollY;
+      const targetElement = document.getElementById(targetId);
+      const targetScrollPosition = targetElement ? targetElement.offsetTop : 0;
+      const duration = calculateScrollDuration(
+        startScrollPosition,
+        targetScrollPosition
+      );
+      console.log("starting location.hash", duration);
+
+      // Only play the transition swoosh sound if the duration is greater than or equal to 150ms (this avoids swoosh sound for short scrolls)
+      if (duration >= 150) {
+        console.log("im playing");
+        transitionSwooshSound.play();
+      }
+
+      scroller.scrollTo(targetId, {
+        duration: duration,
         smooth: true,
       });
     }

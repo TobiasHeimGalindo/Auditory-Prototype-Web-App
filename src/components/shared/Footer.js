@@ -5,14 +5,7 @@ import githubIcon from "../../assets/footage/github.png";
 import linkedInIcon from "../../assets/footage/linkedin.png";
 
 const Footer = () => {
-  const menuItems = [
-    "Home",
-    "About",
-    "Favorites",
-    "Menu",
-    "Location",
-    "Impressum",
-  ];
+  const menuItems = ["Home", "About", "Favorites", "Menu", "Location"];
 
   return (
     <footer className={styles.footer}>

@@ -8,18 +8,26 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AudioControl from "./AudioControl";
+import { useAudio } from "../../Contexts/AudioContext";
+import selectTimbre from "../../assets/sounds/Earcon/select-timbre.mp3";
 
 const Navbar = ({ dialogOpen, setOverlayVisible }) => {
   const menuItems = ["Home", "About", "Menu"];
   const location = useLocation();
+  const { setSrc, setPlaying } = useAudio();
 
   const renderMenuItems = (item, index) => {
+    const handleClick = () => {
+      setSrc(selectTimbre);
+      setPlaying(true);
+    };
     if (item === "Menu") {
       return (
         <NavLink
           key={index}
           to={`/${item.toLowerCase()}`}
           className={styles.link}
+          onClick={handleClick}
         >
           {item}
         </NavLink>
@@ -33,6 +41,7 @@ const Navbar = ({ dialogOpen, setOverlayVisible }) => {
             hash: `${item.toLowerCase()}-section`,
           }}
           className={styles.link}
+          onClick={handleClick}
         >
           {item}
         </NavLink>
@@ -45,6 +54,7 @@ const Navbar = ({ dialogOpen, setOverlayVisible }) => {
           smooth={true}
           duration={500}
           className={styles.link}
+          onClick={handleClick}
         >
           {item}
         </ScrollLink>
@@ -77,6 +87,10 @@ const Navbar = ({ dialogOpen, setOverlayVisible }) => {
             hash: "cart",
           }}
           className={styles.cartIcon}
+          onClick={() => {
+            setSrc(selectTimbre);
+            setPlaying(true);
+          }}
         >
           <ShoppingCartIcon
             edge="end"

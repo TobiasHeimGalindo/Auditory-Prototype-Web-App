@@ -4,7 +4,7 @@ import { Box, Typography, Button } from "@mui/material";
 import { useAudio } from "../Contexts/AudioContext";
 import { useOrderStage } from "../Contexts/OrderStageContext";
 
-import decrement from "../assets/sounds/Earcon/decrement.mp3";
+import closing from "../assets/sounds/Earcon/closing.mp3";
 import softSelection from "../assets/sounds/Earcon/SoftSelection.mp3";
 
 import styles from "./Cart.module.scss";
@@ -85,7 +85,7 @@ const Cart = () => {
         open={orderConfirm}
         handleClose={() => {
           confirmOrder(false);
-          setSrc(decrement);
+          setSrc(closing);
           setPlaying(true);
         }}
         stage={stage}

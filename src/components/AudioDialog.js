@@ -19,6 +19,8 @@ import {
 } from "@mui/material";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import softSelection from "../assets/sounds/Earcon/SoftSelection.mp3";
+import closing from "../assets/sounds/Earcon/closing.mp3";
+import mute from "../assets/sounds/Earcon/mute.mp3";
 
 import styles from "./AudioDialog.module.scss";
 
@@ -70,7 +72,17 @@ const AudioDialog = () => {
     }
   };
 
+  const handleMute = (event) => {
+    const isMuting = event.target.checked;
+    if (isMuting) {
+      setSrc(mute);
+      setPlaying(true);
+    }
+  };
+
   const handleModalClose = () => {
+    setSrc(closing);
+    setPlaying(true);
     setDialogOpen(false);
     localStorage.setItem("visitedBefore", "true");
   };
@@ -176,6 +188,7 @@ const AudioDialog = () => {
                   <Checkbox
                     checked={uiMuted}
                     onChange={(event) => setUIMuted(event.target.checked)}
+                    onClick={(event) => handleMute(event)}
                   />
                 }
                 label="Muted"
@@ -216,6 +229,7 @@ const AudioDialog = () => {
                   <Checkbox
                     checked={spatialMuted}
                     onChange={(event) => setSpatialMuted(event.target.checked)}
+                    onClick={(event) => handleMute(event)}
                   />
                 }
                 label="Muted"
@@ -256,6 +270,7 @@ const AudioDialog = () => {
                   <Checkbox
                     checked={bgMuted}
                     onChange={(event) => setBGMuted(event.target.checked)}
+                    onClick={(event) => handleMute(event)}
                   />
                 }
                 label="Muted"

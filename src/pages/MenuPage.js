@@ -11,17 +11,34 @@ import { useOrderStage } from "../Contexts/OrderStageContext";
 import FloatingCartButton from "../components/shared/FloatingCartButton";
 import { useLocation } from "react-router-dom";
 import { scroller } from "react-scroll";
+import { useAudio } from "../Contexts/AudioContext";
+import transitionSwoosh from "../assets/sounds/transition-swoosh.mp3";
+import { Howl } from "howler";
 
 const MenuPage = () => {
   const { isPayment } = useOrderStage();
+  const { bgVolume, bgMuted } = useAudio();
   const { setBgSrc } = useAuditoryBackground(isPayment);
   const { dialogOpen } = useDialog();
   const location = useLocation();
 
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const transitionSwooshSound = new Howl({
+    src: [transitionSwoosh],
+    volume: bgMuted ? 0 : bgVolume * 0.2,
+    preload: true,
+  });
+
+  const isUserAtBottom = () => {
+    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+    // Checks if the user is near the last 500 pixels of the document
+    const isAtBottom = scrollTop + clientHeight >= scrollHeight - 500;
+    return isAtBottom;
+  };
 
   useEffect(() => {
     if (location.hash) {
+      transitionSwooshSound.play();
       scroller.scrollTo(location.hash.slice(1), {
         duration: 500,
         smooth: true,
@@ -30,6 +47,9 @@ const MenuPage = () => {
   }, [location]);
 
   const scrollToCart = () => {
+    if (!isUserAtBottom()) {
+      transitionSwooshSound.play();
+    }
     scroller.scrollTo("cart", {
       duration: 500,
       smooth: true,
