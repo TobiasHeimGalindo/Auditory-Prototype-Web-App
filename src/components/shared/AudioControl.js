@@ -95,6 +95,7 @@ const AudioControl = ({ highlight }) => {
     <div className={audioControlClass} style={{ cursor: "pointer" }}>
       <Tooltip title="Audio Controls" placement="bottom">
         <span
+          role="button"
           edge="end"
           color="inherit"
           aria-describedby={id}

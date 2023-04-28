@@ -91,6 +91,7 @@ const Navbar = ({ dialogOpen, setOverlayVisible }) => {
             setSrc(selectTimbre);
             setPlaying(true);
           }}
+          aria-label="View cart"
         >
           <ShoppingCartIcon
             edge="end"
