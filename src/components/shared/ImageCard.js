@@ -54,7 +54,7 @@ const ImageCard = ({
             />
           )}
         </Box>
-        <Typography variant="body2" color="text.secondary" align="left">
+        <Typography variant="body2" color="text" align="left">
           {ingredients}
         </Typography>
         <Box

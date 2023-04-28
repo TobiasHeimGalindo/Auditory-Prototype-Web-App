@@ -38,7 +38,7 @@ const CartItem = ({ item, updateCartItemQuantity, removeCartItem }) => {
         </Box>
         <Box className={styles.cartTitle}>
           <Typography>{item.title}</Typography>
-          <Typography variant="body2" fontWeight="Light">
+          <Typography variant="body2">
             {item.ingredients}
           </Typography>
           <Typography> {item.price}</Typography>

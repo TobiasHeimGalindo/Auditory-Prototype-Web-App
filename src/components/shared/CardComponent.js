@@ -41,7 +41,7 @@ const CardComponent = ({
         <Typography variant="h5" component="div" align="left">
           {title}
         </Typography>
-        <Typography variant="body2" color="text.secondary" align="left">
+        <Typography variant="body2" color="text" align="left">
           {ingredients}
         </Typography>
         <Box
