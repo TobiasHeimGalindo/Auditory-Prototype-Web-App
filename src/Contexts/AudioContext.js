@@ -8,7 +8,7 @@ export const useAudio = () => {
   return useContext(AudioContext);
 };
 
-export const AudioProvider = ({ children }) => {
+export const AudioProvider = ({ children, preloadedSounds  }) => {
   const [uiVolume, setUIVolume] = useState(0.5);
   const [uiMuted, setUIMuted] = useState(false);
   const [spatialVolume, setSpatialVolume] = useState(0.5);
@@ -70,6 +70,7 @@ export const AudioProvider = ({ children }) => {
     spatialSrc,
     setSpatialSrc,
     playSpatialAudio,
+    preloadedSounds,
   };
 
   return (

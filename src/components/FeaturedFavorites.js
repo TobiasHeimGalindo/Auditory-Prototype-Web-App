@@ -23,19 +23,17 @@ const FeaturedFavorites = () => {
   const { setSnackbarOpen, setSnackbarContent, setSnackbarDuration } =
     useSnackbar();
 
-  const { setPlaying, setSrc } = useAudio();
+  const { setSrc, setPlaying, preloadedSounds } = useAudio();
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
   const handleUmamiRamenHover = () => {
-    setPlaying(true);
-    setSrc(softSizzle);
+    preloadedSounds.softSizzle.play();
     setUmamiRamenHovered(true);
   };
 
   const handleTokyoSunriseHover = () => {
-    setPlaying(true);
-    setSrc(plateDrop);
+    preloadedSounds.plateDrop.play();
     setTokyoSunriseHovered(true);
   };
   const selectItemSound = () => {

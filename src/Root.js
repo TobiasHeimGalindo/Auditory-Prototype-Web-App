@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { AudioProvider, useAudio } from "./Contexts/AudioContext";
 import { themeOptions } from "../src/styles/theme.ts";
@@ -10,8 +10,37 @@ import { SnackbarProvider, useSnackbar } from "./Contexts/SnackbarContext";
 import { Snackbar, Box, Typography, Button } from "@mui/material";
 import { DialogProvider } from "./Contexts/DialogContext";
 import { OrderStageProvider } from "./Contexts/OrderStageContext";
+import { Howl } from "howler";
 
+
+//Earcons
 import notification from "./assets/sounds/Earcon/notification.mp3";
+import closing from "./assets/sounds/Earcon/closing.mp3";
+import decrement from "./assets/sounds/Earcon/decrement.mp3";
+import highSelect from "./assets/sounds/Earcon/highSelect.mp3";
+import increment from "./assets/sounds/Earcon/increment.mp3";
+import mute from "./assets/sounds/Earcon/mute.mp3";
+import selectTimbre from "./assets/sounds/Earcon/select-timbre.mp3";
+import selectItem from "./assets/sounds/Earcon/selectItem.mp3";
+import softSelection from "./assets/sounds/Earcon/SoftSelection.mp3";
+
+// Auditory Icon
+
+import orderProcess from "./assets/sounds/Auditory Icon/cash-drawer-and-receipt.mp3"
+import drinks from "./assets/sounds/Auditory Icon/drinks.mp3"
+import plateDrop from "./assets/sounds/Auditory Icon/PlateDrop.mp3"
+import popularFire from "./assets/sounds/Auditory Icon/popularFire.mp3"
+import sizzlingBowl from "./assets/sounds/Auditory Icon/SizzlingBowl.mp3"
+import softSizzle from "./assets/sounds/Auditory Icon/soft-sizzle.mp3"
+import teaSpoon from "./assets/sounds/Auditory Icon/teaSpoon.mp3"
+
+//misc
+
+import orderConfirm from "./assets/sounds/order-confirm.mp3"
+
+
+
+
 import AudioDialog from "./components/AudioDialog";
 import styles from "./Root.module.scss";
 
@@ -95,10 +124,22 @@ const AppSnackbar = () => {
 const theme = createTheme(themeOptions);
 
 const Root = () => {
+  const [preloadedSounds, setPreloadedSounds] = useState({});
+
+  useEffect(() => {
+    const sounds = {
+      plateDrop: new Howl({ src: [plateDrop], preload: true }),
+      softSizzle: new Howl({ src: [softSizzle], preload: true }),
+    };
+
+    setPreloadedSounds(sounds);
+  }, []);
+
+  
   return (
     <ThemeProvider theme={theme}>
       <DialogProvider>
-        <AudioProvider>
+        <AudioProvider preloadedSounds={preloadedSounds}>
           <AudioDialog />
           <CartProvider>
             <SnackbarProvider>
