@@ -14,7 +14,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  Divider,
   ButtonGroup,
 } from "@mui/material";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
@@ -152,14 +151,16 @@ const AudioDialog = () => {
           </ButtonGroup>
         </Box>
 
-        <Divider />
-
         <List>
-          <ListItem>
+          <ListItem divider>
             <ListItemText
               primary={
                 <Box display="flex" alignItems="center">
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography
+                    variant="subtitle1"
+                    gutterBottom
+                    id="ui-volume-label"
+                  >
                     UI Volume
                   </Typography>
                 </Box>
@@ -177,7 +178,7 @@ const AudioDialog = () => {
                     setUIVolume(Math.round(newValue) / 100)
                   }
                   valueLabelDisplay="auto"
-                  aria-labelledby="ui-volume-slider"
+                  aria-labelledby="ui-volume-label"
                   step={1}
                   disabled={uiMuted}
                 />
@@ -196,12 +197,15 @@ const AudioDialog = () => {
               />
             </Box>
           </ListItem>
-          <Divider />
-          <ListItem>
+          <ListItem divider>
             <ListItemText
               primary={
                 <Box display="flex" alignItems="center">
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography
+                    variant="subtitle1"
+                    gutterBottom
+                    id="spatial-volume-label"
+                  >
                     Spatial Audio Volume
                   </Typography>
                 </Box>
@@ -219,7 +223,7 @@ const AudioDialog = () => {
                     setSpatialVolume(Math.round(newValue) / 100)
                   }
                   valueLabelDisplay="auto"
-                  aria-labelledby="spatial-volume-slider"
+                  aria-labelledby="spatial-volume-label"
                   step={1}
                   disabled={spatialMuted}
                 />
@@ -237,12 +241,15 @@ const AudioDialog = () => {
               />
             </Box>
           </ListItem>
-          <Divider />
           <ListItem>
             <ListItemText
               primary={
                 <Box display="flex" alignItems="center">
-                  <Typography variant="subtitle1" gutterBottom>
+                  <Typography
+                    variant="subtitle1"
+                    gutterBottom
+                    id="bg-volume-label"
+                  >
                     Background Volume
                   </Typography>
                 </Box>
@@ -260,7 +267,7 @@ const AudioDialog = () => {
                     setBGVolume(Math.round(newValue) / 100)
                   }
                   valueLabelDisplay="auto"
-                  aria-labelledby="bg-volume-slider"
+                  aria-labelledby="bg-volume-label"
                   step={1}
                   disabled={bgMuted}
                 />

@@ -139,7 +139,10 @@ const OrderConfirmModal = ({ open, handleClose, stage, setStage }) => {
             <Typography variant="h6" gutterBottom>
               Processing Payment
             </Typography>
-            <LinearProgress className={styles.linearProgress} />
+            <LinearProgress
+              aria-label="progress bar"
+              className={styles.linearProgress}
+            />
           </Box>
         </Box>
       );

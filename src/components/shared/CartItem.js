@@ -8,7 +8,7 @@ import { useAudio } from "../../Contexts/AudioContext";
 import styles from "./CartItem.module.scss";
 
 const CartControlButton = ({ onClick, children, ...rest }) => (
-  <Button onClick={onClick} className={styles.cartControlButton} {...rest}>
+  <Button aria-label="button" onClick={onClick} className={styles.cartControlButton} {...rest}>
     {children}
   </Button>
 );
@@ -45,7 +45,7 @@ const CartItem = ({ item, updateCartItemQuantity, removeCartItem }) => {
         </Box>
         <Box className={styles.controlWrapper}>
           <Box className={styles.cartItemControls}>
-            <CartControlButton
+            <CartControlButton aria-label="decrease"
               onClick={() => {
                 setSrc(decrement);
                 setPlaying(true);
@@ -61,7 +61,7 @@ const CartItem = ({ item, updateCartItemQuantity, removeCartItem }) => {
             <Typography className={styles.cartItemQuantity}>
               {item.quantity}
             </Typography>
-            <CartControlButton
+            <CartControlButton aria-label="increase"
               onClick={() => {
                 setSrc(increment);
                 setPlaying(true);

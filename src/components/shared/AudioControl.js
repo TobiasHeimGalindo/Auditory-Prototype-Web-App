@@ -11,7 +11,6 @@ import {
   List,
   ListItem,
   ListItemText,
-  Divider,
   ButtonGroup,
 } from "@mui/material";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
@@ -142,40 +141,42 @@ const AudioControl = ({ highlight }) => {
               cursor: "pointer",
             }}
           />
-          <Box padding={4}>
-            <ButtonGroup
-              variant="outlined"
-              sx={{ marginBottom: 2 }}
-              aria-label="sound profile button group"
-            >
-              <Button
-                sx={{ width: "175px" }}
-                onClick={() => setSoundProfile("Atmosphere")}
-              >
-                Atmosphere
-              </Button>
-              <Button
-                sx={{ width: "175px" }}
-                onClick={() => setSoundProfile("Default")}
-              >
-                Default
-              </Button>
-              <Button
-                sx={{ width: "175px" }}
-                onClick={() => setSoundProfile("Subtle")}
-              >
-                Subtle
-              </Button>
-            </ButtonGroup>
-          </Box>
-          <Divider />
 
           <List>
-            <ListItem>
+            <ListItem divider>
+              {" "}
+              <Box padding={4}>
+                <ButtonGroup
+                  variant="outlined"
+                  sx={{ marginBottom: 2 }}
+                  aria-label="sound profile button group"
+                >
+                  <Button
+                    sx={{ width: "175px" }}
+                    onClick={() => setSoundProfile("Atmosphere")}
+                  >
+                    Atmosphere
+                  </Button>
+                  <Button
+                    sx={{ width: "175px" }}
+                    onClick={() => setSoundProfile("Default")}
+                  >
+                    Default
+                  </Button>
+                  <Button
+                    sx={{ width: "175px" }}
+                    onClick={() => setSoundProfile("Subtle")}
+                  >
+                    Subtle
+                  </Button>
+                </ButtonGroup>
+              </Box>
+            </ListItem>
+            <ListItem divider>
               <ListItemText
                 primary={
                   <Box display="flex" alignItems="center">
-                    <Typography variant="subtitle1" gutterBottom>
+                    <Typography variant="subtitle1" gutterBottom id="ui-volume-label">
                       UI Volume
                     </Typography>
                   </Box>
@@ -193,7 +194,7 @@ const AudioControl = ({ highlight }) => {
                       setUIVolume(Math.round(newValue) / 100)
                     }
                     valueLabelDisplay="auto"
-                    aria-labelledby="ui-volume-slider"
+                    aria-labelledby="ui-volume-label"
                     step={1}
                     disabled={uiMuted}
                   />
@@ -212,12 +213,11 @@ const AudioControl = ({ highlight }) => {
                 />
               </Box>
             </ListItem>
-            <Divider />
-            <ListItem>
+            <ListItem divider>
               <ListItemText
                 primary={
                   <Box display="flex" alignItems="center">
-                    <Typography variant="subtitle1" gutterBottom>
+                    <Typography variant="subtitle1" gutterBottom id="spatial-volume-label">
                       Spatial Audio Volume
                     </Typography>
                   </Box>
@@ -235,7 +235,7 @@ const AudioControl = ({ highlight }) => {
                       setSpatialVolume(Math.round(newValue) / 100)
                     }
                     valueLabelDisplay="auto"
-                    aria-labelledby="spatial-volume-slider"
+                    aria-labelledby="spatial-volume-label"
                     step={1}
                     disabled={spatialMuted}
                   />
@@ -255,12 +255,11 @@ const AudioControl = ({ highlight }) => {
                 />
               </Box>
             </ListItem>
-            <Divider />
-            <ListItem>
+            <ListItem divider>
               <ListItemText
                 primary={
                   <Box display="flex" alignItems="center">
-                    <Typography variant="subtitle1" gutterBottom>
+                    <Typography variant="subtitle1" gutterBottom id="bg-volume-label">
                       Background Volume
                     </Typography>
                   </Box>
@@ -278,7 +277,7 @@ const AudioControl = ({ highlight }) => {
                       setBGVolume(Math.round(newValue) / 100)
                     }
                     valueLabelDisplay="auto"
-                    aria-labelledby="bg-volume-slider"
+                    aria-labelledby="bg-volume-label"
                     step={1}
                     disabled={bgMuted}
                   />
