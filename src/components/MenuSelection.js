@@ -31,28 +31,19 @@ import matchaCream from "../assets/footage/dessert/matchaCream.jpg";
 import sesamePudding from "../assets/footage/dessert/sesamePudding.jpg";
 import mochiDonut from "../assets/footage/dessert/mochiDonut.jpg";
 
-//Earcons
-import selectItem from "../assets/sounds/Earcon/selectItem.mp3";
-
-//Auditory Icons
-import drinks from "../assets/sounds/Auditory Icon/drinks.mp3";
-import sizzlingBowl from "../assets/sounds/Auditory Icon/SizzlingBowl.mp3";
-import softSizzle from "../assets/sounds/Auditory Icon/soft-sizzle.mp3";
-import teaSpoon from "../assets/sounds/Auditory Icon/teaSpoon.mp3";
-import popularFlame from "../assets/sounds/Auditory Icon/popularFire.mp3";
 
 const MenuSelection = () => {
   const [selectedCategory, setSelectedCategory] = useState("Ramen");
   const [hoveredDishes, setHoveredDishes] = useState(new Set());
 
   const { addToCart } = useCart();
-  const { setPlaying, setSrc } = useAudio();
+  const { preloadedSounds } = useAudio();
 
   const categories = [
-    { id: 1, label: "Ramen", icon: ramen, sound: softSizzle },
-    { id: 2, label: "Rice", icon: rice, sound: sizzlingBowl },
-    { id: 3, label: "Drinks", icon: drink, sound: drinks },
-    { id: 4, label: "Dessert", icon: dessert, sound: teaSpoon },
+    { id: 1, label: "Ramen", icon: ramen, sound: "softSizzle" },
+    { id: 2, label: "Rice", icon: rice, sound: "sizzlingBowl" },
+    { id: 3, label: "Drinks", icon: drink, sound: "drinks" },
+    { id: 4, label: "Dessert", icon: dessert, sound: "teaSpoon" },
   ];
 
   const dishes = [
@@ -220,15 +211,13 @@ const MenuSelection = () => {
 
   const playHoverSound = (dish) => {
     if (dish.popular && !hoveredDishes.has(dish.id)) {
-      setPlaying(true);
-      setSrc(popularFlame);
+      preloadedSounds.popularFlame.play();
       setHoveredDishes((prev) => new Set([...prev, dish.id]));
     }
   };
 
   const playClickSound = () => {
-    setPlaying(true);
-    setSrc(selectItem);
+    preloadedSounds.selectItem.play();
   };
 
   return (
@@ -239,8 +228,7 @@ const MenuSelection = () => {
             <IconButton
               onClick={() => {
                 setSelectedCategory(category.label);
-                setSrc(category.sound);
-                setPlaying(true);
+                preloadedSounds[category.sound].play();
               }}
               style={{
                 display: "flex",

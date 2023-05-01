@@ -4,9 +4,6 @@ import { Box, Typography, Button } from "@mui/material";
 import { useAudio } from "../Contexts/AudioContext";
 import { useOrderStage } from "../Contexts/OrderStageContext";
 
-import closing from "../assets/sounds/Earcon/closing.mp3";
-import softSelection from "../assets/sounds/Earcon/SoftSelection.mp3";
-
 import styles from "./Cart.module.scss";
 import OrderConfirmModal from "./shared/OrderConfirmModal";
 import CartItem from "./shared/CartItem";
@@ -15,7 +12,7 @@ const Cart = () => {
   const [orderConfirm, confirmOrder] = useState(false);
   const [stage, setStage] = useState("");
   const { cart, updateCartItemQuantity, removeCartItem } = useCart();
-  const { setPlaying, setSrc } = useAudio();
+  const { preloadedSounds } = useAudio();
   const { setIsPayment } = useOrderStage();
 
   const taxRate = 0.1;
@@ -72,8 +69,7 @@ const Cart = () => {
           fullWidth
           sx={{ marginTop: 2 }}
           onClick={() => {
-            setSrc(softSelection);
-            setPlaying(true);
+            preloadedSounds.softSelection.play();
             handleOrder();
           }}
           disabled={cart.length === 0}
@@ -85,8 +81,7 @@ const Cart = () => {
         open={orderConfirm}
         handleClose={() => {
           confirmOrder(false);
-          setSrc(closing);
-          setPlaying(true);
+          preloadedSounds.closing.play();
           setStage("");
           setIsPayment(false);
         }}

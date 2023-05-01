@@ -11,11 +11,6 @@ import tokyoSunrise from "../assets/footage/tokyo-sunrise.mp4";
 
 import umamiImage from "../assets/footage/umamiImage.PNG";
 import tokyoImage from "../assets/footage/tokyoImage.PNG";
-// Auditory Icon
-import softSizzle from "../assets/sounds/Auditory Icon/soft-sizzle.mp3";
-import plateDrop from "../assets/sounds/Auditory Icon/PlateDrop.mp3";
-//Earcon
-import selectItem from "../assets/sounds/Earcon/selectItem.mp3";
 
 const FeaturedFavorites = () => {
   const [umamiRamenHovered, setUmamiRamenHovered] = useState(false);
@@ -23,7 +18,7 @@ const FeaturedFavorites = () => {
   const { setSnackbarOpen, setSnackbarContent, setSnackbarDuration } =
     useSnackbar();
 
-  const { setSrc, setPlaying, preloadedSounds } = useAudio();
+  const { preloadedSounds } = useAudio();
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
@@ -37,8 +32,7 @@ const FeaturedFavorites = () => {
     setTokyoSunriseHovered(true);
   };
   const selectItemSound = () => {
-    setSrc(selectItem);
-    setPlaying(true);
+    preloadedSounds.selectItem.play();
   };
 
   const handleClickUmamiRamen = () => {

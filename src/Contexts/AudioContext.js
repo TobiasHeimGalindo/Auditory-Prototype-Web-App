@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 import ReactHowler from "react-howler";
 import { Howl } from "howler";
 
@@ -8,7 +8,7 @@ export const useAudio = () => {
   return useContext(AudioContext);
 };
 
-export const AudioProvider = ({ children, preloadedSounds  }) => {
+export const AudioProvider = ({ children, preloadedSounds }) => {
   const [uiVolume, setUIVolume] = useState(0.5);
   const [uiMuted, setUIMuted] = useState(false);
   const [spatialVolume, setSpatialVolume] = useState(0.5);
@@ -17,10 +17,16 @@ export const AudioProvider = ({ children, preloadedSounds  }) => {
   const [finalBgVolume, setFinalBgVolume] = useState(0);
   const [bgMuted, setBGMuted] = useState(true);
   const [playing, setPlaying] = useState(false);
-  const [src, setSrc] = useState(null);
   const [spatialSrc, setSpatialSrc] = useState(null);
   const [bgSrc, setBgSrc] = useState(null);
   const [howlerRef, setHowlerRef] = useState(null);
+
+  useEffect(() => {
+    Object.keys(preloadedSounds).forEach((soundKey) => {
+      preloadedSounds[soundKey].volume(uiVolume);
+      preloadedSounds[soundKey].mute(uiMuted);
+    });
+  }, [uiVolume, uiMuted, preloadedSounds]);
 
   const playSpatialAudio = (src, position) => {
     setSpatialSrc(src);
@@ -60,8 +66,6 @@ export const AudioProvider = ({ children, preloadedSounds  }) => {
     setBGMuted,
     playing,
     setPlaying,
-    src,
-    setSrc,
     bgSrc,
     setBgSrc,
     howlerRef,
@@ -76,15 +80,6 @@ export const AudioProvider = ({ children, preloadedSounds  }) => {
   return (
     <AudioContext.Provider value={value}>
       {children}
-      {src && (
-        <ReactHowler
-          src={src}
-          volume={uiMuted ? 0 : uiVolume}
-          playing={playing}
-          onEnd={() => setPlaying(false)}
-          preload={true}
-        />
-      )}
       {bgSrc && (
         <ReactHowler
           ref={howlerRef}

@@ -9,17 +9,15 @@ import Box from "@mui/material/Box";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AudioControl from "./AudioControl";
 import { useAudio } from "../../Contexts/AudioContext";
-import selectTimbre from "../../assets/sounds/Earcon/select-timbre.mp3";
 
 const Navbar = ({ dialogOpen, setOverlayVisible }) => {
   const menuItems = ["Home", "About", "Menu"];
   const location = useLocation();
-  const { setSrc, setPlaying } = useAudio();
+  const { preloadedSounds } = useAudio();
 
   const renderMenuItems = (item, index) => {
     const handleClick = () => {
-      setSrc(selectTimbre);
-      setPlaying(true);
+      preloadedSounds.selectTimbre.play();
     };
     if (item === "Menu") {
       return (
@@ -88,8 +86,7 @@ const Navbar = ({ dialogOpen, setOverlayVisible }) => {
           }}
           className={styles.cartIcon}
           onClick={() => {
-            setSrc(selectTimbre);
-            setPlaying(true);
+            preloadedSounds.selectTimbre.play();
           }}
           aria-label="View cart"
         >

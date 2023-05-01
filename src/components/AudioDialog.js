@@ -17,9 +17,6 @@ import {
   ButtonGroup,
 } from "@mui/material";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
-import softSelection from "../assets/sounds/Earcon/SoftSelection.mp3";
-import closing from "../assets/sounds/Earcon/closing.mp3";
-import mute from "../assets/sounds/Earcon/mute.mp3";
 
 import styles from "./AudioDialog.module.scss";
 
@@ -28,6 +25,7 @@ import { useAudio } from "../Contexts/AudioContext";
 
 const AudioDialog = () => {
   const { dialogOpen, setDialogOpen } = useDialog();
+  const { preloadedSounds } = useAudio();
   const {
     uiVolume,
     setUIVolume,
@@ -41,13 +39,10 @@ const AudioDialog = () => {
     setBGVolume,
     bgMuted,
     setBGMuted,
-    setSrc,
-    setPlaying,
   } = useAudio();
 
   const setSoundProfile = (profile) => {
-    setSrc(softSelection);
-    setPlaying(true);
+    preloadedSounds.softSelection.play();
     setBGMuted(false);
 
     switch (profile) {
@@ -74,14 +69,12 @@ const AudioDialog = () => {
   const handleMute = (event) => {
     const isMuting = event.target.checked;
     if (isMuting) {
-      setSrc(mute);
-      setPlaying(true);
+      preloadedSounds.mute.play();
     }
   };
 
   const handleModalClose = () => {
-    setSrc(closing);
-    setPlaying(true);
+    preloadedSounds.closing.play();
     setDialogOpen(false);
     localStorage.setItem("visitedBefore", "true");
   };

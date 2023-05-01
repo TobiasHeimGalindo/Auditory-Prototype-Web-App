@@ -6,15 +6,12 @@ import Stack from "@mui/material/Stack";
 import { useAudio } from "../Contexts/AudioContext";
 import { useNavigate } from "react-router-dom";
 
-import softSelection from "../assets/sounds/Earcon/SoftSelection.mp3";
-
 const HeroSection = () => {
-  const { setPlaying, setSrc } = useAudio();
+  const { preloadedSounds } = useAudio();
   const navigate = useNavigate();
 
   const handleMenuClick = () => {
-    setPlaying(true);
-    setSrc(softSelection);
+    preloadedSounds.softSelection.play();
     navigate("/menu");
   };
 

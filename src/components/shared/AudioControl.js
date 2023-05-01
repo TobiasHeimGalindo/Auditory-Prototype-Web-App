@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 
 import {
   Button,
@@ -19,10 +19,6 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import Box from "@mui/material/Box";
 import { useAudio } from "../../Contexts/AudioContext";
-import softSelection from "../../assets/sounds/Earcon/SoftSelection.mp3";
-import closing from "../../assets/sounds/Earcon/closing.mp3";
-import mute from "../../assets/sounds/Earcon/mute.mp3";
-import selectTimbre from "../../assets/sounds/Earcon/select-timbre.mp3";
 
 import styles from "./AudioControl.module.scss";
 
@@ -31,8 +27,7 @@ const AudioControl = ({ highlight }) => {
     highlight ? styles.highlight : ""
   }`;
   const setSoundProfile = (profile) => {
-    setSrc(softSelection);
-    setPlaying(true);
+    preloadedSounds.softSelection.play();
     switch (profile) {
       case "Atmosphere":
         setUIVolume(0.9);
@@ -67,16 +62,14 @@ const AudioControl = ({ highlight }) => {
     setBGVolume,
     bgMuted,
     setBGMuted,
-    setSrc,
-    setPlaying,
+    preloadedSounds,
   } = useAudio();
   const [anchorEl, setAnchorEl] = useState(null);
   const audioControlButtonRef = useRef(null);
 
   const handleClick = (event) => {
     if (!open) {
-      setSrc(selectTimbre);
-      setPlaying(true);
+      preloadedSounds.selectTimbre.play();
     }
     setAnchorEl(event.currentTarget);
   };
@@ -84,8 +77,7 @@ const AudioControl = ({ highlight }) => {
   const handleMute = (event) => {
     const isMuting = event.target.checked;
     if (isMuting) {
-      setSrc(mute);
-      setPlaying(true);
+      preloadedSounds.mute.play();
     }
   };
 
@@ -136,8 +128,7 @@ const AudioControl = ({ highlight }) => {
             aria-label="close"
             onClick={() => {
               handleClose();
-              setSrc(closing);
-              setPlaying(true);
+              preloadedSounds.closing.play();
             }}
             sx={{
               position: "absolute",
@@ -270,7 +261,7 @@ const AudioControl = ({ highlight }) => {
                 />
               </Box>
             </ListItem>
-            <ListItem divider>
+            <ListItem>
               <ListItemText
                 primary={
                   <Box display="flex" alignItems="center">

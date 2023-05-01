@@ -11,8 +11,6 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import deliveryBike from "../../assets/footage/delivery-bike.png";
-import orderBell from "../../assets/sounds/order-confirm.mp3";
-import cashDrawer from "../../assets/sounds/Auditory Icon/cash-drawer-and-receipt.mp3";
 import { useAudio } from "../../Contexts/AudioContext";
 import { useSnackbar } from "../../Contexts/SnackbarContext";
 import { useCart } from "../../Contexts/CartContext";
@@ -22,7 +20,7 @@ import CartItem from "./CartItem";
 import styles from "./OrderConfirmModal.module.scss";
 
 const OrderConfirmModal = ({ open, handleClose, stage, setStage }) => {
-  const { setPlaying, setSrc } = useAudio();
+  const { preloadedSounds } = useAudio();
   const {
     setSnackbarOpen,
     setSnackbarContent,
@@ -39,8 +37,7 @@ const OrderConfirmModal = ({ open, handleClose, stage, setStage }) => {
 
   useEffect(() => {
     if (stage === "confirmation") {
-      setSrc(orderBell);
-      setPlaying(true);
+      preloadedSounds.orderConfirm.play();
 
       const deliveryTime = Math.floor(Math.random() * 21) + 20;
       setSnackbarContent({
@@ -54,16 +51,14 @@ const OrderConfirmModal = ({ open, handleClose, stage, setStage }) => {
     }
   }, [
     stage,
-    setPlaying,
-    setSrc,
+    preloadedSounds,
     setSnackbarContent,
     setSnackbarOpen,
     setSnackbarTimeout,
   ]);
 
   const handlePayNowClick = () => {
-    setSrc(cashDrawer);
-    setPlaying(true);
+    preloadedSounds.orderProcess.play();
     setStage("loading");
     setTimeout(() => {
       setStage("confirmation");

@@ -12,7 +12,6 @@ import { DialogProvider } from "./Contexts/DialogContext";
 import { OrderStageProvider } from "./Contexts/OrderStageContext";
 import { Howl } from "howler";
 
-
 //Earcons
 import notification from "./assets/sounds/Earcon/notification.mp3";
 import closing from "./assets/sounds/Earcon/closing.mp3";
@@ -25,21 +24,16 @@ import selectItem from "./assets/sounds/Earcon/selectItem.mp3";
 import softSelection from "./assets/sounds/Earcon/SoftSelection.mp3";
 
 // Auditory Icon
-
-import orderProcess from "./assets/sounds/Auditory Icon/cash-drawer-and-receipt.mp3"
-import drinks from "./assets/sounds/Auditory Icon/drinks.mp3"
-import plateDrop from "./assets/sounds/Auditory Icon/PlateDrop.mp3"
-import popularFire from "./assets/sounds/Auditory Icon/popularFire.mp3"
-import sizzlingBowl from "./assets/sounds/Auditory Icon/SizzlingBowl.mp3"
-import softSizzle from "./assets/sounds/Auditory Icon/soft-sizzle.mp3"
-import teaSpoon from "./assets/sounds/Auditory Icon/teaSpoon.mp3"
+import orderProcess from "./assets/sounds/Auditory Icon/cash-drawer-and-receipt.mp3";
+import drinks from "./assets/sounds/Auditory Icon/drinks.mp3";
+import plateDrop from "./assets/sounds/Auditory Icon/PlateDrop.mp3";
+import popularFire from "./assets/sounds/Auditory Icon/popularFire.mp3";
+import sizzlingBowl from "./assets/sounds/Auditory Icon/SizzlingBowl.mp3";
+import softSizzle from "./assets/sounds/Auditory Icon/soft-sizzle.mp3";
+import teaSpoon from "./assets/sounds/Auditory Icon/teaSpoon.mp3";
 
 //misc
-
-import orderConfirm from "./assets/sounds/order-confirm.mp3"
-
-
-
+import orderConfirm from "./assets/sounds/order-confirm.mp3";
 
 import AudioDialog from "./components/AudioDialog";
 import styles from "./Root.module.scss";
@@ -128,14 +122,27 @@ const Root = () => {
 
   useEffect(() => {
     const sounds = {
+      closing: new Howl({ src: [closing], preload: true }),
+      decrement: new Howl({ src: [decrement], preload: true }),
+      highSelect: new Howl({ src: [highSelect], preload: true }),
+      increment: new Howl({ src: [increment], preload: true }),
+      mute: new Howl({ src: [mute], preload: true }),
+      selectTimbre: new Howl({ src: [selectTimbre], preload: true }),
+      selectItem: new Howl({ src: [selectItem], preload: true }),
+      softSelection: new Howl({ src: [softSelection], preload: true }),
+      orderProcess: new Howl({ src: [orderProcess], preload: true }),
+      drinks: new Howl({ src: [drinks], preload: true }),
       plateDrop: new Howl({ src: [plateDrop], preload: true }),
+      popularFire: new Howl({ src: [popularFire], preload: true }),
+      sizzlingBowl: new Howl({ src: [sizzlingBowl], preload: true }),
       softSizzle: new Howl({ src: [softSizzle], preload: true }),
+      teaSpoon: new Howl({ src: [teaSpoon], preload: true }),
+      orderConfirm: new Howl({ src: [orderConfirm], preload: true }),
     };
 
     setPreloadedSounds(sounds);
   }, []);
 
-  
   return (
     <ThemeProvider theme={theme}>
       <DialogProvider>

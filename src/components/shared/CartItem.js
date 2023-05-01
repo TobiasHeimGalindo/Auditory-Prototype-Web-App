@@ -1,8 +1,6 @@
 import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { Add, Remove } from "@mui/icons-material";
-import increment from "../../assets/sounds/Earcon/increment.mp3";
-import decrement from "../../assets/sounds/Earcon/decrement.mp3";
 import { useAudio } from "../../Contexts/AudioContext";
 
 import styles from "./CartItem.module.scss";
@@ -14,7 +12,7 @@ const CartControlButton = ({ onClick, children, ...rest }) => (
 );
 
 const CartItem = ({ item, updateCartItemQuantity, removeCartItem }) => {
-  const { setPlaying, setSrc } = useAudio();
+  const { preloadedSounds } = useAudio();
   return (
     <Box key={item.id} className={styles.cartItem}>
       <Box className={styles.itemHead}>
@@ -47,8 +45,7 @@ const CartItem = ({ item, updateCartItemQuantity, removeCartItem }) => {
           <Box className={styles.cartItemControls}>
             <CartControlButton aria-label="decrease"
               onClick={() => {
-                setSrc(decrement);
-                setPlaying(true);
+                preloadedSounds.decrement.play();
                 if (item.quantity === 1) {
                   removeCartItem(item.id);
                 } else {
@@ -63,8 +60,7 @@ const CartItem = ({ item, updateCartItemQuantity, removeCartItem }) => {
             </Typography>
             <CartControlButton aria-label="increase"
               onClick={() => {
-                setSrc(increment);
-                setPlaying(true);
+                preloadedSounds.increment.play();
                 updateCartItemQuantity(item.id, item.quantity + 1);
               }}
             >
