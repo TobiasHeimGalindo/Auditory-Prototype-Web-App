@@ -211,7 +211,7 @@ const MenuSelection = () => {
 
   const playHoverSound = (dish) => {
     if (dish.popular && !hoveredDishes.has(dish.id)) {
-      preloadedSounds.popularFlame.play();
+      preloadedSounds.popularFire.play();
       setHoveredDishes((prev) => new Set([...prev, dish.id]));
     }
   };
