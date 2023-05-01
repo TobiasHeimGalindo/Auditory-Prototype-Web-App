@@ -1,5 +1,4 @@
 import React, { useState, createContext, useContext, useEffect } from "react";
-import ReactHowler from "react-howler";
 import { Howl } from "howler";
 
 const AudioContext = createContext();
@@ -19,7 +18,29 @@ export const AudioProvider = ({ children, preloadedSounds }) => {
   const [playing, setPlaying] = useState(false);
   const [spatialSrc, setSpatialSrc] = useState(null);
   const [bgSrc, setBgSrc] = useState(null);
-  const [howlerRef, setHowlerRef] = useState(null);
+  const [bgHowler, setBgHowler] = useState(null);
+
+  useEffect(() => {
+    if (bgSrc) {
+      if (bgHowler) {
+        bgHowler.unload();
+      }
+      const newBgHowler = new Howl({
+        src: [bgSrc],
+        volume: bgMuted ? 0 : finalBgVolume,
+        loop: true,
+        preload: true,
+      });
+      newBgHowler.play();
+      setBgHowler(newBgHowler);
+    }
+  }, [bgSrc]);
+
+  useEffect(() => {
+    if (bgHowler) {
+      bgHowler.volume(bgMuted ? 0 : finalBgVolume);
+    }
+  }, [bgHowler, bgMuted, finalBgVolume]);
 
   useEffect(() => {
     Object.keys(preloadedSounds).forEach((soundKey) => {
@@ -68,8 +89,6 @@ export const AudioProvider = ({ children, preloadedSounds }) => {
     setPlaying,
     bgSrc,
     setBgSrc,
-    howlerRef,
-    setHowlerRef,
     setFinalBgVolume,
     spatialSrc,
     setSpatialSrc,
@@ -80,16 +99,6 @@ export const AudioProvider = ({ children, preloadedSounds }) => {
   return (
     <AudioContext.Provider value={value}>
       {children}
-      {bgSrc && (
-        <ReactHowler
-          ref={howlerRef}
-          src={bgSrc}
-          volume={bgMuted ? 0 : finalBgVolume}
-          playing={true}
-          loop={true}
-          preload={true}
-        />
-      )}
     </AudioContext.Provider>
   );
 };

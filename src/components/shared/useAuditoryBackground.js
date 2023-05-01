@@ -1,31 +1,25 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { throttle } from "lodash";
 import { useAudio } from "../../Contexts/AudioContext";
 
 export const useAuditoryBackground = (additionalMutedCondition = false) => {
-  const { bgVolume, bgMuted, setBgSrc, setFinalBgVolume, setHowlerRef } =
+  const { bgVolume, bgMuted, setBGMuted, setBgSrc, setFinalBgVolume } =
     useAudio();
   const [scrollVolume, setScrollVolume] = useState(bgVolume);
-  const howlerRef = useRef(null);
-  setHowlerRef(howlerRef);
-  const handleVisibilityChange = () => {
-    if (document.visibilityState === "hidden") {
-      if (howlerRef.current) {
-        howlerRef.current.pause();
-      }
-    } else if (document.visibilityState === "visible") {
-      if (howlerRef.current) {
-        howlerRef.current.play();
-      }
-    }
-  };
 
   useEffect(() => {
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        setBGMuted(true);
+      } else {
+        setBGMuted(false);
+      }
     };
-  });
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () =>
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, [setBGMuted]);
 
   useEffect(() => {
     const handleScroll = throttle(() => {
@@ -61,7 +55,6 @@ export const useAuditoryBackground = (additionalMutedCondition = false) => {
   }, [finalVolume, setFinalBgVolume]);
 
   return {
-    howlerRef,
     setBgSrc,
   };
 };
