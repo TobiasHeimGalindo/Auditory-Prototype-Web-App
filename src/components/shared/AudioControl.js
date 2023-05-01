@@ -139,6 +139,7 @@ const AudioControl = ({ highlight }) => {
               right: 8,
               padding: "6px",
               cursor: "pointer",
+              zIndex: 1,
             }}
           />
 
@@ -255,7 +256,7 @@ const AudioControl = ({ highlight }) => {
                 />
               </Box>
             </ListItem>
-            <ListItem divider>
+            <ListItem>
               <ListItemText
                 primary={
                   <Box display="flex" alignItems="center">
