@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import {
   Button,
@@ -22,6 +22,7 @@ import { useAudio } from "../../Contexts/AudioContext";
 import softSelection from "../../assets/sounds/Earcon/SoftSelection.mp3";
 import closing from "../../assets/sounds/Earcon/closing.mp3";
 import mute from "../../assets/sounds/Earcon/mute.mp3";
+import selectTimbre from "../../assets/sounds/Earcon/select-timbre.mp3";
 
 import styles from "./AudioControl.module.scss";
 
@@ -52,6 +53,7 @@ const AudioControl = ({ highlight }) => {
         break;
     }
   };
+
   const {
     uiVolume,
     setUIVolume,
@@ -72,6 +74,10 @@ const AudioControl = ({ highlight }) => {
   const audioControlButtonRef = useRef(null);
 
   const handleClick = (event) => {
+    if (!open) {
+      setSrc(selectTimbre);
+      setPlaying(true);
+    }
     setAnchorEl(event.currentTarget);
   };
 
@@ -177,7 +183,11 @@ const AudioControl = ({ highlight }) => {
               <ListItemText
                 primary={
                   <Box display="flex" alignItems="center">
-                    <Typography variant="subtitle1" gutterBottom id="ui-volume-label">
+                    <Typography
+                      variant="subtitle1"
+                      gutterBottom
+                      id="ui-volume-label"
+                    >
                       UI Volume
                     </Typography>
                   </Box>
@@ -218,7 +228,11 @@ const AudioControl = ({ highlight }) => {
               <ListItemText
                 primary={
                   <Box display="flex" alignItems="center">
-                    <Typography variant="subtitle1" gutterBottom id="spatial-volume-label">
+                    <Typography
+                      variant="subtitle1"
+                      gutterBottom
+                      id="spatial-volume-label"
+                    >
                       Spatial Audio Volume
                     </Typography>
                   </Box>
@@ -256,11 +270,15 @@ const AudioControl = ({ highlight }) => {
                 />
               </Box>
             </ListItem>
-            <ListItem>
+            <ListItem divider>
               <ListItemText
                 primary={
                   <Box display="flex" alignItems="center">
-                    <Typography variant="subtitle1" gutterBottom id="bg-volume-label">
+                    <Typography
+                      variant="subtitle1"
+                      gutterBottom
+                      id="bg-volume-label"
+                    >
                       Background Volume
                     </Typography>
                   </Box>
