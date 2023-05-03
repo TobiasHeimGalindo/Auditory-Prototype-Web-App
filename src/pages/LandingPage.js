@@ -65,7 +65,7 @@ function LandingPage() {
     setBgSrc(auditoryBackground);
   }, [setBgSrc]);
   return (
-    <div className="App">
+    <div className="LandingPage">
       <section className={styles.navbar}>
         <Navbar dialogOpen={dialogOpen} />
       </section>
