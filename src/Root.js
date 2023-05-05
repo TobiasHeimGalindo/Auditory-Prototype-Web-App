@@ -22,9 +22,9 @@ import mute from "./assets/sounds/Earcon/mute.mp3";
 import selectTimbre from "./assets/sounds/Earcon/select-timbre.mp3";
 import selectItem from "./assets/sounds/Earcon/selectItem.mp3";
 import softSelection from "./assets/sounds/Earcon/SoftSelection.mp3";
+import orderProcess from "./assets/sounds/Earcon/cash-drawer-and-receipt.mp3";
 
 // Auditory Icon
-import orderProcess from "./assets/sounds/Auditory Icon/cash-drawer-and-receipt.mp3";
 import drinks from "./assets/sounds/Auditory Icon/drinks.mp3";
 import plateDrop from "./assets/sounds/Auditory Icon/PlateDrop.mp3";
 import popularFire from "./assets/sounds/Auditory Icon/popularFire.mp3";
