@@ -16,7 +16,6 @@ export const AudioProvider = ({ children, preloadedSounds }) => {
   const [finalBgVolume, setFinalBgVolume] = useState(0);
   const [bgMuted, setBGMuted] = useState(true);
   const [playing, setPlaying] = useState(false);
-  const [spatialSrc, setSpatialSrc] = useState(null);
   const [bgSrc, setBgSrc] = useState(null);
   const [bgHowler, setBgHowler] = useState(null);
 
@@ -50,7 +49,6 @@ export const AudioProvider = ({ children, preloadedSounds }) => {
   }, [uiVolume, uiMuted, preloadedSounds]);
 
   const playSpatialAudio = (src, position) => {
-    setSpatialSrc(src);
     const notificationSound = new Howl({
       src: [src],
       preload: true,
@@ -90,8 +88,6 @@ export const AudioProvider = ({ children, preloadedSounds }) => {
     bgSrc,
     setBgSrc,
     setFinalBgVolume,
-    spatialSrc,
-    setSpatialSrc,
     playSpatialAudio,
     preloadedSounds,
   };
