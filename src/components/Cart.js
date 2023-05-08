@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useCart } from "../Contexts/CartContext";
 import { Box, Typography, Button } from "@mui/material";
 import { useAudio } from "../Contexts/AudioContext";
-import { useOrderStage } from "../Contexts/OrderStageContext";
+import { useOrderStage } from "../Contexts/PaymentStageContext";
 
 import styles from "./Cart.module.scss";
 import OrderConfirmModal from "./shared/OrderConfirmModal";

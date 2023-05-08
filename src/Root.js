@@ -9,7 +9,7 @@ import { CartProvider } from "./Contexts/CartContext";
 import { SnackbarProvider, useSnackbar } from "./Contexts/SnackbarContext";
 import { Snackbar, Box, Typography, Button } from "@mui/material";
 import { DialogProvider } from "./Contexts/DialogContext";
-import { OrderStageProvider } from "./Contexts/OrderStageContext";
+import { PaymentStageProvider } from "./Contexts/PaymentStageContext";
 import { Howl } from "howler";
 
 //Earcons
@@ -150,7 +150,7 @@ const Root = () => {
           <AudioDialog />
           <CartProvider>
             <SnackbarProvider>
-              <OrderStageProvider>
+              <PaymentStageProvider>
                 <HashRouter>
                   <Routes>
                     <Route path="/" element={<LandingPage />} />
@@ -158,7 +158,7 @@ const Root = () => {
                   </Routes>
                 </HashRouter>
                 <AppSnackbar />
-              </OrderStageProvider>
+              </PaymentStageProvider>
             </SnackbarProvider>
           </CartProvider>
         </AudioProvider>

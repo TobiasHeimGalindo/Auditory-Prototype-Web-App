@@ -4,7 +4,7 @@ const OrderStageContext = createContext();
 
 export const useOrderStage = () => useContext(OrderStageContext);
 
-export const OrderStageProvider = ({ children }) => {
+export const PaymentStageProvider = ({ children }) => {
   const [isPayment, setIsPayment] = useState(false);
 
   return (

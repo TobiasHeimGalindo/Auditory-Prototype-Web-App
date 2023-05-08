@@ -7,7 +7,7 @@ import cooking from "../assets/footage/menu.mp4";
 import { useAuditoryBackground } from "../components/shared/useAuditoryBackground";
 import auditoryBackground from "../assets/sounds/boiling-sizzling-cutting.mp3";
 import { useDialog } from "../Contexts/DialogContext";
-import { useOrderStage } from "../Contexts/OrderStageContext";
+import { useOrderStage } from "../Contexts/PaymentStageContext";
 import FloatingCartButton from "../components/shared/FloatingCartButton";
 import { useLocation } from "react-router-dom";
 import { useCart } from "../Contexts/CartContext";
